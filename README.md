@@ -1,6 +1,6 @@
 # U.stick-battle-arena
 ### Game Description
-This is a multiplayer party game that all players fight againt each other in a 2d pre built stage. Players pick up weapons/items that are spawned at random places on the stage and use them to gain advantage among the fight.
+Stick Battle Arena is a multiplayer hunger games type game where the last person standing wins. Players will fight as stick people and battle each other to victory. The game will include several themed stages, and even more unique weapons such as bows, guns, spears, swords, grenades, machine guns, rocket launchers, flame throwers and more. Learning good movement and how to line up shots will be a core element of the gameplay.
 ### Our goal
 Our goal is to ship a finished game with refined details and fun gameplay by the end of the quarter. Also, to gain group project and teamwork experience along the development process.
 ### Repo layout
