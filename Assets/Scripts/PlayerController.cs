@@ -9,7 +9,7 @@ namespace Game
     {
         // Public for external hooks
         public Vector3 Velocity { get; private set; }
-        public FrameInput Input { get; private set; }
+        public FrameInput MovementInput { get; private set; }
         public bool JumpingThisFrame { get; private set; }
         public bool LandingThisFrame { get; private set; }
         public Vector3 RawMovement { get; private set; }
@@ -51,13 +51,13 @@ namespace Game
         
         private void UpdateInput(Vector2 value)
         {
-            Input = new FrameInput
+            MovementInput = new FrameInput
             {
                 JumpDown = value.y > 0,
                 JumpUp = value.y < 0,
                 X = value.x
             };
-            if (Input.JumpDown)
+            if (MovementInput.JumpDown)
             {
                 _lastJumpPressed = Time.time;
             }
@@ -168,16 +168,16 @@ namespace Game
 
         private void CalculateWalk()
         {
-            if (Input.X != 0)
+            if (MovementInput.X != 0)
             {
                 // Set horizontal move speed
-                _currentHorizontalSpeed += Input.X * _acceleration * Time.deltaTime;
+                _currentHorizontalSpeed += MovementInput.X * _acceleration * Time.deltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
 
                 // Apply bonus at the apex of a jump
-                var apexBonus = Mathf.Sign(Input.X) * _apexBonus * _apexPoint;
+                var apexBonus = Mathf.Sign(MovementInput.X) * _apexBonus * _apexPoint;
                 _currentHorizontalSpeed += apexBonus * Time.deltaTime;
             }
             else
@@ -258,7 +258,7 @@ namespace Game
         private void CalculateJump()
         {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (Input.JumpDown && CanUseCoyote || HasBufferedJump)
+            if (MovementInput.JumpDown && CanUseCoyote || HasBufferedJump)
             {
                 _currentVerticalSpeed = _jumpHeight;
                 _endedJumpEarly = false;
@@ -272,7 +272,7 @@ namespace Game
             }
 
             // End the jump early if button released
-            if (!_colDown && Input.JumpUp && !_endedJumpEarly && Velocity.y > 0)
+            if (!_colDown && MovementInput.JumpUp && !_endedJumpEarly && Velocity.y > 0)
             {
                 // _currentVerticalSpeed = 0;
                 _endedJumpEarly = true;
@@ -348,7 +348,7 @@ namespace Game
     public interface IPlayerController
     {
         public Vector3 Velocity { get; }
-        public FrameInput Input { get; }
+        public FrameInput MovementInput { get; }
         public bool JumpingThisFrame { get; }
         public bool LandingThisFrame { get; }
         public Vector3 RawMovement { get; }
