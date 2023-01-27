@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace Game
+namespace Game.Player
 {
     // Script by Tarodev repo: https://github.com/Matthew-J-Spencer/Ultimate-2D-Controller
     public class PlayerController : MonoBehaviour, IPlayerController
@@ -13,18 +14,26 @@ namespace Game
         public bool JumpingThisFrame { get; private set; }
         public bool LandingThisFrame { get; private set; }
         public Vector3 RawMovement { get; private set; }
+        public bool FacingLeft => _facingLeft;
         public bool Grounded => _colDown;
 
         [SerializeField] private InputReader _input;
+        private bool _facingLeft = true;
         private Vector3 _lastPosition;
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
         // This is horrible, but for some reason colliders are not fully established when update starts...
         private bool _active;
 
+        public event UnityAction OnItemUseDown = () => { };
+        public event UnityAction OnItemUseUp = () => { };
+        public event UnityAction OnMovement = () => { };
+
         private void Awake()
         {
             _input.moveEvent += UpdateInput;
+            _input.useItemDownEvent += UseItemDown;
+            _input.useItemUpEvent += UseItemUp;
             
             // mute control for 0.5 seconds
             Invoke(nameof(Activate), 0.5f);
@@ -57,12 +66,19 @@ namespace Game
                 JumpUp = value.y < 0,
                 X = value.x
             };
+            
             if (MovementInput.JumpDown)
-            {
                 _lastJumpPressed = Time.time;
-            }
+            
+            // update facing left flag
+            if (MovementInput.X != 0)
+                _facingLeft = MovementInput.X < 0;
+            OnMovement.Invoke();
         }
-        
+
+        private void UseItemDown() => OnItemUseDown.Invoke();
+        private void UseItemUp() => OnItemUseUp.Invoke();
+
         #region Collisions
 
         [Header("COLLISION")] [SerializeField] private Bounds _characterBounds;
