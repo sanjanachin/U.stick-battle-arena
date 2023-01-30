@@ -4,32 +4,32 @@ using UnityEngine.Events;
 
 namespace Game
 {
-    [RequireComponent(typeof(Collider2D))]
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class UsableItem : Pickable
+    [RequireComponent(typeof(Pickable))]
+    public class UsableItem : MonoBehaviour
     {
         public event UnityAction OnUseButtonDown = delegate {  }; 
         public event UnityAction OnUseButtonUp = delegate {  };
+        public event UnityAction OnBreak = delegate {  };
 
-        protected bool _pressing = false;
-        protected PlayerController _player;
+        public PlayerController Player { get => _player; }
+        
+        private bool _pressing = false;
+        private PlayerController _player;
 
-        private Collider2D _collider;
-        private Rigidbody2D _rigidbody;
+        [SerializeField] private Pickable _pickable;
         [SerializeField] private int _durability;
 
         protected virtual void Awake()
         {
-            _collider = GetComponent<Collider2D>();
-            _rigidbody = GetComponent<Rigidbody2D>();
+            _pickable = GetComponent<Pickable>();
 
-            OnPicked += RegisterToPlayer;
+            _pickable.OnPicked += RegisterToPlayer;
         }
 
         private void DisablePhysics()
         {
-            _collider.isTrigger = true;
-            _rigidbody.isKinematic = true;
+            _pickable.Collider.enabled = false;
+            _pickable.Rigidbody.isKinematic = true;
         }
         
         // hook the player's events and disable physics to be held 
@@ -39,6 +39,7 @@ namespace Game
             player.OnItemUseUp += HandleItemUseUp;
             DisablePhysics();
             _player = player;
+            player.GetComponent<PlayerInventory>().PickUpItem(this);
         }
 
         private void HandleItemUseDown()
@@ -53,7 +54,13 @@ namespace Game
             OnUseButtonUp.Invoke();
         }
 
-        protected void IncreaseDurability(int value) => _durability += value;
-        protected void ReduceDurability(int value) => _durability -= value;
+        public void IncreaseDurability(int value) => _durability += value;
+
+        public void ReduceDurability(int value)
+        {
+            _durability -= value;
+            if (_durability <= 0)
+                OnBreak.Invoke();
+        }
     }
 }

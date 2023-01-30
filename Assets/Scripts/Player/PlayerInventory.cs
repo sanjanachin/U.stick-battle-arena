@@ -9,7 +9,7 @@ namespace Game.Player
     public class PlayerInventory : MonoBehaviour
     {
         [SerializeField] private Transform _itemHolderTrans;
-        [SerializeField] private GameObject _currentItem;
+        [SerializeField] private UsableItem _currentItem;
         [SerializeField] private PlayerController _playerController;
 
         private void Awake()
@@ -26,15 +26,13 @@ namespace Game.Player
         }
         
         // detect for collision
-        private void OnCollisionEnter2D(Collision2D col)
+        public void PickUpItem(UsableItem item)
         {
-            // check if collided with a usable item
-            UsableItem item = col.gameObject.GetComponent<UsableItem>();
-            if (item == null) return;
-            item.PickUpBy(_playerController);
-            // move the gameobject under the player's holder and reset position
-            item.transform.position = Vector3.zero;
+            _currentItem = item;
+            
+            // move the gameObject under the player's holder
             item.transform.SetParent(_itemHolderTrans, false);
+            item.transform.localPosition = Vector3.zero;
         }
     }
 }
