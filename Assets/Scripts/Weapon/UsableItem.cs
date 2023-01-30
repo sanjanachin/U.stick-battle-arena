@@ -4,11 +4,25 @@ using UnityEngine.Events;
 
 namespace Game
 {
+    /**
+     * Represent a item that can be used by the player using the
+     * "use" button
+     * Rely on Pickable component to be pick up by a player and to be used
+     */
     [RequireComponent(typeof(Pickable))]
     public class UsableItem : MonoBehaviour
     {
+        /**
+         * Invoked when the player holding this item pressed the use button
+         */
         public event UnityAction OnUseButtonDown = delegate {  }; 
+        /**
+         * Invoked when the player holding this item released the use button
+         */
         public event UnityAction OnUseButtonUp = delegate {  };
+        /**
+         * Invoked when the durability of this item reaches 0
+         */
         public event UnityAction OnBreak = delegate {  };
 
         public PlayerController Player { get => _player; }
@@ -53,7 +67,7 @@ namespace Game
             _pressing = false;
             OnUseButtonUp.Invoke();
         }
-
+        
         public void IncreaseDurability(int value) => _durability += value;
 
         public void ReduceDurability(int value)

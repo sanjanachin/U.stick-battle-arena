@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Player
 {
+    /**
+     * Represent the inventory of a player
+     */
     [RequireComponent(typeof(PlayerController))]
     public class PlayerInventory : MonoBehaviour
     {
@@ -19,13 +19,17 @@ namespace Game.Player
             _playerController.OnMovement += CheckAndFlip;
         }
         
+        // flip the item holder when the player is facing different directions
         private void CheckAndFlip()
         {
             _itemHolderTrans.localScale = new Vector3(
                 _playerController.FacingLeft ? 1 : -1, 1, 1);
         }
         
-        // detect for collision
+        /**
+         * Set the item to the player's item holder
+         * and updates player's inventory
+         */
         public void PickUpItem(UsableItem item)
         {
             _currentItem = item;

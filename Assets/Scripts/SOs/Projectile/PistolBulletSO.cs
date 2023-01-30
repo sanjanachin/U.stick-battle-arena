@@ -2,6 +2,9 @@
 
 namespace Game
 {
+    /**
+     * Data used to generate a PistolBullet gameObject
+     */
     [CreateAssetMenu(menuName = "Game/Projectile/PistolBullet", fileName = "PistolBulletSO")]
     public class PistolBulletSO : Reconstructable<PistolBullet>
     {

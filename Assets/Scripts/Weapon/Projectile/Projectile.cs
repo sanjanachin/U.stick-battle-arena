@@ -11,7 +11,13 @@ namespace Game
     [RequireComponent(typeof(Pickable))]
     public class Projectile : MonoBehaviour
     {
+        /**
+         * Invoked on launched
+         */
         public event UnityAction OnLaunch = delegate { };
+        /**
+         * Invoked on hitting a player
+         */
         public event UnityAction<PlayerController> OnHit = delegate { };
         
         public Vector2 Velocity => _pickable.Rigidbody.velocity;
@@ -37,6 +43,9 @@ namespace Game
             OnLaunch.Invoke();
         }
 
+        /**
+         * Deconstruct and return this Object to the pool
+         */
         public void ReturnToPool<T>(Reconstructable<T> data)
         {
             _service.ProjectileManager.ReturnAndDeconstruct(data, this);

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using Game.Player;
+﻿using Game.Player;
 using UnityEngine;
 
 namespace Game
@@ -16,9 +14,13 @@ namespace Game
         {
             _projectile = GetComponent<Projectile>();
             _projectile.OnHit += HandleHit;
-            _projectile.OnLaunch += ReturnCountdown;
+            _projectile.OnLaunch += StartReturnCountdown;
         }
         
+        /**
+         * Initialize the gameObject
+         * Should ONLY be called by corresponding Reconstructable
+         */
         public void Initialize(PistolBulletSO data)
         {
             _data = data;
@@ -26,6 +28,7 @@ namespace Game
         
         private void Update()
         {
+            // countdown and destroy bullet 
             if (_lifespan > 0)
             {
                 _lifespan -= Time.deltaTime;
@@ -36,8 +39,9 @@ namespace Game
             }
         }
 
-        private void ReturnCountdown()
+        private void StartReturnCountdown()
         {
+            // reset countdown timer
             _lifespan = _data.Lifespan;
         }
 
@@ -46,14 +50,18 @@ namespace Game
             Debug.Log($"deal {_data.Damage} to player");
             ReturnToPool();
         }
-
+        
+        /**
+         * Reset hooks before deconstruction
+         */
         private void ReturnToPool()
         {
             _projectile.OnHit -= HandleHit;
-            _projectile.OnLaunch -= ReturnCountdown;
+            _projectile.OnLaunch -= StartReturnCountdown;
             _projectile.ReturnToPool(_data);
         }
-
+        
+        // check for wall / floor hits
         private void OnCollisionEnter2D(Collision2D col)
         {
             PlayerController player = col.gameObject.GetComponent<PlayerController>();

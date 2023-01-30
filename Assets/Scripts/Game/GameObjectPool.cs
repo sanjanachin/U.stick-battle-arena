@@ -18,6 +18,10 @@ namespace Game
          */
         private Transform _parent;
 
+        /**
+         * Create a GameObjectPool that pools gameObject of the given
+         * prefab and set it to the given parent
+         */
         public GameObjectPool(T prefab, Transform parent = null)
         {
             _prefab = prefab;
@@ -28,9 +32,16 @@ namespace Game
                 ReleaseT
             );
         }
-
+        
+        /**
+         * Get object from pool with out initialization or set to parent
+         */
         public T GetRaw() => _pool.Get();
-
+        
+        /**
+         * Get object from pool and initialize with the given function
+         * and set the object to parent
+         */
         public T Get(Action<T> initialize)
         {
             T newObject = _pool.Get();
@@ -39,6 +50,9 @@ namespace Game
             return newObject;
         }
         
+        /**
+         * Return object to the pool
+         */
         public void Release(T item) => _pool.Release(item);
 
         private T CreatT() => 

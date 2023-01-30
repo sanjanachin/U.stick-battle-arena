@@ -17,6 +17,7 @@ namespace Game
             _usableItem.OnUseButtonDown += Slash;
         }
         
+        // Preform a circle hitbox check
         private void Slash()
         {
             Vector2 point = (_usableItem.Player.FacingLeft) ? Vector2.left : Vector2.right;

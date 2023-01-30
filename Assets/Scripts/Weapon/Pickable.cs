@@ -5,10 +5,17 @@ using UnityEngine.Events;
 
 namespace Game
 {
-    [RequireComponent(typeof(Collider2D))]
-    [RequireComponent(typeof(Rigidbody2D))]
+    /**
+     * Represent a gameObject that can be "pick up" by the player
+     * Pickable is considered "picked up" by player when the collider
+     * collides with player's collider
+     */
+    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class Pickable : MonoBehaviour
     {
+        /**
+         * Invoked when this collider collides with player's collider
+         */
         public event UnityAction<PlayerController> OnPicked = delegate {  };
         
         public Collider2D Collider { get => _collider; }
@@ -25,7 +32,7 @@ namespace Game
         
         private void OnCollisionEnter2D(Collision2D col)
         {
-            // check if collided with a usable item
+            // check if collided with a player
             PlayerController player = col.gameObject.GetComponent<PlayerController>();
             if (player == null) return;
             OnPicked.Invoke(player);
