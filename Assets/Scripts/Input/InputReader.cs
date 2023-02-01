@@ -9,7 +9,8 @@ namespace Game
     {
         // Player
         public event UnityAction<Vector2> moveEvent = delegate { };
-        public event UnityAction useItemEvent = delegate { };
+        public event UnityAction useItemDownEvent = delegate { };
+        public event UnityAction useItemUpEvent = delegate { };
         public event UnityAction switchItemEvent = delegate { };
 
         // Menus
@@ -44,7 +45,13 @@ namespace Game
         public void OnUseItem(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
-                useItemEvent.Invoke();
+            {
+                useItemDownEvent.Invoke();
+            }
+            else if (context.phase == InputActionPhase.Canceled)
+            {
+                useItemUpEvent.Invoke();
+            }
         }
 
         public void OnSwitchItem(InputAction.CallbackContext context)
