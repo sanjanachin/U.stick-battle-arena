@@ -1,40 +1,66 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using ProjectilePool = Game.GameObjectPool<Game.Projectile>;
 
 namespace Game
 {
+    public enum ProjectileID
+    {
+        PistolBullet,
+        Arrow,
+    }
+    
     /**
      * Manage all the projectiles on scene
      */
     public class ProjectileManager : MonoBehaviour
     {
         [SerializeField] private Projectile _projectilePrefab;
-        private GameObjectPool<Projectile> _pool;
+        private ProjectilePool _pool;
+        private Dictionary<ProjectileID, ProjectilePool> _poolMap;
+
+       [SerializeField]  private ProjectileIdPrefabPair[] _prefabEntries;
 
         private void Awake()
         {
             _pool = new GameObjectPool<Projectile>(_projectilePrefab, transform);
+            _poolMap = new Dictionary<ProjectileID, ProjectilePool>();
+
+            for (int i = 0; i < _prefabEntries.Length; i++)
+            {
+                Transform spawnParent = new GameObject(
+                    $"{_prefabEntries[i].Id} Pool").GetComponent<Transform>();
+                
+                _poolMap.Add(
+                    _prefabEntries[i].Id,
+                    new ProjectilePool(_prefabEntries[i].Prefab, spawnParent));
+            }
         }
 
         /**
          * Get a projectile prefab from the pool and let the given
-         * Reconstructable to construct the gameObject
          */
-        public Projectile SpawnAndConstruct<T>(Reconstructable<T> projectileData)
+        public Projectile SpawnProjectile(ProjectileID id)
         {
-            Projectile projectile = _pool.Get((p) =>
-            {
-                projectileData.Construct(p.gameObject);
-            });
+            ProjectilePool pool = _poolMap[id];
+            Projectile projectile = pool.Get((_) => { });
             return projectile;
         }
         
         /**
-         * Deconstruct and return the projectile gameObject to the pool
+         * Return the projectile gameObject to the pool
          */
-        public void ReturnAndDeconstruct<T>(Reconstructable<T> projectileData, Projectile projectile)
+        public void ReturnProjectile(ProjectileID id, Projectile projectile)
         {
-            projectileData.Deconstruct(projectile.gameObject);
-            _pool.Release(projectile);
+            _poolMap[id].Release(projectile);
+        }
+
+        [Serializable]
+        private struct ProjectileIdPrefabPair
+        {
+            public ProjectileID Id;
+            public Projectile Prefab;
         }
     }
 }

@@ -25,30 +25,49 @@ namespace Game
 
         [SerializeField] private GameplayService _service;
         [SerializeField] private Pickable _pickable;
+        [SerializeField] private float _lifespan;
+        [SerializeField] private ProjectileID _id;
         
         private void Awake()
         {
             _pickable = GetComponent<Pickable>();
             _pickable.OnPicked += Hit;
         }
+        
+        private void Update()
+        {
+            if (!isActiveAndEnabled) return;
+
+            // countdown and destroy bullet 
+            if (_lifespan > 0)
+            {
+                _lifespan -= Time.deltaTime;
+            } 
+            else 
+            {
+                ReturnToPool();
+            }
+        }
 
         /**
          * Launch the projectile with provided values
          */
-        public void Launch(Vector2 velocity, float gravity)
+        public void Launch(ProjectileID id, Vector2 velocity, float gravity, float lifespan)
         {
             _pickable.Rigidbody.velocity = velocity;
             _pickable.Rigidbody.gravityScale = gravity;
+            _lifespan = lifespan;
+            _id = id;
             
             OnLaunch.Invoke();
         }
 
         /**
-         * Deconstruct and return this Object to the pool
+         * Return this Object to the pool
          */
-        public void ReturnToPool<T>(Reconstructable<T> data)
+        public void ReturnToPool()
         {
-            _service.ProjectileManager.ReturnAndDeconstruct(data, this);
+            _service.ProjectileManager.ReturnProjectile(_id, this);
         }
 
         // called on the projectile collides with a collider
