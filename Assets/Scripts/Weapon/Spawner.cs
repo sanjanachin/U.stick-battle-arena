@@ -8,40 +8,53 @@ namespace Game
 {
     public class Spawner : MonoBehaviour
     {
-        public GameObject weapon;
-        public float spawnTime;
-        private float currentTime;
+        [SerializeField] private GameplayService _service;
+        [SerializeField] private UsableItemID _usableItemID;
+        [SerializeField] private float _spawnLifespan;
+        
+        [Header("Spawner Settings")]
+        [SerializeField] private float _spawnInterval;
+        [SerializeField] private float _randomXPosLowerBound;
+        [SerializeField] private float _randomXPosUpperBound;
+        private float _currentTime;
 
-        void Update()
+        private void Update()
         {
             UpdateTimer();
         }
 
         private void UpdateTimer()
         {
-            if (currentTime > 0)
+            if (_currentTime > 0)
             {
                 // update current count down time
-                currentTime -= Time.deltaTime;
+                _currentTime -= Time.deltaTime;
             }
             else
             {
                 // update the position of the spawner and spawn weapon
-                UpdatePosition();
                 SpawnWeapon();
-                currentTime = spawnTime;
+                UpdatePosition();
+                _currentTime = _spawnInterval;
             }
         }
 
         private void UpdatePosition()
         {
             // random x position
-            transform.position = new Vector3(Random.Range(-15, 15), transform.position.y);
+            transform.position = new Vector3(
+                Random.Range(_randomXPosLowerBound, _randomXPosUpperBound),
+                transform.position.y);
         }
 
         private void SpawnWeapon()
         {
-            Instantiate(weapon, transform.position, Quaternion.identity);
+            // Get a weapon from the pool and set to the current location
+            UsableItem weapon = _service.UsableItemManager.SpawnProjectile(_usableItemID);
+            weapon.transform.position = transform.position;
+            
+            // Set the lifespan of this weapon
+            weapon.Spawn(_spawnLifespan);
         }
     }
 }

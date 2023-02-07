@@ -227,8 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fab3e6986754e8e9f9f4b0db74e9acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _pickable: {fileID: 6693322614909361244}
   _durability: 0
+  _id: 2
 --- !u!114 &6693322614909361247
 MonoBehaviour:
   m_ObjectHideFlags: 0

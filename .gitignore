@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Rider settings
+.idea/
+
+# Unity layout files
+UserSettings/Layouts/

@@ -16,15 +16,12 @@ namespace Game
      */
     public class ProjectileManager : MonoBehaviour
     {
-        [SerializeField] private Projectile _projectilePrefab;
-        private ProjectilePool _pool;
         private Dictionary<ProjectileID, ProjectilePool> _poolMap;
 
        [SerializeField]  private ProjectileIdPrefabPair[] _prefabEntries;
 
         private void Awake()
         {
-            _pool = new GameObjectPool<Projectile>(_projectilePrefab, transform);
             _poolMap = new Dictionary<ProjectileID, ProjectilePool>();
 
             for (int i = 0; i < _prefabEntries.Length; i++)
