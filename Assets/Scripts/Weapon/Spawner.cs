@@ -42,7 +42,9 @@ namespace Game
         private void UpdatePosition()
         {
             // random x position
-            transform.position = new Vector3(Random.Range(_randomXPosLowerBound, _randomXPosUpperBound), transform.position.y);
+            transform.position = new Vector3(
+                Random.Range(_randomXPosLowerBound, _randomXPosUpperBound),
+                transform.position.y);
         }
 
         private void SpawnWeapon()

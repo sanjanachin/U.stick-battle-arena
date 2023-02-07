@@ -13,15 +13,12 @@ namespace Game
     }
     public class UsableItemManager : MonoBehaviour
     {
-        [SerializeField] private UsableItem _usableItemPrefab;
         [SerializeField] private UsableItemIdPrefabPair[] _prefabEntries;
 
-        private GameObjectPool<UsableItem> _pool;
         private Dictionary<UsableItemID, GameObjectPool<UsableItem>> _poolmap;
 
         private void Awake()
         {
-            _pool = new GameObjectPool<UsableItem>(_usableItemPrefab, transform);
             _poolmap = new Dictionary<UsableItemID, GameObjectPool<UsableItem>>();
 
             for (int i = 0; i < _prefabEntries.Length; i++)
