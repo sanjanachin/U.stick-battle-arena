@@ -11,6 +11,7 @@ namespace Game
     public class GameplayService : ScriptableObject
     {
         public ProjectileManager ProjectileManager { get; private set; }
+        public UsableItemManager UsableItemManager { get; private set; }
 
         /**
          * Any provide function below are to setup the reference of
@@ -20,6 +21,11 @@ namespace Game
         public void ProvideProjectileManager(ProjectileManager projectileManager)
         {
             ProjectileManager = projectileManager;
+        }
+
+        public void ProvideUsableItemManager(UsableItemManager usableItemManager)
+        {
+            UsableItemManager = usableItemManager;
         }
     }
 }
