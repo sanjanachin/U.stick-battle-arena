@@ -2,15 +2,8 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(UsableItem))]
-    public class Pistol : MonoBehaviour
+    public class Pistol : RangedWeapon
     {
-        [SerializeField] private GameplayService _service;
-        [SerializeField] private PistolBulletSO _bulletData;
-        
-        [SerializeField] private UsableItem _usableItem;
-        [SerializeField] private Transform _shootingPoint;
-
         private void Awake()
         {
             _usableItem = GetComponent<UsableItem>();
@@ -19,13 +12,17 @@ namespace Game
         
         private void Shoot()
         {
-            Projectile bullet = _service.ProjectileManager.SpawnAndConstruct(_bulletData);
+            Projectile bullet = _service.ProjectileManager.
+                SpawnProjectile(_projectileID);
+
             bullet.transform.position = _shootingPoint.position;
 
-            Vector2 velocity = _bulletData.Velocity;
+            // flip velocity if facing different direction
+            Vector2 velocity = BulletVelocity;
             if (_usableItem.Player.FacingLeft)
                 velocity = new Vector2(-velocity.x, velocity.y);
-            bullet.Launch(velocity, _bulletData.Gravity);
+            
+            bullet.Launch(_projectileID, velocity, BulletGravity, BulletLifespan);
             _usableItem.ReduceDurability(1);
         }
     }

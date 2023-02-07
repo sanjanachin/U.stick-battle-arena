@@ -1,18 +1,31 @@
-﻿using Game.Player;
+﻿using System;
+using Game.Player;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(Projectile))]
-    public class PistolBullet : MonoBehaviour
+    public class Arrow : MonoBehaviour
     {
         [SerializeField] private Projectile _projectile;
+        [SerializeField] private Pickable _pickable;
         [SerializeField] private float _damage;
+        [SerializeField] private Transform _visualTransform;
         
         private void Awake()
         {
             _projectile = GetComponent<Projectile>();
+            _pickable = GetComponent<Pickable>();
             _projectile.OnHit += HandleHit;
+        }
+
+        private void Update()
+        {
+            // rotate arrow based on velocity
+            Vector2 v = _pickable.Rigidbody.velocity;
+            _visualTransform.rotation = Quaternion.AngleAxis(
+                Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg, 
+                Vector3.forward);
         }
 
         private void HandleHit(PlayerController player)
