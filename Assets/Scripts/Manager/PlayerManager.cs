@@ -16,6 +16,7 @@ namespace Game
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private PlayerIDPlayerPair[] _playerEntries;
+        [SerializeField] private int _playerDefaultLife;
         private Transform _parent;
         private Dictionary<PlayerID, float> _scoreboard;
         private Dictionary<PlayerID, int> _remainingLife;
@@ -32,34 +33,49 @@ namespace Game
             for (int i = 0; i < _playerEntries.Length; i++)
             {
                 _scoreboard.Add(_playerEntries[i].Id, 0);
-                _remainingLife.Add(_playerEntries[i].Id, 10);
+                _remainingLife.Add(_playerEntries[i].Id, _playerDefaultLife);
                 _playerList.Add(_playerEntries[i].Id, _playerEntries[i].Player);
             }
         }
 
+        /**
+         * Instantiate the given player in the manager, return the Player Stat reference.
+         */
         public PlayerStat SpawnPlayer(PlayerID id)
         {
             return Instantiate(_playerList[id], _parent);
         }
 
+        /**
+         * Increase the score of given player by given score.
+         */
         public void IncreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] += score;
             Debug.Log($"{id} got a score of {GetScore(id)}");
         }
         
+        /**
+         * Decrease the score of given player by given score.
+         */
         public void DecreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] -= score;
             Debug.Log($"{id} got a score of {GetScore(id)}");
         }
 
+        /**
+         * Deduct the remaining life of the given player by 1.
+         */
         public void ReduceRemainingLife(PlayerID id)
         {
             _remainingLife[id]--;
             Debug.Log($"{id} got {GetRemainingLife(id)} life(s) left");
         }
         
+        /**
+         * Increase the remaining life of the given player by 1.
+         */
         public void IncreaseRemainingLife(PlayerID id)
         {
             _remainingLife[id]++;

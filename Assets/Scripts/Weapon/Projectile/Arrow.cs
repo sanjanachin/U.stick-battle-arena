@@ -32,8 +32,10 @@ namespace Game
 
         private void HandleHit(PlayerController player, PlayerController executor)
         {
-            _service.PlayerManager.IncreaseScore(executor.Stat.PlayerID, _score);
-            player.Stat.DeductHealth(_damage, executor.Stat.PlayerID);
+            // Increase score of the dealer if hit
+            _service.PlayerManager.IncreaseScore(executor.Stat.ID, _score);
+            // Deduct health of the hit player
+            player.Stat.DeductHealth(_damage, executor.Stat.ID);
             ReturnToPool();
         }
         

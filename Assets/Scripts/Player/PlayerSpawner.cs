@@ -19,6 +19,9 @@ namespace Game
             _player.OnDeath += Respawn;
         }
 
+        /**
+         * Change the position of the player to the position of the spawner
+         */
         private void Respawn()
         {
             _player.transform.position = transform.position;

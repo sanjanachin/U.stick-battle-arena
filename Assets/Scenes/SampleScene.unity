@@ -308,6 +308,7 @@ MonoBehaviour:
     Player: {fileID: -7951954074938605117, guid: 2d8cd4706b8c78d4e935757fa348d0f6, type: 3}
   - Id: 3
     Player: {fileID: 328236448532474933, guid: 897cc7834fcb5b042a345ba79e3d0381, type: 3}
+  _playerDefaultLife: 10
 --- !u!1 &149488244
 GameObject:
   m_ObjectHideFlags: 0

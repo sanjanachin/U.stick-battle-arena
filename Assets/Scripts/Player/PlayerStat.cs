@@ -5,6 +5,7 @@ using Game;
 using Game.Player;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class PlayerStat : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerStat : MonoBehaviour
     private float _remainingHealth;
     private PlayerID _lastDamageDealer;
     
-    public PlayerID PlayerID;
+    public PlayerID ID;
 
     public event UnityAction OnDeath = delegate { }; 
 
@@ -28,6 +29,10 @@ public class PlayerStat : MonoBehaviour
         CheckDeath();
     }
 
+    /**
+     * Deduct the health of the player by given damage;
+     * set the the player ID of the dealer for kill bonus reference.
+     */
     public void DeductHealth(float damage, PlayerID lastDealer)
     {
         _remainingHealth -= damage;
@@ -36,12 +41,14 @@ public class PlayerStat : MonoBehaviour
 
     private void CheckDeath()
     {
-        if (_remainingHealth <= 0)
-        {
-            _remainingHealth = _maxHealth;
-            _service.PlayerManager.IncreaseScore(_lastDamageDealer, _killBonus);
-            _service.PlayerManager.ReduceRemainingLife(PlayerID);
-            OnDeath.Invoke();
-        }
+        if (_remainingHealth > 0) return;
+        
+        // reset the health
+        _remainingHealth = _maxHealth;
+        // give kill bonus to the last damage dealer
+        _service.PlayerManager.IncreaseScore(_lastDamageDealer, _killBonus);
+        // reduce the remaining life of the player
+        _service.PlayerManager.ReduceRemainingLife(ID);
+        OnDeath.Invoke();
     }
 }
