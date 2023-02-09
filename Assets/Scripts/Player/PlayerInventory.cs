@@ -1,5 +1,6 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Object = System.Object;
 
 namespace Game.Player
 {
@@ -9,12 +10,13 @@ namespace Game.Player
     [RequireComponent(typeof(PlayerController))]
     public class PlayerInventory : MonoBehaviour
     {
-        [SerializeField] private GameplayService _service;
         [SerializeField] private Transform _itemHolderTrans;
         [SerializeField] private UsableItem _equippedItem;
         [SerializeField] private UsableItem _holdItem;
         [SerializeField] private PlayerController _playerController;
-
+        [Tooltip("The delay applied before equipping the remaining item if the current item broke")]
+        [SerializeField] private float _itemBreakSwitchDelay;
+        
         private void Awake()
         {
             _playerController = GetComponent<PlayerController>();
@@ -30,10 +32,20 @@ namespace Game.Player
                 _playerController.FacingLeft ? 1 : -1, 1, 1);
         }
 
+        // delay a bit then check and equip the current holding item
+        private IEnumerator ReEquipItemAfterBreak()
+        {
+            // TODO: very ugly by-pass, might need to modify for edge cases
+            yield return new WaitForSecondsRealtime(_itemBreakSwitchDelay);
+            if (!Object.Equals(_equippedItem, null) && !_equippedItem.isActiveAndEnabled)
+                _equippedItem.Equip();
+        }
+
+        // handle player's switch action, switch items in inventory
         private void SwitchItem()
         {
             // do nothing if don't have another item
-            if (_holdItem == null) return;
+            if (Object.Equals(_holdItem, null)) return;
             
             // switch
             _equippedItem.UnEquip();
@@ -41,6 +53,8 @@ namespace Game.Player
             (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
         }
 
+        // handle if the item is broken
+        // automatically equip the remaining item
         private void HandleItemBreak(UsableItem item)
         {
             // place the broken item to hold slot
@@ -52,8 +66,8 @@ namespace Game.Player
             _holdItem.ReturnToPool();
             _holdItem = null;
 
-            if (_equippedItem == null) return;
-            _equippedItem.Equip();
+            // delay a bit before equip the hold item to prevent double shooting
+            StartCoroutine(ReEquipItemAfterBreak());
         }
         
         /**

@@ -1,6 +1,4 @@
-﻿using System;
-using Game.Player;
-using Unity.VisualScripting;
+﻿using Game.Player;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -99,6 +97,10 @@ namespace Game
             OnUseButtonUp.Invoke();
         }
 
+        /**
+         * remove hooks to the player and deactivate the gameObject
+         * used for item switching
+         */
         public void UnEquip()
         {
             _player.OnItemUseDown -= HandleItemUseDown;
@@ -106,13 +108,21 @@ namespace Game
             gameObject.SetActive(false);
         }
         
+        /**
+         * hooks to the player and activate the gameObject
+         * used for item switching
+         */
         public void Equip()
         {
             _player.OnItemUseDown += HandleItemUseDown;
             _player.OnItemUseUp += HandleItemUseUp;
+            
             gameObject.SetActive(true);
         }
-
+        
+        /**
+         * set the parent of this gameObject and reset local position
+         */
         public void SetAndMoveToParent(Transform parent)
         {
             _transform.SetParent(parent, false);
@@ -135,7 +145,9 @@ namespace Game
         {
             _durability -= value;
             if (_durability <= 0)
+            {
                 OnBreak.Invoke(this);
+            }
         }
 
         public void Spawn(float lifespan)
