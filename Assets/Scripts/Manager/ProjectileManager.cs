@@ -28,6 +28,7 @@ namespace Game
             {
                 Transform spawnParent = new GameObject(
                     $"{_prefabEntries[i].Id} Pool").GetComponent<Transform>();
+                spawnParent.SetParent(transform);
                 
                 _poolMap.Add(
                     _prefabEntries[i].Id,

@@ -68,6 +68,12 @@ namespace Game
             _pickable.Rigidbody.isKinematic = true;
         }
         
+        private void EnablePhysics()
+        {
+            _pickable.Collider.enabled = true;
+            _pickable.Rigidbody.isKinematic = false;
+        }
+        
         // hook the player's events and disable physics to be held 
         private void RegisterToPlayer(PlayerController player)
         {
@@ -113,6 +119,8 @@ namespace Game
         
         public void ReturnToPool()
         {
+            EnablePhysics();
+            UnEquip();
             _service.UsableItemManager.ReturnUsableItem(_id, this);
         }
         
