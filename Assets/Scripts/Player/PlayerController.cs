@@ -16,6 +16,7 @@ namespace Game.Player
         public Vector3 RawMovement { get; private set; }
         public bool FacingLeft => _facingLeft;
         public bool Grounded => _colDown;
+        public PlayerStat Stat;
 
         [SerializeField] private InputReader _input;
         private bool _facingLeft = true;
