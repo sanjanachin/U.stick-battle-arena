@@ -16,11 +16,11 @@ namespace Game
         /**
          * Invoked when the player holding this item pressed the use button
          */
-        public event UnityAction OnUseButtonDown = delegate {  }; 
+        public event UnityAction<PlayerController> OnUseButtonDown = delegate {  }; 
         /**
          * Invoked when the player holding this item released the use button
          */
-        public event UnityAction OnUseButtonUp = delegate {  };
+        public event UnityAction<PlayerController> OnUseButtonUp = delegate {  };
         /**
          * Invoked when the durability of this item reaches 0
          */
@@ -81,13 +81,13 @@ namespace Game
         private void HandleItemUseDown()
         {
             _pressing = true;
-            OnUseButtonDown.Invoke();
+            OnUseButtonDown.Invoke(_player);
         }
         
         private void HandleItemUseUp()
         {
             _pressing = false;
-            OnUseButtonUp.Invoke();
+            OnUseButtonUp.Invoke(_player);
         }
 
         private void ReturnToPool()

@@ -7,9 +7,11 @@ namespace Game
     [RequireComponent(typeof(Projectile))]
     public class Arrow : MonoBehaviour
     {
+        [SerializeField] private GameplayService _service;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private Pickable _pickable;
         [SerializeField] private float _damage;
+        [SerializeField] private float _score;
         [SerializeField] private Transform _visualTransform;
         
         private void Awake()
@@ -28,9 +30,10 @@ namespace Game
                 Vector3.forward);
         }
 
-        private void HandleHit(PlayerController player)
+        private void HandleHit(PlayerController player, PlayerController executor)
         {
-            Debug.Log($"deal {_damage} to player");
+            _service.PlayerManager.IncreaseScore(executor.Stat.PlayerID, _score);
+            player.Stat.DeductHealth(_damage, executor.Stat.PlayerID);
             ReturnToPool();
         }
         

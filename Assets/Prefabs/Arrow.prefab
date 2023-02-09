@@ -114,9 +114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5462c1fbd614464d8f89d2567d16831f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _projectile: {fileID: 2245831819351892443}
   _pickable: {fileID: 8691087888988716436}
-  _damage: 0
+  _damage: 4
+  _score: 4
   _visualTransform: {fileID: 8691087890077011024}
 --- !u!1 &8691087889624562888
 GameObject:

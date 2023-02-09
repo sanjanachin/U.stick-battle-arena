@@ -17,15 +17,15 @@ namespace Game
     {
         [SerializeField] private PlayerIDPlayerPair[] _playerEntries;
         private Transform _parent;
-        private Dictionary<PlayerID, int> _scoreboard;
+        private Dictionary<PlayerID, float> _scoreboard;
         private Dictionary<PlayerID, int> _remainingLife;
-        private Dictionary<PlayerID, PlayerController> _playerList;
+        private Dictionary<PlayerID, PlayerStat> _playerList;
 
         private void Awake()
         {
-            _scoreboard = new Dictionary<PlayerID, int>();
+            _scoreboard = new Dictionary<PlayerID, float>();
             _remainingLife = new Dictionary<PlayerID, int>();
-            _playerList = new Dictionary<PlayerID, PlayerController>();
+            _playerList = new Dictionary<PlayerID, PlayerStat>();
             _parent = new GameObject("Player Pool").GetComponent<Transform>();
             
             // initialize all the values
@@ -37,22 +37,36 @@ namespace Game
             }
         }
 
-        public PlayerController SpawnPlayer(PlayerID id)
+        public PlayerStat SpawnPlayer(PlayerID id)
         {
             return Instantiate(_playerList[id], _parent);
         }
 
-        public void IncreaseScore(PlayerID id, int score)
+        public void IncreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] += score;
+            Debug.Log($"{id} got a score of {GetScore(id)}");
+        }
+        
+        public void DecreaseScore(PlayerID id, float score)
+        {
+            _scoreboard[id] -= score;
+            Debug.Log($"{id} got a score of {GetScore(id)}");
         }
 
         public void ReduceRemainingLife(PlayerID id)
         {
             _remainingLife[id]--;
+            Debug.Log($"{id} got {GetRemainingLife(id)} life(s) left");
+        }
+        
+        public void IncreaseRemainingLife(PlayerID id)
+        {
+            _remainingLife[id]++;
+            Debug.Log($"{id} got {GetRemainingLife(id)} life(s) left");
         }
 
-        public int GetScore(PlayerID id)
+        public float GetScore(PlayerID id)
         {
             return _scoreboard[id];
         }
@@ -66,7 +80,7 @@ namespace Game
         public struct PlayerIDPlayerPair
         {
             public PlayerID Id;
-            public PlayerController Player;
+            public PlayerStat Player;
         }
     }
 }
