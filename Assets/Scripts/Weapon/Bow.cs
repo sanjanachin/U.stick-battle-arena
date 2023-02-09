@@ -40,9 +40,10 @@ namespace Game
                 velocity = new Vector2(-velocity.x, velocity.y);
             
             arrow.Launch(_projectileID, _pull * velocity, BulletGravity, BulletLifespan);
-            _usableItem.ReduceDurability(1);
-            
             _pulling = false;
-            _pull = 0;}
+            _pull = 0;
+            
+            _usableItem.ReduceDurability(1);
+        }
     }
 }

@@ -41,6 +41,21 @@ namespace Game.Player
             (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
         }
 
+        private void HandleItemBreak(UsableItem item)
+        {
+            // place the broken item to hold slot
+            if (item == _equippedItem)
+                (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
+            
+            // disable item
+            _holdItem.UnEquip();
+            _holdItem.ReturnToPool();
+            _holdItem = null;
+
+            if (_equippedItem == null) return;
+            _equippedItem.Equip();
+        }
+        
         /**
          * Set the item to the player's item holder
          * and updates player's inventory
@@ -66,6 +81,7 @@ namespace Game.Player
             }
             
             _equippedItem = item;
+            item.OnBreak += HandleItemBreak;
 
             // move the gameObject under the player's holder
             item.SetAndMoveToParent(_itemHolderTrans);

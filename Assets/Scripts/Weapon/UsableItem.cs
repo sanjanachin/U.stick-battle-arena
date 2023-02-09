@@ -25,7 +25,7 @@ namespace Game
         /**
          * Invoked when the durability of this item reaches 0
          */
-        public event UnityAction OnBreak = delegate {  };
+        public event UnityAction<UsableItem> OnBreak = delegate {  };
 
         public PlayerController Player { get => _player; }
         
@@ -36,6 +36,7 @@ namespace Game
         [SerializeField] private Transform _transform;
         [SerializeField] private Pickable _pickable;
         [SerializeField] private UsableItemID _id;
+        [SerializeField] private int _maxDurability;
         [SerializeField] private int _durability;
         private float _lifespan;
         private bool _picked = false;
@@ -44,6 +45,7 @@ namespace Game
         {
             _transform = GetComponent<Transform>();
             _pickable = GetComponent<Pickable>();
+            _durability = _maxDurability;
 
             _pickable.OnPicked += RegisterToPlayer;
         }
@@ -121,6 +123,9 @@ namespace Game
         {
             EnablePhysics();
             UnEquip();
+            OnBreak = delegate {  };
+            _player = null;
+            _durability = _maxDurability;
             _service.UsableItemManager.ReturnUsableItem(_id, this);
         }
         
@@ -130,7 +135,7 @@ namespace Game
         {
             _durability -= value;
             if (_durability <= 0)
-                OnBreak.Invoke();
+                OnBreak.Invoke(this);
         }
 
         public void Spawn(float lifespan)
