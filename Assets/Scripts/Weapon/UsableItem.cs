@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,19 +33,19 @@ namespace Game
         private PlayerController _player;
 
         [SerializeField] private GameplayService _service;
+        [SerializeField] private Transform _transform;
         [SerializeField] private Pickable _pickable;
         [SerializeField] private UsableItemID _id;
         [SerializeField] private int _durability;
         private float _lifespan;
-        private bool _picked;
+        private bool _picked = false;
 
         protected virtual void Awake()
         {
+            _transform = GetComponent<Transform>();
             _pickable = GetComponent<Pickable>();
 
             _pickable.OnPicked += RegisterToPlayer;
-
-            _picked = false;
         }
 
         private void Update()
@@ -90,7 +91,27 @@ namespace Game
             OnUseButtonUp.Invoke();
         }
 
-        private void ReturnToPool()
+        public void UnEquip()
+        {
+            _player.OnItemUseDown -= HandleItemUseDown;
+            _player.OnItemUseUp -= HandleItemUseUp;
+            gameObject.SetActive(false);
+        }
+        
+        public void Equip()
+        {
+            _player.OnItemUseDown += HandleItemUseDown;
+            _player.OnItemUseUp += HandleItemUseUp;
+            gameObject.SetActive(true);
+        }
+
+        public void SetAndMoveToParent(Transform parent)
+        {
+            _transform.SetParent(parent, false);
+            _transform.localPosition = Vector3.zero;
+        }
+        
+        public void ReturnToPool()
         {
             _service.UsableItemManager.ReturnUsableItem(_id, this);
         }

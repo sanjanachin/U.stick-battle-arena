@@ -174,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 0}
+  _transform: {fileID: 0}
   _pickable: {fileID: 90987699}
   _id: 0
   _durability: 0
@@ -767,7 +768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645740834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 9.23, z: 0}
+  m_LocalPosition: {x: -10.01, y: 9.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -788,8 +789,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItemID: 0
-  _spawnLifespan: 60
-  _spawnInterval: 15
+  _spawnLifespan: 15
+  _spawnInterval: 5
   _randomXPosLowerBound: -15
   _randomXPosUpperBound: 15
 --- !u!1 &679827580
@@ -826,6 +827,7 @@ Transform:
   - {fileID: 90987696}
   - {fileID: 1562066557}
   - {fileID: 645740835}
+  - {fileID: 1690977623}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -941,6 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 0}
+  _transform: {fileID: 0}
   _pickable: {fileID: 759574716}
   _id: 0
   _durability: 0
@@ -1627,8 +1630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4e67c2a52059641872ef5547986ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _itemHolderTrans: {fileID: 2021105469}
-  _currentItem: {fileID: 0}
+  _equippedItem: {fileID: 0}
+  _holdItem: {fileID: 0}
   _playerController: {fileID: 1429359256}
 --- !u!1 &1530142907
 GameObject:
@@ -1799,6 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 0}
+  _transform: {fileID: 0}
   _pickable: {fileID: 1562066560}
   _id: 0
   _durability: 0
@@ -1994,6 +2000,56 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1690977622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690977623}
+  - component: {fileID: 1690977624}
+  m_Layer: 0
+  m_Name: BowSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1690977623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690977622}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.88, y: 9.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 679827581}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1690977624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690977622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e441d79a321c2864993fc4f128b21d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
+  _usableItemID: 2
+  _spawnLifespan: 15
+  _spawnInterval: 5
+  _randomXPosLowerBound: -15
+  _randomXPosUpperBound: 15
 --- !u!1 &1701835015
 GameObject:
   m_ObjectHideFlags: 0

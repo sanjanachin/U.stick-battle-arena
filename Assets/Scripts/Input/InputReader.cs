@@ -19,13 +19,13 @@ namespace Game
         // public event UnityAction menuCancelEvent = delegate { };
 
         // !!! Remember to edit Input Reader functions upon updating the input map !!!
-        private GameInput gameInput;
+        private GameInput _gameInput;
 
         private void OnEnable() {
-            if (gameInput == null) {
-                gameInput = new GameInput();
+            if (_gameInput == null) {
+                _gameInput = new GameInput();
 
-                gameInput.Player.SetCallbacks(this);
+                _gameInput.Player.SetCallbacks(this);
                 // gameInput.Menus.SetCallbacks(this);
             }
 
@@ -80,7 +80,7 @@ namespace Game
 
         // Input Reader
         public void EnablePlayerInput() {
-            gameInput.Player.Enable();
+            _gameInput.Player.Enable();
         }
 
         // public void EnableMenusInput() {
@@ -90,7 +90,7 @@ namespace Game
         // }
 
         public void DisableAllInput() {
-            gameInput.Player.Disable();
+            _gameInput.Player.Disable();
         }
     }
 }
