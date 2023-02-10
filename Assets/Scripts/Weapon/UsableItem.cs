@@ -131,12 +131,12 @@ namespace Game
         
         public void ReturnToPool()
         {
+            _service.UsableItemManager.ReturnUsableItem(_id, this);
             EnablePhysics();
             UnEquip();
             OnBreak = delegate {  };
             _player = null;
             _durability = _maxDurability;
-            _service.UsableItemManager.ReturnUsableItem(_id, this);
         }
         
         public void IncreaseDurability(int value) => _durability += value;

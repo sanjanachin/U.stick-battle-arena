@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using Object = System.Object;
 
 namespace Game.Player
@@ -32,15 +34,6 @@ namespace Game.Player
                 _playerController.FacingLeft ? 1 : -1, 1, 1);
         }
 
-        // delay a bit then check and equip the current holding item
-        private IEnumerator ReEquipItemAfterBreak()
-        {
-            // TODO: very ugly by-pass, might need to modify for edge cases
-            yield return new WaitForSecondsRealtime(_itemBreakSwitchDelay);
-            if (!Object.Equals(_equippedItem, null) && !_equippedItem.isActiveAndEnabled)
-                _equippedItem.Equip();
-        }
-
         // handle player's switch action, switch items in inventory
         private void SwitchItem()
         {
@@ -48,7 +41,8 @@ namespace Game.Player
             if (Object.Equals(_holdItem, null)) return;
             
             // switch
-            _equippedItem.UnEquip();
+            if (!Object.Equals(_equippedItem, null))
+                _equippedItem.UnEquip();
             _holdItem.Equip();
             (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
         }
@@ -57,17 +51,13 @@ namespace Game.Player
         // automatically equip the remaining item
         private void HandleItemBreak(UsableItem item)
         {
-            // place the broken item to hold slot
-            if (item == _equippedItem)
-                (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
-            
             // disable item
-            _holdItem.UnEquip();
-            _holdItem.ReturnToPool();
-            _holdItem = null;
+            _equippedItem.UnEquip();
+            _equippedItem.ReturnToPool();
+            _equippedItem = null;
 
-            // delay a bit before equip the hold item to prevent double shooting
-            StartCoroutine(ReEquipItemAfterBreak());
+            // switch the inventory weapon out if the player has one
+            SwitchItem();
         }
         
         /**
@@ -95,6 +85,7 @@ namespace Game.Player
             }
             
             _equippedItem = item;
+            item.Equip();
             item.OnBreak += HandleItemBreak;
 
             // move the gameObject under the player's holder

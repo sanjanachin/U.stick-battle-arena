@@ -29,6 +29,8 @@ namespace Game
         
         private void Release()
         {
+            if (!_pulling) return;
+            
             Projectile arrow = _service.ProjectileManager.
                 SpawnProjectile(_projectileID);
 
