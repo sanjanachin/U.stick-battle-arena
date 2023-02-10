@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Game.Player;
 using UnityEngine;
 
 namespace Game
@@ -18,7 +19,7 @@ namespace Game
         }
         
         // Preform a circle hitbox check
-        private void Slash()
+        private void Slash(PlayerController executor)
         {
             Vector2 point = (_usableItem.Player.FacingLeft) ? Vector2.left : Vector2.right;
             point = (Vector2) _usableItem.Player.transform.position + (point * _rayCastDist);

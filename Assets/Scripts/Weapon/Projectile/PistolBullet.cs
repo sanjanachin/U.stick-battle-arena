@@ -6,8 +6,10 @@ namespace Game
     [RequireComponent(typeof(Projectile))]
     public class PistolBullet : MonoBehaviour
     {
+        [SerializeField] private GameplayService _service;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private float _damage;
+        [SerializeField] private float _score;
         
         private void Awake()
         {
@@ -15,9 +17,13 @@ namespace Game
             _projectile.OnHit += HandleHit;
         }
 
-        private void HandleHit(PlayerController player)
+        private void HandleHit(PlayerController player, PlayerController executor)
         {
-            Debug.Log($"deal {_damage} to player");
+            
+            // Increase score of the dealer if hit
+            _service.PlayerManager.IncreaseScore(executor.Stat.ID, _score);
+            // Deduct health of the hit player
+            player.Stat.DeductHealth(_damage, executor.Stat.ID);
             ReturnToPool();
         }
         
