@@ -13,6 +13,7 @@ namespace Game
             _usableItem = GetComponent<UsableItem>();
             _usableItem.OnUseButtonUp += Release;
             _usableItem.OnUseButtonDown += Pull;
+            // _usableItem.OnReturn += CancelPull;
         }
 
         private void Update()
@@ -25,6 +26,12 @@ namespace Game
         private void Pull()
         {
             _pulling = true;
+        }
+
+        private void CancelPull()
+        {
+            _pulling = false;
+
         }
         
         private void Release()

@@ -25,6 +25,7 @@ namespace Game
          * Invoked when the durability of this item reaches 0
          */
         public event UnityAction<UsableItem> OnBreak = delegate {  };
+        public event UnityAction OnReturn = delegate {  };
 
         public PlayerController Player { get => _player; }
         
@@ -133,18 +134,18 @@ namespace Game
             if (!_picked) return;
             _player.OnItemUseDown -= HandleItemUseDown;
             _player.OnItemUseUp -= HandleItemUseUp;
-            EnablePhysics();
             _player.GetComponent<PlayerInventory>().DumpItem(this);
             _player = null;
         }
         
         public void ReturnToPool()
         {
-            DeregisterFromPlayer();
+            EnablePhysics();
             _equipped = false;
             _durability = _maxDurability;
             gameObject.SetActive(false);
             _service.UsableItemManager.ReturnUsableItem(_id, this);
+            OnReturn.Invoke();
         }
         
         public void IncreaseDurability(int value) => _durability += value;
@@ -155,6 +156,7 @@ namespace Game
             if (_durability <= 0)
             {
                 OnBreak.Invoke(this);
+                DeregisterFromPlayer();
                 ReturnToPool();
             }
         }

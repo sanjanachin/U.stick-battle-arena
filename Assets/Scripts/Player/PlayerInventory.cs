@@ -16,9 +16,7 @@ namespace Game.Player
         [SerializeField] private UsableItem _equippedItem;
         [SerializeField] private UsableItem _holdItem;
         [SerializeField] private PlayerController _playerController;
-        [Tooltip("The delay applied before equipping the remaining item if the current item broke")]
-        [SerializeField] private float _itemBreakSwitchDelay;
-        
+
         private void Awake()
         {
             _playerController = GetComponent<PlayerController>();
