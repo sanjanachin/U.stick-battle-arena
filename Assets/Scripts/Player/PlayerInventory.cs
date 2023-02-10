@@ -49,12 +49,18 @@ namespace Game.Player
 
         // handle if the item is broken
         // automatically equip the remaining item
-        private void HandleItemBreak(UsableItem item)
+        public void DumpItem(UsableItem item)
         {
             // disable item
-            _equippedItem.UnEquip();
-            _equippedItem.ReturnToPool();
-            _equippedItem = null;
+            item.UnEquip();
+            if (item == _equippedItem)
+            {
+                _equippedItem = null;
+            }
+            else
+            {
+                _holdItem = null;
+            }
 
             // switch the inventory weapon out if the player has one
             SwitchItem();
@@ -86,7 +92,6 @@ namespace Game.Player
             
             _equippedItem = item;
             item.Equip();
-            item.OnBreak += HandleItemBreak;
 
             // move the gameObject under the player's holder
             item.SetAndMoveToParent(_itemHolderTrans);

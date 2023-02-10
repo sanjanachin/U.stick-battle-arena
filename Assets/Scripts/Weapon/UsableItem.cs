@@ -1,6 +1,7 @@
 ﻿using Game.Player;
 using UnityEngine;
 using UnityEngine.Events;
+using Object = System.Object;
 
 namespace Game
 {
@@ -27,7 +28,6 @@ namespace Game
 
         public PlayerController Player { get => _player; }
         
-        private bool _pressing = false;
         private PlayerController _player;
 
         [SerializeField] private GameplayService _service;
@@ -37,7 +37,8 @@ namespace Game
         [SerializeField] private int _maxDurability;
         [SerializeField] private int _durability;
         private float _lifespan;
-        private bool _picked = false;
+        private bool _picked => _player != null;
+        private bool _equipped = false;
 
         protected virtual void Awake()
         {
@@ -64,7 +65,9 @@ namespace Game
 
         private void DisablePhysics()
         {
+
             _pickable.Collider.enabled = false;
+            _pickable.Rigidbody.velocity = Vector2.zero;
             _pickable.Rigidbody.isKinematic = true;
         }
         
@@ -82,18 +85,17 @@ namespace Game
             DisablePhysics();
             _player = player;
             player.GetComponent<PlayerInventory>().PickUpItem(this);
-            _picked = true;
         }
 
         private void HandleItemUseDown()
         {
-            _pressing = true;
+            if (!_equipped) return;
             OnUseButtonDown.Invoke();
         }
         
         private void HandleItemUseUp()
         {
-            _pressing = false;
+            if (!_equipped) return;
             OnUseButtonUp.Invoke();
         }
 
@@ -103,8 +105,7 @@ namespace Game
          */
         public void UnEquip()
         {
-            _player.OnItemUseDown -= HandleItemUseDown;
-            _player.OnItemUseUp -= HandleItemUseUp;
+            _equipped = false;
             gameObject.SetActive(false);
         }
         
@@ -114,9 +115,7 @@ namespace Game
          */
         public void Equip()
         {
-            _player.OnItemUseDown += HandleItemUseDown;
-            _player.OnItemUseUp += HandleItemUseUp;
-            
+            _equipped = true;
             gameObject.SetActive(true);
         }
         
@@ -128,15 +127,24 @@ namespace Game
             _transform.SetParent(parent, false);
             _transform.localPosition = Vector3.zero;
         }
+
+        private void DeregisterFromPlayer()
+        {
+            if (!_picked) return;
+            _player.OnItemUseDown -= HandleItemUseDown;
+            _player.OnItemUseUp -= HandleItemUseUp;
+            EnablePhysics();
+            _player.GetComponent<PlayerInventory>().DumpItem(this);
+            _player = null;
+        }
         
         public void ReturnToPool()
         {
-            _service.UsableItemManager.ReturnUsableItem(_id, this);
-            EnablePhysics();
-            UnEquip();
-            OnBreak = delegate {  };
-            _player = null;
+            DeregisterFromPlayer();
+            _equipped = false;
             _durability = _maxDurability;
+            gameObject.SetActive(false);
+            _service.UsableItemManager.ReturnUsableItem(_id, this);
         }
         
         public void IncreaseDurability(int value) => _durability += value;
@@ -147,6 +155,7 @@ namespace Game
             if (_durability <= 0)
             {
                 OnBreak.Invoke(this);
+                ReturnToPool();
             }
         }
 
