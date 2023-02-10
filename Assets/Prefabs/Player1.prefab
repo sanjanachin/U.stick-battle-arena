@@ -152,7 +152,7 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _maxHealth: 10
   _killBonus: 10
-  PlayerID: 0
+  ID: 0
 --- !u!114 &7112100993949861734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stat: {fileID: -7537424052761003295}
-  _input: {fileID: 11400000, guid: 400e4facf778cfc419f15e091268f8f1, type: 2}
+  _input: {fileID: 11400000, guid: c722ed66deac01843ab19877f52dbac6, type: 2}
   _characterBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
