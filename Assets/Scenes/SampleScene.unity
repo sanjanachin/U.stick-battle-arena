@@ -510,7 +510,7 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItemID: 0
   _spawnLifespan: 15
-  _spawnInterval: 1
+  _spawnInterval: 3
   _randomXPosLowerBound: -15
   _randomXPosUpperBound: 15
 --- !u!1 &679827580
@@ -1203,7 +1203,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1690977623
 Transform:
   m_ObjectHideFlags: 0
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItemID: 2
   _spawnLifespan: 15
-  _spawnInterval: 2
+  _spawnInterval: 3
   _randomXPosLowerBound: -15
   _randomXPosUpperBound: 15
 --- !u!1 &1701835015
