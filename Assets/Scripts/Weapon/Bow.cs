@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Player;
+using UnityEngine;
 
 namespace Game
 {
@@ -23,7 +24,7 @@ namespace Game
             _pull = Mathf.Min(_pull + Time.deltaTime, _maxPull);
         }
 
-        private void Pull()
+        private void Pull(PlayerController executor)
         {
             _pulling = true;
         }
@@ -34,7 +35,7 @@ namespace Game
 
         }
         
-        private void Release()
+        private void Release(PlayerController executor)
         {
             if (!_pulling) return;
             
@@ -49,6 +50,7 @@ namespace Game
                 velocity = new Vector2(-velocity.x, velocity.y);
             
             arrow.Launch(_projectileID, _pull * velocity, BulletGravity, BulletLifespan);
+
             _pulling = false;
             _pull = 0;
             

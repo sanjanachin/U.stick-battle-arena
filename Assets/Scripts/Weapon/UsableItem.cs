@@ -16,11 +16,11 @@ namespace Game
         /**
          * Invoked when the player holding this item pressed the use button
          */
-        public event UnityAction OnUseButtonDown = delegate {  }; 
+        public event UnityAction<PlayerController> OnUseButtonDown = delegate {  }; 
         /**
          * Invoked when the player holding this item released the use button
          */
-        public event UnityAction OnUseButtonUp = delegate {  };
+        public event UnityAction<PlayerController> OnUseButtonUp = delegate {  };
         /**
          * Invoked when the durability of this item reaches 0
          */

@@ -18,7 +18,7 @@ namespace Game
         /**
          * Invoked on hitting a player
          */
-        public event UnityAction<PlayerController> OnHit = delegate { };
+        public event UnityAction<PlayerController, PlayerController> OnHit = delegate { };
         
         public Vector2 Velocity => _pickable.Rigidbody.velocity;
         public float Gravity => _pickable.Rigidbody.gravityScale;
@@ -27,6 +27,8 @@ namespace Game
         [SerializeField] private Pickable _pickable;
         [SerializeField] private float _lifespan;
         [SerializeField] private ProjectileID _id;
+
+        private PlayerController _executor;
         
         private void Awake()
         {
@@ -52,8 +54,9 @@ namespace Game
         /**
          * Launch the projectile with provided values
          */
-        public void Launch(ProjectileID id, Vector2 velocity, float gravity, float lifespan)
+        public void Launch(ProjectileID id, Vector2 velocity, PlayerController executor, float gravity, float lifespan)
         {
+            _executor = executor;
             _pickable.Rigidbody.velocity = velocity;
             _pickable.Rigidbody.gravityScale = gravity;
             _lifespan = lifespan;
@@ -73,7 +76,7 @@ namespace Game
         // called on the projectile collides with a collider
         private void Hit(PlayerController player)
         {
-            OnHit.Invoke(player);
+            OnHit.Invoke(player, _executor);
         }
     }
 }

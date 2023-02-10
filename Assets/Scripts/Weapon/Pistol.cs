@@ -1,3 +1,4 @@
+using Game.Player;
 using UnityEngine;
 
 namespace Game
@@ -10,7 +11,7 @@ namespace Game
             _usableItem.OnUseButtonDown += Shoot;
         }
         
-        private void Shoot()
+        private void Shoot(PlayerController executor)
         {
             Projectile bullet = _service.ProjectileManager.
                 SpawnProjectile(_projectileID);
@@ -22,7 +23,7 @@ namespace Game
             if (_usableItem.Player.FacingLeft)
                 velocity = new Vector2(-velocity.x, velocity.y);
             
-            bullet.Launch(_projectileID, velocity, BulletGravity, BulletLifespan);
+            bullet.Launch(_projectileID, velocity, executor, BulletGravity, BulletLifespan);
             _usableItem.ReduceDurability(1);
         }
     }

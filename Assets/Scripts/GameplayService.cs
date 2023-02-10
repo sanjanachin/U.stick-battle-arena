@@ -12,6 +12,7 @@ namespace Game
     {
         public ProjectileManager ProjectileManager { get; private set; }
         public UsableItemManager UsableItemManager { get; private set; }
+        public PlayerManager PlayerManager { get; private set; }
 
         /**
          * Any provide function below are to setup the reference of
@@ -26,6 +27,11 @@ namespace Game
         public void ProvideUsableItemManager(UsableItemManager usableItemManager)
         {
             UsableItemManager = usableItemManager;
+        }
+
+        public void ProvidePlayerManager(PlayerManager playerManager)
+        {
+            PlayerManager = playerManager;
         }
     }
 }

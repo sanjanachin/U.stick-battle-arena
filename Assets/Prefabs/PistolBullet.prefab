@@ -114,8 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfa64b540044bfbae7efef3e6bd9002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _projectile: {fileID: 7547939695696379543}
-  _damage: 0
+  _damage: 2
+  _score: 2
 --- !u!1 &1083561488964981533
 GameObject:
   m_ObjectHideFlags: 0
