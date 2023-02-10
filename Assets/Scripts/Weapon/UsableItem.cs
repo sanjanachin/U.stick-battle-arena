@@ -91,13 +91,13 @@ namespace Game
         private void HandleItemUseDown()
         {
             if (!_equipped) return;
-            OnUseButtonDown.Invoke();
+            OnUseButtonDown.Invoke(_player);
         }
         
         private void HandleItemUseUp()
         {
             if (!_equipped) return;
-            OnUseButtonUp.Invoke();
+            OnUseButtonUp.Invoke(_player);
         }
 
         /**

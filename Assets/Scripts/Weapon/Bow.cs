@@ -49,7 +49,7 @@ namespace Game
             if (_usableItem.Player.FacingLeft)
                 velocity = new Vector2(-velocity.x, velocity.y);
             
-            arrow.Launch(_projectileID, _pull * velocity, BulletGravity, BulletLifespan);
+            arrow.Launch(_projectileID, _pull * velocity, executor, BulletGravity, BulletLifespan);
 
             _pulling = false;
             _pull = 0;
