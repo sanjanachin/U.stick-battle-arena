@@ -18,7 +18,7 @@ namespace Game.Player
         public bool Grounded => _colDown;
         public PlayerStat Stat;
 
-        [SerializeField] private InputReader _input;
+        [SerializeField] private PlayerInputReader _input;
         private bool _facingLeft = true;
         private Vector3 _lastPosition;
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
