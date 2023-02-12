@@ -11,7 +11,8 @@ namespace Game
 
         private void Awake()
         {
-            _gameService.SceneManager.StartLoadScene(_firstSceneToLoad);
+            // load the first scene
+            _gameService.SceneManager.FirstLoadScene(_firstSceneToLoad);
         }
     }
 }

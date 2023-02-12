@@ -9,12 +9,12 @@ namespace Game
         
         public void PlayGame() 
         {
-            _gameService.SceneManager.StartLoadScene(_playGameButtonScene);
+            _gameService.SceneManager.LoadScene(_playGameButtonScene);
         }
 
-        public void QuitGame() 
+        public void QuitGame()
         {
-            Application.Quit();
+            _gameService.SceneManager.ExitGame();
         }
     }
 }

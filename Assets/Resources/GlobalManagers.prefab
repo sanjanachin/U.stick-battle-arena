@@ -93,9 +93,18 @@ MonoBehaviour:
   _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
   _sceneEntries:
   - _id: 0
-    _sceneAsset: {fileID: 102900000, guid: fe5c92ac80bd34e4ea30116d89ceba52, type: 3}
+    _sceneReference:
+      m_AssetGUID: fe5c92ac80bd34e4ea30116d89ceba52
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
   - _id: 1
-    _sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    _sceneReference:
+      m_AssetGUID: 8c9cfa26abfee488c85f1582747f6a02
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  _currentScene: 0
 --- !u!1 &3707169909927594837
 GameObject:
   m_ObjectHideFlags: 0

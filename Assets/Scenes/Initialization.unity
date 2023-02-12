@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1090786755}
   - component: {fileID: 1090786756}
   m_Layer: 0
-  m_Name: Initializer
+  m_Name: InitializeLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,4 +168,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
-  _firstSceneToLoad: {fileID: 102900000, guid: fe5c92ac80bd34e4ea30116d89ceba52, type: 3}
+  _firstSceneToLoad: 0
