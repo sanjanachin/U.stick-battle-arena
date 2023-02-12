@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187ef37ae573401a9f27f0bb05d5d7a5, type: 3}
   m_Name: GameplayService
   m_EditorClassIdentifier: 
+  _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
