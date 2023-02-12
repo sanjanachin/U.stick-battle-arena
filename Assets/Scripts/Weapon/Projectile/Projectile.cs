@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Game.Player;
@@ -18,7 +19,9 @@ namespace Game
         /**
          * Invoked on hitting a player
          */
-        public event UnityAction<PlayerController, PlayerController> OnHit = delegate { };
+        // TODO: make <PlayerController, PlayerController> a struct with damage/attack detail
+        public event UnityAction<PlayerController, PlayerController> OnHitPlayer = delegate { };
+        public event UnityAction OnHitStage = delegate { };
         
         public Vector2 Velocity => _pickable.Rigidbody.velocity;
         public float Gravity => _pickable.Rigidbody.gravityScale;
@@ -76,7 +79,19 @@ namespace Game
         // called on the projectile collides with a collider
         private void Hit(PlayerController player)
         {
-            OnHit.Invoke(player, _executor);
+            OnHitPlayer.Invoke(player, _executor);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player == null)
+            {
+                OnHitStage.Invoke();
+                return;
+            }
+            
+            Hit(player);
         }
     }
 }
