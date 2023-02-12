@@ -1,4 +1,8 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using Object = System.Object;
 
 namespace Game.Player
 {
@@ -9,7 +13,8 @@ namespace Game.Player
     public class PlayerInventory : MonoBehaviour
     {
         [SerializeField] private Transform _itemHolderTrans;
-        [SerializeField] private UsableItem _currentItem;
+        [SerializeField] private UsableItem _equippedItem;
+        [SerializeField] private UsableItem _holdItem;
         [SerializeField] private PlayerController _playerController;
 
         private void Awake()
@@ -17,6 +22,7 @@ namespace Game.Player
             _playerController = GetComponent<PlayerController>();
 
             _playerController.OnMovement += CheckAndFlip;
+            _playerController.OnSwitchItem += SwitchItem;
         }
         
         // flip the item holder when the player is facing different directions
@@ -25,6 +31,38 @@ namespace Game.Player
             _itemHolderTrans.localScale = new Vector3(
                 _playerController.FacingLeft ? 1 : -1, 1, 1);
         }
+
+        // handle player's switch action, switch items in inventory
+        private void SwitchItem()
+        {
+            // do nothing if don't have another item
+            if (Object.Equals(_holdItem, null)) return;
+            
+            // switch
+            if (!Object.Equals(_equippedItem, null))
+                _equippedItem.UnEquip();
+            _holdItem.Equip();
+            (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
+        }
+
+        // handle if the item is broken
+        // automatically equip the remaining item
+        public void DumpItem(UsableItem item)
+        {
+            // disable item
+            item.UnEquip();
+            if (item == _equippedItem)
+            {
+                _equippedItem = null;
+            }
+            else
+            {
+                _holdItem = null;
+            }
+
+            // switch the inventory weapon out if the player has one
+            SwitchItem();
+        }
         
         /**
          * Set the item to the player's item holder
@@ -32,11 +70,29 @@ namespace Game.Player
          */
         public void PickUpItem(UsableItem item)
         {
-            _currentItem = item;
+            // check if currently holding an Item
+            if (_equippedItem != null)
+            {
+                if (_holdItem == null)
+                {
+                    // holding one item, but got an empty slot
+                    // set equipped item to holding equip pick up item 
+                    _holdItem = _equippedItem;
+                    _holdItem.UnEquip();
+                }
+                else
+                {
+                    // no empty slot, replace the item with equipped one
+                    _equippedItem.UnEquip();
+                    _equippedItem.ReturnToPool();
+                }
+            }
             
+            _equippedItem = item;
+            item.Equip();
+
             // move the gameObject under the player's holder
-            item.transform.SetParent(_itemHolderTrans, false);
-            item.transform.localPosition = Vector3.zero;
+            item.SetAndMoveToParent(_itemHolderTrans);
         }
     }
 }

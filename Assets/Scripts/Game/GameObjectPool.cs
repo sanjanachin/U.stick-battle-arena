@@ -10,6 +10,8 @@ namespace Game
      */
     public class GameObjectPool<T> where T : MonoBehaviour
     {
+        public Transform PoolParent;
+        
         private ObjectPool<T> _pool;
         private T _prefab;
         

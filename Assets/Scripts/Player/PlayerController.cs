@@ -29,12 +29,14 @@ namespace Game.Player
         public event UnityAction OnItemUseDown = () => { };
         public event UnityAction OnItemUseUp = () => { };
         public event UnityAction OnMovement = () => { };
+        public event UnityAction OnSwitchItem = () => { };
 
         private void Awake()
         {
             _input.moveEvent += UpdateInput;
             _input.useItemDownEvent += UseItemDown;
             _input.useItemUpEvent += UseItemUp;
+            _input.switchItemEvent += SwitchItem;
             
             // mute control for 0.5 seconds
             Invoke(nameof(Activate), 0.5f);
@@ -79,6 +81,7 @@ namespace Game.Player
 
         private void UseItemDown() => OnItemUseDown.Invoke();
         private void UseItemUp() => OnItemUseUp.Invoke();
+        private void SwitchItem() => OnSwitchItem.Invoke();
 
         #region Collisions
 

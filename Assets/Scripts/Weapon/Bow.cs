@@ -14,6 +14,7 @@ namespace Game
             _usableItem = GetComponent<UsableItem>();
             _usableItem.OnUseButtonUp += Release;
             _usableItem.OnUseButtonDown += Pull;
+            _usableItem.OnReturn += CancelPull;
         }
 
         private void Update()
@@ -27,9 +28,17 @@ namespace Game
         {
             _pulling = true;
         }
+
+        private void CancelPull()
+        {
+            _pulling = false;
+
+        }
         
         private void Release(PlayerController executor)
         {
+            if (!_pulling) return;
+            
             Projectile arrow = _service.ProjectileManager.
                 SpawnProjectile(_projectileID);
 
@@ -41,9 +50,11 @@ namespace Game
                 velocity = new Vector2(-velocity.x, velocity.y);
             
             arrow.Launch(_projectileID, _pull * velocity, executor, BulletGravity, BulletLifespan);
-            _usableItem.ReduceDurability(1);
-            
+
             _pulling = false;
-            _pull = 0;}
+            _pull = 0;
+            
+            _usableItem.ReduceDurability(1);
+        }
     }
 }
