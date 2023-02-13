@@ -7,6 +7,7 @@ namespace Game
 {
     public class AudioManager : MonoBehaviour
     {
+        [SerializeField] private GameService _gameService;
         [SerializeField] private AudioDataSetSO _audioDataSet;
         
         // Maps each audio id to its source
@@ -16,6 +17,8 @@ namespace Game
         {
             _audioSources = new Dictionary<AudioID, AudioSource>();
             StartCoroutine(AudioTest());
+
+            _gameService.ProvideAudioManager(this);
         }
 
         private IEnumerator AudioTest()
