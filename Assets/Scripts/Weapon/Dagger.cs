@@ -8,9 +8,12 @@ namespace Game
     [RequireComponent(typeof(UsableItem))]
     public class Dagger : MonoBehaviour
     {
+        [SerializeField] private GameplayService _service;
         [SerializeField] private UsableItem _usableItem;
         [SerializeField] private float _rayCastDist;
         [SerializeField] private float _rayCastRadius;
+        [SerializeField] private float _damage;
+        [SerializeField] private float _score;
 
         private void Awake()
         {
@@ -25,8 +28,18 @@ namespace Game
             point = (Vector2) _usableItem.Player.transform.position + (point * _rayCastDist);
             Collider2D target = Physics2D.OverlapCircle(point, _rayCastRadius);
             if (target == null) return;
+            if (target.GetComponent<PlayerController>() != null)
+                HandleHit(target.GetComponent<PlayerController>(), executor);
             
             _usableItem.ReduceDurability(1);
+        }
+
+        private void HandleHit(PlayerController hit, PlayerController dealer)
+        {
+            // Increase score of the dealer if hit
+            _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
+            // Deduct health of the hit player
+            hit.Stat.DeductHealth(_damage, dealer.Stat.ID);
         }
     }
 }

@@ -126,9 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19451f29fae94af199ca851973bf8270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItem: {fileID: 4961244621800134770}
   _rayCastDist: 1
   _rayCastRadius: 0.3
+  _damage: 2
+  _score: 2
 --- !u!1 &4961244622899746949
 GameObject:
   m_ObjectHideFlags: 0
