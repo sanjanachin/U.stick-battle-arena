@@ -14,6 +14,9 @@ namespace Game
         public UsableItemManager UsableItemManager { get; private set; }
         public PlayerManager PlayerManager { get; private set; }
 
+        public AudioManager AudioManager { get => _gameService.AudioManager; }
+        [SerializeField] private GameService _gameService;
+
         /**
          * Any provide function below are to setup the reference of
          * managers of the gameplay scene.
