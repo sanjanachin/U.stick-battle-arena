@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083561487914459844}
-  - component: {fileID: 9017558255918675841}
+  - component: {fileID: 1083561487914459865}
   - component: {fileID: 1083561487914459866}
   - component: {fileID: 1083561487914459864}
   - component: {fileID: 7547939695696379543}
-  - component: {fileID: 4270408015509447863}
+  - component: {fileID: 6900324322748996455}
   m_Layer: 0
-  m_Name: SniperBullet
+  m_Name: SMGBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,8 +37,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &9017558255918675841
-BoxCollider2D:
+--- !u!58 &1083561487914459865
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -51,18 +51,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.29}
-  m_EdgeRadius: 0
+  m_Radius: 0.19
 --- !u!50 &1083561487914459866
 Rigidbody2D:
   serializedVersion: 4
@@ -111,8 +101,8 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _pickable: {fileID: 1083561487914459864}
   _lifespan: 0
-  _id: 2
---- !u!114 &4270408015509447863
+  _id: 0
+--- !u!114 &6900324322748996455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,13 +111,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1083561487914459845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1152c6f4087143038897b2ae50dcab5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9755d2d21b7644e494b46eca5363ba86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _projectile: {fileID: 7547939695696379543}
-  _damage: 10
-  _score: 10
+  _damage: 1
+  _score: 1
 --- !u!1 &1083561488964981533
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +176,7 @@ Transform:
   m_GameObject: {fileID: 1083561489089241988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.29, z: 1}
+  m_LocalScale: {x: 0.31, y: 0.29, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1083561488964981532}
@@ -234,7 +224,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 868ec022ec5370c4cafbe00bd333295b, type: 3}
-  m_Color: {r: 0.9921569, g: 0.7411765, b: 0.03137255, a: 1}
+  m_Color: {r: 1, g: 0.7728623, b: 0.3443396, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
