@@ -14,10 +14,11 @@ namespace Game
         private void Awake()
         {
             _projectile = GetComponent<Projectile>();
-            _projectile.OnHit += HandleHit;
+            _projectile.OnHitPlayer += HandleHitPlayer;
+            _projectile.OnHitStage += HandleHitStage;
         }
 
-        private void HandleHit(PlayerController player, PlayerController executor)
+        private void HandleHitPlayer(PlayerController player, PlayerController executor)
         {
             
             // Increase score of the dealer if hit
@@ -31,15 +32,7 @@ namespace Game
         {
             _projectile.ReturnToPool();
         }
-        
-        // check for wall / floor hits
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            PlayerController player = col.gameObject.GetComponent<PlayerController>();
-            if (player != null) return;
-            
-            // hits a wall / floor
-            ReturnToPool();
-        }
+
+        private void HandleHitStage() => ReturnToPool();
     }
 }

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0ee251cb05704dcb984608d5ae42e1c8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
+  - _audioDataSet: {fileID: 11400000, guid: 30032a0398de4a44b85033eabce83f60, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
