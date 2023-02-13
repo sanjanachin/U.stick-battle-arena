@@ -1,6 +1,21 @@
 # U.stick-battle-arena
 ### Game Description
 Stick Battle Arena is a multiplayer hunger games type game where the last person standing wins. Players will fight as stick people and battle each other to victory. The game will include several themed stages, and even more unique weapons such as bows, guns, spears, swords, grenades, machine guns, rocket launchers, flame throwers and more. Learning good movement and how to line up shots will be a core element of the gameplay.
+### Version Control
+Version control is done through `JimmyC7834/U.stick-battle-arena` repo on github.
+Adding to the project is done in a standardized [pull request workflow](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests) and follow these rules:
+- Create a branch for the content you wish to add
+- Commit often and with relevant messages/descriptions to make bug tracking easier
+- Write tests for all new content you are adding
+- Since the GameCI takes a while to run, before submitting a pull request for your branch make sure all tests pass locally (refer below for info on running tests)
+- Do not approve pull requests that have not/ do not pass all tests in the GameCI (check actions tab)
+- Do not approve pull requests that you have not fully reviewed and built locally
+- Lastly, make sure all code follows the [C# style guide for Unity ](https://github.com/JimmyC7834/U.stick-battle-arena/blob/main/C%23%20style%20guide.md)
+### Bug Tracking And Reporting
+Bugs are reported to `JimmyC7834/U.stick-battle-arena` repo under the issues tab.
+If a bug is found in a branch you are attempting to PR, the PR will not be approved until a suitable fix is implemented.
+### Testing And GameCI
+The project utilizes gameCI, which integrates with github under github actions. Everytime a PR is submitted all build tests and Test Runner tests are ran and the result will appear on the pull request page. Additionally, all submitted PR's will have their test results listed in the actions tab of the repo.
 ### Running in Unity editor for development
 In order to run the system within the editor follow these steps:
 - Download and install Unity
