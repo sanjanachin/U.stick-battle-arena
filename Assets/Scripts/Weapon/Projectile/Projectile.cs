@@ -82,8 +82,9 @@ namespace Game
             OnHitPlayer.Invoke(player, _executor);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
+            if (!enabled) return;
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             if (player == null)
             {

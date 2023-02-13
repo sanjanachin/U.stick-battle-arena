@@ -2013,7 +2013,7 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItemID: 0
   _spawnLifespan: 60
-  _spawnInterval: 15
+  _spawnInterval: 3
   _randomXPosLowerBound: -15
   _randomXPosUpperBound: 15
 --- !u!1 &669547038
