@@ -25,21 +25,7 @@ namespace Game
             }
 
             DisableAllInput();
-            
-            // enable corresponding input for player id
-            switch (_playerID)
-            {
-                case PlayerID.Player1:
-                    EnablePlayer1Input();
-                    break;
-                case PlayerID.Player2:
-                    EnablePlayer2Input();
-                    break;
-                default:
-                    Debug.LogError($"Invalid player id {_playerID}");
-                    DisableAllInput();
-                    break;
-            }
+            EnablePlayerInput(_playerID);
         }
 
         #region PlayerInput
@@ -69,6 +55,24 @@ namespace Game
 
         #endregion
 
+        public void EnablePlayerInput(PlayerID id)
+        {
+            // enable corresponding input for player id
+            switch (id)
+            {
+                case PlayerID.Player1:
+                    EnablePlayer1Input();
+                    break;
+                case PlayerID.Player2:
+                    EnablePlayer2Input();
+                    break;
+                default:
+                    Debug.LogError($"Invalid player id {_playerID}");
+                    DisableAllInput();
+                    break;
+            }
+        }
+        
         // Input Reader Controls
         public void EnablePlayer1Input() {
             DisableAllInput();

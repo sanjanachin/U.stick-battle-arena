@@ -246,6 +246,118 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player3"",
+            ""id"": ""a7cd9cf6-d216-4f8f-a16b-1e3494b51ec7"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""3e39a96d-6129-4380-a2cb-1ba8f9a32444"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""726559d0-f9b8-4105-8a10-ba8d5dd9841b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""87ff611f-729b-4344-ac56-c46ba7cc4943"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""324c12dc-1353-4e2c-a346-a25bd74a618f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e1318169-71b4-496e-8cbe-40048432989a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1c08399d-c109-45fa-9d6d-397e683e1829"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9daec68c-1d9d-46b7-b250-41da352d0504"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""8a70fc5b-7854-4331-8633-a9438c2f395b"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ca6a5f3-e74b-4933-bbe0-be7b82fcff3a"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22635dff-116b-4fb2-8fce-35bdd2f88d24"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -272,6 +384,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player2_Movement = m_Player2.FindAction("Movement", throwIfNotFound: true);
         m_Player2_UseItem = m_Player2.FindAction("UseItem", throwIfNotFound: true);
         m_Player2_SwitchItem = m_Player2.FindAction("SwitchItem", throwIfNotFound: true);
+        // Player3
+        m_Player3 = asset.FindActionMap("Player3", throwIfNotFound: true);
+        m_Player3_Movement = m_Player3.FindAction("Movement", throwIfNotFound: true);
+        m_Player3_UseItem = m_Player3.FindAction("UseItem", throwIfNotFound: true);
+        m_Player3_SwitchItem = m_Player3.FindAction("SwitchItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,6 +542,55 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public Player2Actions @Player2 => new Player2Actions(this);
+
+    // Player3
+    private readonly InputActionMap m_Player3;
+    private IPlayer3Actions m_Player3ActionsCallbackInterface;
+    private readonly InputAction m_Player3_Movement;
+    private readonly InputAction m_Player3_UseItem;
+    private readonly InputAction m_Player3_SwitchItem;
+    public struct Player3Actions
+    {
+        private @PlayerInput m_Wrapper;
+        public Player3Actions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Player3_Movement;
+        public InputAction @UseItem => m_Wrapper.m_Player3_UseItem;
+        public InputAction @SwitchItem => m_Wrapper.m_Player3_SwitchItem;
+        public InputActionMap Get() { return m_Wrapper.m_Player3; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Player3Actions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer3Actions instance)
+        {
+            if (m_Wrapper.m_Player3ActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_Player3ActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_Player3ActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_Player3ActionsCallbackInterface.OnMovement;
+                @UseItem.started -= m_Wrapper.m_Player3ActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_Player3ActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_Player3ActionsCallbackInterface.OnUseItem;
+                @SwitchItem.started -= m_Wrapper.m_Player3ActionsCallbackInterface.OnSwitchItem;
+                @SwitchItem.performed -= m_Wrapper.m_Player3ActionsCallbackInterface.OnSwitchItem;
+                @SwitchItem.canceled -= m_Wrapper.m_Player3ActionsCallbackInterface.OnSwitchItem;
+            }
+            m_Wrapper.m_Player3ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
+                @SwitchItem.started += instance.OnSwitchItem;
+                @SwitchItem.performed += instance.OnSwitchItem;
+                @SwitchItem.canceled += instance.OnSwitchItem;
+            }
+        }
+    }
+    public Player3Actions @Player3 => new Player3Actions(this);
     private int m_PrototypeSchemeIndex = -1;
     public InputControlScheme PrototypeScheme
     {
@@ -441,6 +607,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSwitchItem(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
+        void OnSwitchItem(InputAction.CallbackContext context);
+    }
+    public interface IPlayer3Actions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
