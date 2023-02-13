@@ -36,7 +36,7 @@ namespace Game
             // Increase score of the dealer if hit
             _service.PlayerManager.IncreaseScore(executor.Stat.ID, _score);
             // Deduct health of the hit player
-            player.Stat.DeductHealth(_damage, executor.Stat.ID);
+            player.Stat.DeductHealth(executor.Stat.ID, _damage);
             ReturnToPool();
         }
         

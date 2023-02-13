@@ -10,6 +10,7 @@ namespace Game
     {
         [SerializeField] private GameplayService _service;
         [SerializeField] private UsableItem _usableItem;
+        [SerializeField] private PlayerController _hitPlayer;
         [SerializeField] private float _rayCastDist;
         [SerializeField] private float _rayCastRadius;
         [SerializeField] private float _damage;
@@ -28,7 +29,10 @@ namespace Game
             point = (Vector2) _usableItem.Player.transform.position + (point * _rayCastDist);
             Collider2D target = Physics2D.OverlapCircle(point, _rayCastRadius);
             if (target == null) return;
-            if (target.GetComponent<PlayerController>() != null)
+            
+            // check if hit a player
+            _hitPlayer = target.GetComponent<PlayerController>();
+            if (_hitPlayer != null)
                 HandleHit(target.GetComponent<PlayerController>(), executor);
             
             _usableItem.ReduceDurability(1);
@@ -39,7 +43,7 @@ namespace Game
             // Increase score of the dealer if hit
             _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
             // Deduct health of the hit player
-            hit.Stat.DeductHealth(_damage, dealer.Stat.ID);
+            hit.Stat.DeductHealth(dealer.Stat.ID, _damage);
         }
     }
 }
