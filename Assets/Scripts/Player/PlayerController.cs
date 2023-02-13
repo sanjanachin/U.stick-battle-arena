@@ -33,11 +33,14 @@ namespace Game.Player
 
         private void Awake()
         {
+            // TODO: quick patch on input, should related to addressable, need to fix later
+            _input = new PlayerInputReader();
             _input.moveEvent += UpdateInput;
             _input.useItemDownEvent += UseItemDown;
             _input.useItemUpEvent += UseItemUp;
             _input.switchItemEvent += SwitchItem;
-            
+            _input.EnablePlayerInput(GetComponent<PlayerStat>().ID);
+
             // mute control for 0.5 seconds
             Invoke(nameof(Activate), 0.5f);
         } 
