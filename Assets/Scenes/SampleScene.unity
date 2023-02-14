@@ -306,17 +306,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b12bd183d736e44b4371a822a240d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSettings: {fileID: 0}
+  _gameSettings: {fileID: 11400000, guid: 20164ed21e2c1374585f0d83457de296, type: 2}
   _playerEntries:
   - Id: 0
-    PlayerStat: {fileID: 0}
+    PlayerStat: {fileID: -7537424052761003295, guid: 24e7c4a1a2b53dd419df50d8dcb12656, type: 3}
   - Id: 1
-    PlayerStat: {fileID: 0}
+    PlayerStat: {fileID: -2735579429968919024, guid: 71c5fe3a3df224a4f93c69fbc591988c, type: 3}
   - Id: 2
-    PlayerStat: {fileID: 0}
+    PlayerStat: {fileID: -7951954074938605117, guid: 2d8cd4706b8c78d4e935757fa348d0f6, type: 3}
   - Id: 3
-    PlayerStat: {fileID: 0}
-  _playerSpawnPoint: []
+    PlayerStat: {fileID: 328236448532474933, guid: 897cc7834fcb5b042a345ba79e3d0381, type: 3}
+  _playerSpawnPoint:
+  - {fileID: 149488246}
+  - {fileID: 1978219732}
+  - {fileID: 643101353}
+  - {fileID: 1154410088}
   _playerDefaultLife: 10
 --- !u!1 &125229746
 GameObject:
@@ -3175,7 +3179,7 @@ MonoBehaviour:
   _projectileManager: {fileID: 1992798599}
   _usableItemManager: {fileID: 1701835017}
   _playerManager: {fileID: 121340824}
-  _gameplayUIManager: {fileID: 0}
+  _gameplayUIManager: {fileID: 280575162}
 --- !u!1 &1416172595
 GameObject:
   m_ObjectHideFlags: 0
