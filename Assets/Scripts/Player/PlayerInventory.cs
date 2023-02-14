@@ -16,6 +16,8 @@ namespace Game.Player
         [SerializeField] private UsableItem _equippedItem;
         [SerializeField] private UsableItem _holdItem;
         [SerializeField] private PlayerController _playerController;
+        
+        public event UnityAction<UsableItem> OnItemSwitched = (_) => { };
 
         private void Awake()
         {
@@ -43,6 +45,7 @@ namespace Game.Player
                 _equippedItem.UnEquip();
             _holdItem.Equip();
             (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
+            OnItemSwitched.Invoke(_equippedItem);
         }
 
         // handle if the item is broken

@@ -14,6 +14,7 @@ namespace Game.Player
         public PlayerID ID;
 
         public event UnityAction OnDeath = delegate { }; 
+        public event UnityAction<DamageInfo> OnHealthChange = delegate { }; 
 
         private void Awake()
         {
@@ -46,6 +47,23 @@ namespace Game.Player
             // reduce the remaining life of the player
             _service.PlayerManager.ReduceRemainingLife(ID);
             OnDeath.Invoke();
+        }
+    }
+
+    public struct DamageInfo
+    {
+        public readonly PlayerID Dealer;
+        public readonly PlayerID Target;
+        public readonly int Damage;
+        public readonly UsableItem ItemUsed;
+
+        public DamageInfo(
+            PlayerID dealer, PlayerID target, int damage, UsableItem itemUsed)
+        {
+            Dealer = dealer;
+            Target = target;
+            Damage = damage;
+            ItemUsed = itemUsed;
         }
     }
 }

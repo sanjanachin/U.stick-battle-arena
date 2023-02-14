@@ -15,6 +15,7 @@ namespace Game
     
     public class PlayerManager : MonoBehaviour
     {
+        [SerializeField] private GameSettingsSO _gameSettings;
         [SerializeField] private PlayerIDPlayerPair[] _playerEntries;
         [SerializeField] private int _playerDefaultLife;
         private Transform _parent;
@@ -30,7 +31,7 @@ namespace Game
             _parent = new GameObject("Player Pool").GetComponent<Transform>();
             
             // initialize all the values
-            for (int i = 0; i < _playerEntries.Length; i++)
+            for (int i = 0; i < _gameSettings.PlayerCount; i++)
             {
                 _scoreboard.Add(_playerEntries[i].Id, 0);
                 _remainingLife.Add(_playerEntries[i].Id, _playerDefaultLife);
@@ -91,6 +92,8 @@ namespace Game
         {
             return _remainingLife[id];
         }
+
+        public PlayerStat GetPlayerStat(PlayerID id) => _playerList[id];
 
         [Serializable]
         public struct PlayerIDPlayerPair
