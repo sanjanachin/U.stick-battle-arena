@@ -5,6 +5,7 @@ Stick Battle Arena is a multiplayer hunger games type game where the last person
 Version control is done through `JimmyC7834/U.stick-battle-arena` repo on github.
 Adding to the project is done in a standardized [pull request workflow](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests) and follow these rules:
 - Create a branch for the content you wish to add
+  - be sure your branch is descriptive for your changes along with your name so it is easier to submit bug reports and ask for fixes. For example, `Jimmy-dev-Weapon-logic`, `Todd-patch-documentation`, etc.
 - Commit often and with relevant messages/descriptions to make bug tracking easier
 - Write tests for all new content you are adding
 - Since the GameCI takes a while to run, before submitting a pull request for your branch make sure all tests pass locally (refer below for info on running tests)
@@ -13,6 +14,7 @@ Adding to the project is done in a standardized [pull request workflow](https://
 - Lastly, make sure all code follows the [C# style guide for Unity ](https://github.com/JimmyC7834/U.stick-battle-arena/blob/main/C%23%20style%20guide.md)
 ### Bug Tracking And Reporting
 Bugs are reported to `JimmyC7834/U.stick-battle-arena` repo under the issues tab.
+- It is best to let the responsible for the feature to fix the bug. Please `@` the responsibility for your issue. You can find the responsible by looking through the PR records or the branch with the responsible's name.
 If a bug is found in a branch you are attempting to PR, the PR will not be approved until a suitable fix is implemented.
 ### Testing And GameCI
 The project utilizes gameCI, which integrates with github under github actions. Everytime a PR is submitted all build tests and Test Runner tests are ran and the result will appear on the pull request page. Additionally, all submitted PR's will have their test results listed in the actions tab of the repo.
