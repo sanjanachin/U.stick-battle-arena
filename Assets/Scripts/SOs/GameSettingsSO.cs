@@ -5,8 +5,8 @@ namespace Game
     [CreateAssetMenu]
     public class GameSettingsSO : ScriptableObject
     {
-        private static readonly int MIN_PLAYER_COUNT = 2;
-        private static readonly int MAX_PLAYER_COUNT = 4;
+        public static readonly int MIN_PLAYER_COUNT = 2;
+        public static readonly int MAX_PLAYER_COUNT = 4;
 
         public int PlayerCount { get; private set; } = MIN_PLAYER_COUNT;
         public SceneID GameplayStageID { get; private set; }

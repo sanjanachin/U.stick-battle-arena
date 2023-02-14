@@ -76,8 +76,7 @@ namespace Game
         
         public void ExitGame()
         {
-            Application.Quit();
-            Debug.Log("Exit!");
+            App.ExitApplication();
         }
         
         [Serializable]

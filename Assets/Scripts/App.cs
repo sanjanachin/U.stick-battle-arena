@@ -21,5 +21,11 @@ namespace Game
             // temporary setting
             Application.targetFrameRate = 60;
         }
+
+        public static void ExitApplication()
+        {
+            Application.Quit();
+            Debug.Log("Exit!");
+        }
     }
 }
