@@ -1,8 +1,10 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Game.Arrow" preserve="all" />
+    <type fullname="Game.BattleRoyalGameModeLogicSO" preserve="all" />
     <type fullname="Game.Bow" preserve="all" />
     <type fullname="Game.Dagger" preserve="all" />
+    <type fullname="Game.DataSet.GameModeLogicDataSetSO" preserve="all" />
     <type fullname="Game.GameplayManager" preserve="all" />
     <type fullname="Game.GameplayService" preserve="all" />
     <type fullname="Game.GameplayUIManager" preserve="all" />
@@ -19,12 +21,6 @@
     <type fullname="Game.PlayerSpawnPoint" preserve="all" />
     <type fullname="Game.Projectile" preserve="all" />
     <type fullname="Game.ProjectileManager" preserve="all" />
-    <type fullname="Game.Shotgun" preserve="all" />
-    <type fullname="Game.ShotgunBullet" preserve="all" />
-    <type fullname="Game.SMG" preserve="all" />
-    <type fullname="Game.SMGBullet" preserve="all" />
-    <type fullname="Game.Sniper" preserve="all" />
-    <type fullname="Game.SniperBullet" preserve="all" />
     <type fullname="Game.Spawner" preserve="all" />
     <type fullname="Game.UI.UI_PlayerStatusDisplay" preserve="all" />
     <type fullname="Game.UI.UI_PlayerStatusPanel" preserve="all" />
