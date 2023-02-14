@@ -1,10 +1,10 @@
-﻿using Game.Player;
+using Game.Player;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(Projectile))]
-    public class PistolBullet : MonoBehaviour
+    public class SniperBullet : MonoBehaviour
     {
         [SerializeField] private GameplayService _service;
         [SerializeField] private Projectile _projectile;

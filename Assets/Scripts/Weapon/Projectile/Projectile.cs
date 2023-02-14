@@ -22,6 +22,7 @@ namespace Game
         // TODO: make <PlayerController, PlayerController> a struct with damage/attack detail
         public event UnityAction<PlayerController, PlayerController> OnHitPlayer = delegate { };
         public event UnityAction OnHitStage = delegate { };
+        public event UnityAction<Projectile> OnHitProjectile = delegate { };
         
         public Vector2 Velocity => _rigidbody.velocity;
         public float Gravity => _rigidbody.gravityScale;
@@ -88,13 +89,20 @@ namespace Game
         {
             if (!enabled) return;
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            if (player == null)
+            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+            if (player != null)
             {
-                OnHitStage.Invoke();
+                Hit(player);
+                return;
+            }
+
+            if (projectile != null)
+            {
+                OnHitProjectile.Invoke(projectile);
                 return;
             }
             
-            Hit(player);
+            OnHitStage.Invoke();
         }
     }
 }

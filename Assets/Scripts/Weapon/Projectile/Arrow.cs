@@ -20,6 +20,7 @@ namespace Game
             _pickable = GetComponent<Pickable>();
             _projectile.OnHitPlayer += HandleHitPlayer;
             _projectile.OnHitStage += HandleHitStage;
+            _projectile.OnHitProjectile += HandleHitProjectile;
         }
 
         private void Update()
@@ -33,17 +34,20 @@ namespace Game
 
         private void HandleHitPlayer(PlayerController target, PlayerController dealer)
         {
-            // Increase score of the dealer if hit
-            _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
-            // Deduct health of the hit player
-            target.Stat.DeductHealth(
-                dealer.Stat.ID, 
-                new DamageInfo(
-                    dealer.Stat.ID,
-                    target.Stat.ID,
-                    _damage,
-                    null));
-            ReturnToPool();
+            if (target != dealer)
+            {
+                // Increase score of the dealer if hit
+                _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
+                // Deduct health of the hit player
+                target.Stat.DeductHealth(
+                    dealer.Stat.ID, 
+                    new DamageInfo(
+                        dealer.Stat.ID,
+                        target.Stat.ID,
+                        _damage,
+                        null));
+                ReturnToPool();
+            }
         }
         
         private void ReturnToPool()
@@ -53,5 +57,7 @@ namespace Game
         
         // wall / floor hits
         private void HandleHitStage() => ReturnToPool();
+
+        private void HandleHitProjectile(Projectile other) => ReturnToPool();
     }
 }
