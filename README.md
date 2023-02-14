@@ -5,6 +5,7 @@ Stick Battle Arena is a multiplayer hunger games type game where the last person
 Version control is done through `JimmyC7834/U.stick-battle-arena` repo on github.
 Adding to the project is done in a standardized [pull request workflow](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests) and follow these rules:
 - Create a branch for the content you wish to add
+  - be sure your branch is descriptive for your changes along with your name. For example, `Jimmy-dev-Weapon-logic`, `Todd-patch-documentation`, etc.
 - Commit often and with relevant messages/descriptions to make bug tracking easier
 - Write tests for all new content you are adding
 - Since the GameCI takes a while to run, before submitting a pull request for your branch make sure all tests pass locally (refer below for info on running tests)
