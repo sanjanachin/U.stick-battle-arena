@@ -19,6 +19,12 @@
     <type fullname="Game.PlayerSpawnPoint" preserve="all" />
     <type fullname="Game.Projectile" preserve="all" />
     <type fullname="Game.ProjectileManager" preserve="all" />
+    <type fullname="Game.Shotgun" preserve="all" />
+    <type fullname="Game.ShotgunBullet" preserve="all" />
+    <type fullname="Game.SMG" preserve="all" />
+    <type fullname="Game.SMGBullet" preserve="all" />
+    <type fullname="Game.Sniper" preserve="all" />
+    <type fullname="Game.SniperBullet" preserve="all" />
     <type fullname="Game.Spawner" preserve="all" />
     <type fullname="Game.UI.UI_PlayerStatusDisplay" preserve="all" />
     <type fullname="Game.UI.UI_PlayerStatusPanel" preserve="all" />
