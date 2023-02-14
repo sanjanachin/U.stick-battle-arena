@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1822478864894748584}
   - component: {fileID: 1822478864894748591}
   - component: {fileID: 1822478864894748590}
-  - component: {fileID: 1822478864894748586}
+  - component: {fileID: -1699035591499349554}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -144,10 +144,10 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _transform: {fileID: 0}
   _pickable: {fileID: 1822478864894748591}
-  _id: 0
-  _maxDurability: 2
-  _durability: 2
---- !u!114 &1822478864894748586
+  _id: 4
+  _maxDurability: 10
+  _durability: 10
+--- !u!114 &-1699035591499349554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,16 +156,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1822478864894748595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c0eb2de7d6381e42858aed03c4aaca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a877190ad5f4bccb280b091e2919fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItem: {fileID: 1822478864894748590}
   _shootingPoint: {fileID: 1822478866356062737}
-  _projectileID: 0
+  _projectileID: 3
   _bulletVelocity: {x: 30, y: 0}
   _bulletGravity: 0
   _bulletLifespan: 1.5
+  _fireInterval: 0.1
 --- !u!1 &1822478866347210712
 GameObject:
   m_ObjectHideFlags: 0

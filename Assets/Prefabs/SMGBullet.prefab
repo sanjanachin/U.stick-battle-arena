@@ -99,9 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _pickable: {fileID: 1083561487914459864}
   _lifespan: 0
-  _id: 0
+  _id: 3
 --- !u!114 &6900324322748996455
 MonoBehaviour:
   m_ObjectHideFlags: 0
