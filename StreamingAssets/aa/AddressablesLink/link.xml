@@ -11,6 +11,10 @@
     <type fullname="Game.Pickable" preserve="all" />
     <type fullname="Game.Pistol" preserve="all" />
     <type fullname="Game.PistolBullet" preserve="all" />
+    <type fullname="Game.Player.PlayerController" preserve="all" />
+    <type fullname="Game.Player.PlayerInventory" preserve="all" />
+    <type fullname="Game.Player.PlayerStat" preserve="all" />
+    <type fullname="Game.PlayerInputReader" preserve="all" />
     <type fullname="Game.PlayerManager" preserve="all" />
     <type fullname="Game.PlayerSpawnPoint" preserve="all" />
     <type fullname="Game.Projectile" preserve="all" />
