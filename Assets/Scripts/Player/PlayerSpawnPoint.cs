@@ -21,7 +21,7 @@ namespace Game
         /**
          * Change the position of the player to the position of the spawner
          */
-        private void Respawn()
+        private void Respawn(PlayerID _)
         {
             _playerStat.transform.position = transform.position;
         }

@@ -1,15 +1,27 @@
+using Game.DataSet;
 using UnityEngine;
 
 namespace Game
 {
+    /**
+     * Contains settings for gameplay
+     */
     [CreateAssetMenu]
     public class GameSettingsSO : ScriptableObject
     {
         public static readonly int MIN_PLAYER_COUNT = 2;
         public static readonly int MAX_PLAYER_COUNT = 4;
+        public static readonly PlayerID[] PLAYER_IDS =
+        {
+            PlayerID.Player1, 
+            PlayerID.Player2,
+            PlayerID.Player3,
+            PlayerID.Player4,
+        };
 
         public int PlayerCount { get; private set; } = MIN_PLAYER_COUNT;
         public SceneID GameplayStageID { get; private set; }
+        public GameModeID GameModeID { get; private set; }
 
         /**
          * Check if the given player id is in the gameplay
@@ -33,9 +45,14 @@ namespace Game
             PlayerCount = value;
         }
         
-        public void SetGameplayStageID(SceneID value)
+        public void SetGameplayStageID(SceneID id)
         {
-            GameplayStageID = value;
+            GameplayStageID = id;
+        }
+        
+        public void SetGameMode(GameModeID id)
+        {
+            GameModeID = id;
         }
     }
 }

@@ -321,7 +321,7 @@ MonoBehaviour:
   - {fileID: 1978219732}
   - {fileID: 643101353}
   - {fileID: 1154410088}
-  _playerDefaultLife: 10
+  _playerDefaultLife: 2
 --- !u!1 &125229746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3175,11 +3175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ae823c2cfe4ebeb6ac0348f96b32db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameSettings: {fileID: 11400000, guid: 20164ed21e2c1374585f0d83457de296, type: 2}
+  _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
+  _gameModeLogicDataSet: {fileID: 11400000, guid: fd4715f8255615a44b774986bd1c63df, type: 2}
   _projectileManager: {fileID: 1992798599}
   _usableItemManager: {fileID: 1701835017}
   _playerManager: {fileID: 121340824}
   _gameplayUIManager: {fileID: 280575162}
+  _gameModeLogic: {fileID: 0}
 --- !u!1 &1416172595
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,15 +5,17 @@ namespace Game.Player
 {
     public class PlayerStat : MonoBehaviour
     {
+        public PlayerID ID { get => _id; }
+
         [SerializeField] private GameplayService _service;
+        [SerializeField] private PlayerID _id;
         [SerializeField] private int _maxHealth;
         [SerializeField] private float _killBonus;
         private int _remainingHealth;
         private PlayerID _lastDamageDealer;
-    
-        public PlayerID ID;
 
-        public event UnityAction OnDeath = delegate { }; 
+
+        public event UnityAction<PlayerID> OnDeath = delegate { }; 
         public event UnityAction<int, int> OnHealthChange = delegate { }; 
 
         private void Awake()
@@ -40,11 +42,13 @@ namespace Game.Player
             // reset the health
             _remainingHealth = _maxHealth;
             OnHealthChange.Invoke(_remainingHealth, _maxHealth);
+            
             // give kill bonus to the last damage dealer
             _service.PlayerManager.IncreaseScore(_lastDamageDealer, _killBonus);
+            
             // reduce the remaining life of the player
             _service.PlayerManager.ReduceRemainingLife(ID);
-            OnDeath.Invoke();
+            OnDeath.Invoke(_id);
         }
     }
 
