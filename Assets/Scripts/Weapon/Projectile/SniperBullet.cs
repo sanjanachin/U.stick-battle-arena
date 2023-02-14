@@ -16,6 +16,7 @@ namespace Game
             _projectile = GetComponent<Projectile>();
             _projectile.OnHitPlayer += HandleHitPlayer;
             _projectile.OnHitStage += HandleHitStage;
+            _projectile.OnHitProjectile += HandleHitProjectile;
         }
 
         private void HandleHitPlayer(PlayerController player, PlayerController executor)
@@ -36,5 +37,7 @@ namespace Game
         }
 
         private void HandleHitStage() => ReturnToPool();
+        
+        private void HandleHitProjectile(Projectile other) => ReturnToPool();
     }
 }

@@ -11,6 +11,7 @@ namespace Game
         Arrow,
         SniperBullet,
         SMGBullet,
+        ShotgunBullet,
     }
     
     /**

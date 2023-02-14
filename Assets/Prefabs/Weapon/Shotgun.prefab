@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 1822478864894748584}
   - component: {fileID: 1822478864894748591}
   - component: {fileID: 1822478864894748590}
-  - component: {fileID: -1699035591499349554}
+  - component: {fileID: -2050175179094586164}
   m_Layer: 0
-  m_Name: SMG
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,10 +144,10 @@ MonoBehaviour:
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _transform: {fileID: 0}
   _pickable: {fileID: 1822478864894748591}
-  _id: 4
-  _maxDurability: 5
-  _durability: 5
---- !u!114 &-1699035591499349554
+  _id: 5
+  _maxDurability: 1
+  _durability: 1
+--- !u!114 &-2050175179094586164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,17 +156,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1822478864894748595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a877190ad5f4bccb280b091e2919fc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c901d1cd9774dccbcef5662b5cd781b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _usableItem: {fileID: 1822478864894748590}
   _shootingPoint: {fileID: 1822478866356062737}
-  _projectileID: 3
-  _bulletVelocity: {x: 30, y: 0}
+  _projectileID: 4
+  _bulletVelocity: {x: 40, y: 0}
   _bulletGravity: 0
-  _bulletLifespan: 1
-  _fireInterval: 0.1
+  _bulletLifespan: 0.5
+  _bulletNumber: 3
+  _yOffset: 4
 --- !u!1 &1822478866347210712
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 868ec022ec5370c4cafbe00bd333295b, type: 3}
-  m_Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+  m_Color: {r: 0, g: 0.5231595, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

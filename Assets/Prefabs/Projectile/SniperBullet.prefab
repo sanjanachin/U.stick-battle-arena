@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _pickable: {fileID: 1083561487914459864}
   _lifespan: 0
   _id: 2
 --- !u!114 &4270408015509447863
@@ -126,8 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _projectile: {fileID: 7547939695696379543}
-  _damage: 10
-  _score: 10
+  _damage: 5
+  _score: 5
 --- !u!1 &1083561488964981533
 GameObject:
   m_ObjectHideFlags: 0
