@@ -13,7 +13,7 @@ namespace Game
         [SerializeField] private PlayerController _hitPlayer;
         [SerializeField] private float _rayCastDist;
         [SerializeField] private float _rayCastRadius;
-        [SerializeField] private float _damage;
+        [SerializeField] private int _damage;
         [SerializeField] private float _score;
 
         private void Awake()
@@ -43,7 +43,13 @@ namespace Game
             // Increase score of the dealer if hit
             _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
             // Deduct health of the hit player
-            hit.Stat.DeductHealth(dealer.Stat.ID, _damage);
+            hit.Stat.DeductHealth(
+                dealer.Stat.ID, 
+                new DamageInfo(
+                    dealer.Stat.ID,
+                    hit.Stat.ID,
+                    _damage,
+                    _usableItem));
         }
     }
 }
