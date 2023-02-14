@@ -13,6 +13,7 @@ namespace Game
         public ProjectileManager ProjectileManager { get; private set; }
         public UsableItemManager UsableItemManager { get; private set; }
         public PlayerManager PlayerManager { get; private set; }
+        public GameplayUIManager GameplayUIManager { get; private set; }
 
         public AudioManager AudioManager { get => _gameService.AudioManager; }
         [SerializeField] private GameService _gameService;
@@ -35,6 +36,11 @@ namespace Game
         public void ProvidePlayerManager(PlayerManager playerManager)
         {
             PlayerManager = playerManager;
+        }
+        
+        public void ProvideGameplayUIManager(GameplayUIManager gameplayUIManager)
+        {
+            GameplayUIManager = gameplayUIManager;
         }
     }
 }

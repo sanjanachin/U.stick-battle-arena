@@ -10,7 +10,7 @@ namespace Game
         [SerializeField] private GameplayService _service;
         [SerializeField] private Projectile _projectile;
         [SerializeField] private Pickable _pickable;
-        [SerializeField] private float _damage;
+        [SerializeField] private int _damage;
         [SerializeField] private float _score;
         [SerializeField] private Transform _visualTransform;
         
@@ -32,14 +32,20 @@ namespace Game
                 Vector3.forward);
         }
 
-        private void HandleHitPlayer(PlayerController player, PlayerController executor)
+        private void HandleHitPlayer(PlayerController target, PlayerController dealer)
         {
-            if (player != executor)
+            if (target != dealer)
             {
                 // Increase score of the dealer if hit
-                _service.PlayerManager.IncreaseScore(executor.Stat.ID, _score);
+                _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
                 // Deduct health of the hit player
-                player.Stat.DeductHealth(executor.Stat.ID, _damage);
+                target.Stat.DeductHealth(
+                    dealer.Stat.ID, 
+                    new DamageInfo(
+                        dealer.Stat.ID,
+                        target.Stat.ID,
+                        _damage,
+                        null));
                 ReturnToPool();
             }
         }

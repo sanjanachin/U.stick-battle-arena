@@ -126,9 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19451f29fae94af199ca851973bf8270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _service: {fileID: 0}
   _usableItem: {fileID: 4961244621800134770}
+  _hitPlayer: {fileID: 0}
   _rayCastDist: 1
   _rayCastRadius: 0.3
+  _damage: 3
+  _score: 0
 --- !u!1 &4961244622899746949
 GameObject:
   m_ObjectHideFlags: 0
