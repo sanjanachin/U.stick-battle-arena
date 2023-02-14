@@ -71,7 +71,7 @@ namespace Game
         public void IncreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] += score;
-            Debug.Log($"{id} got a score of {GetScore(id)}");
+            Debug.Log($"{id} got {score} score");
         }
         
         /**
@@ -80,7 +80,7 @@ namespace Game
         public void DecreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] -= score;
-            Debug.Log($"{id} got a score of {GetScore(id)}");
+            Debug.Log($"{id} got {score} score");
         }
 
         /**
