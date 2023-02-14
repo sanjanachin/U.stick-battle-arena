@@ -1,18 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class UI_PlayerStatusPanel : MonoBehaviour
+namespace Game.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UI_PlayerStatusPanel : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private UI_PlayerStatusDisplay[] _playerStatusDisplays;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            Assert.IsTrue(_playerStatusDisplays != null);
+            Assert.IsTrue(_playerStatusDisplays.Length == GameSettingsSO.MAX_PLAYER_COUNT);
+        }
+
+        public void Initialize()
+        {
+            foreach (UI_PlayerStatusDisplay display in _playerStatusDisplays)
+                display.Initialize();
+        }
     }
 }

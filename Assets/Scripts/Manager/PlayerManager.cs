@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Game.Player;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -17,6 +19,7 @@ namespace Game
     {
         [SerializeField] private GameSettingsSO _gameSettings;
         [SerializeField] private PlayerIDPlayerPair[] _playerEntries;
+        [SerializeField] private PlayerSpawnPoint[] _playerSpawnPoint;
         [SerializeField] private int _playerDefaultLife;
         private Transform _parent;
         private Dictionary<PlayerID, float> _scoreboard;
@@ -25,17 +28,32 @@ namespace Game
 
         private void Awake()
         {
+            Assert.IsTrue(_playerEntries != null);
+            Assert.IsTrue(_playerEntries.Length == GameSettingsSO.MAX_PLAYER_COUNT);
+            Assert.IsTrue(_playerSpawnPoint != null);
+            Assert.IsTrue(_playerSpawnPoint.Length == GameSettingsSO.MAX_PLAYER_COUNT);
+        }
+
+        public void Initialize()
+        {
             _scoreboard = new Dictionary<PlayerID, float>();
             _remainingLife = new Dictionary<PlayerID, int>();
             _playerList = new Dictionary<PlayerID, PlayerStat>();
             _parent = new GameObject("Player Pool").GetComponent<Transform>();
             
+            // TODO: better initialization required, current is not robust for inorder reference assignment
             // initialize all the values
             for (int i = 0; i < _gameSettings.PlayerCount; i++)
             {
+                // initialize gameplay values
                 _scoreboard.Add(_playerEntries[i].Id, 0);
                 _remainingLife.Add(_playerEntries[i].Id, _playerDefaultLife);
-                _playerList.Add(_playerEntries[i].Id, _playerEntries[i].Player);
+                
+                // spawn player instance
+                PlayerStat playerStat = Instantiate(_playerEntries[i].PlayerStat, _parent);
+                _playerList.Add(_playerEntries[i].Id, playerStat);
+                // set up spawn point
+                _playerSpawnPoint[i].Initialize(playerStat);
             }
         }
 
@@ -99,7 +117,7 @@ namespace Game
         public struct PlayerIDPlayerPair
         {
             public PlayerID Id;
-            public PlayerStat Player;
+            public PlayerStat PlayerStat;
         }
     }
 }
