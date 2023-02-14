@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Object = UnityEngine.Object;
 
 namespace Game.Player
 {
@@ -359,6 +361,13 @@ namespace Game.Player
         }
 
         #endregion
+
+        private void OnDestroy()
+        {
+            // TODO: ugly fix of double input in new game, need to rewrite
+            _input.DisableAllInput();
+            Object.Destroy(_input);
+        }
     }
 
     public struct FrameInput
