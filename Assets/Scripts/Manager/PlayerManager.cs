@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Player;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Game
@@ -25,6 +26,8 @@ namespace Game
         private Dictionary<PlayerID, float> _scoreboard;
         private Dictionary<PlayerID, int> _remainingLife;
         private Dictionary<PlayerID, PlayerStat> _playerList;
+
+        public event UnityAction<PlayerID> OnScoreChange = delegate { };
 
         private void Awake()
         {
@@ -71,7 +74,9 @@ namespace Game
         public void IncreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] += score;
-            Debug.Log($"{id} got {score} score");
+            Debug.Log($"{id} got a score of {GetScore(id)}");
+
+            OnScoreChange.Invoke(id);
         }
         
         /**
@@ -80,7 +85,9 @@ namespace Game
         public void DecreaseScore(PlayerID id, float score)
         {
             _scoreboard[id] -= score;
-            Debug.Log($"{id} got {score} score");
+            Debug.Log($"{id} got a score of {GetScore(id)}");
+
+            OnScoreChange.Invoke(id);
         }
 
         /**
