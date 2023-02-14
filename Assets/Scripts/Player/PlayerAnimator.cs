@@ -12,11 +12,17 @@ namespace Game.Player {
         // [SerializeField] private float _landAnimDuration = 0.1f;
         // [SerializeField] private float _attackAnimTime = 0.2f;
 
+        // maxTilt and tiltSpeed control rate and maximum pitch of rotation effect while moving
+        [SerializeField] private float _maxTilt = 4;
+        [SerializeField] private float _tiltSpeed = 20;
+
         private IPlayerController _player;
         private SpriteRenderer _renderer;
         
         private Animator _anim;
         private float _lockedTill;
+
+
 
         private void Awake() {
             if (!TryGetComponent(out IPlayerController player)) {
@@ -32,7 +38,9 @@ namespace Game.Player {
         private void Update() {
             // if (_player.Input.x != 0) _renderer.flipX = _player.Input.x < 0;
             if (_player.MovementInput.X != 0) transform.localScale = new Vector3(_player.MovementInput.X < 0 ? 1 : -1, 1, 1);
-
+            // Apply rotation to model dependant of speed and time
+            var targetRotVector = new Vector3(0, 0, Mathf.Lerp(-_maxTilt, _maxTilt, Mathf.InverseLerp(-1, 1, _player.MovementInput.X)));
+            _anim.transform.rotation = Quaternion.RotateTowards(_anim.transform.rotation, Quaternion.Euler(targetRotVector), _tiltSpeed * Time.deltaTime);
             var state = GetState();
             // Debug.Log(state);
 

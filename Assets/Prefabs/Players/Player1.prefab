@@ -188,7 +188,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c0f357db5447aa9438f4a838749b0e52, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -207,14 +207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677bdbaff4f87b346bad13bf78373fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _source: {fileID: 0}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _footsteps: []
-  _maxTilt: 0.1
-  _tiltSpeed: 1
-  _maxIdleSpeed: 2
+  _maxTilt: 4
+  _tiltSpeed: 20
+  _squashSpeed: 10.6
 --- !u!1 &8807138702188848656
 GameObject:
   m_ObjectHideFlags: 0
