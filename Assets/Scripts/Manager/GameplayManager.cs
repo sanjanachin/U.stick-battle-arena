@@ -1,6 +1,5 @@
 ﻿using Game.DataSet;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Game
 {
@@ -21,6 +20,8 @@ namespace Game
         
         private void Awake()
         {
+            // temporary set game mode for battle royal mode
+            // TODO: wait for game mode menu and change this
             _gameSettings.SetGameMode(GameModeID.BattleRoyal);
             _gameModeLogic = _gameModeLogicDataSet[_gameSettings.GameModeID];
             
@@ -32,14 +33,25 @@ namespace Game
             // Initialize managers in order of dependency
             _playerManager.Initialize();
             _gameplayUIManager.Initialize();
-
+            
+            // initialize and hook the game ended event
             _gameModeLogic.Initialize();
             _gameModeLogic.OnGameEnded += HandleGameEnded;
         }
 
-        private void HandleGameEnded()
+        private void HandleGameEnded(PlayerID winnerId)
         {
             Debug.Log("Game ended");
+            // temporary winning effect
+            // slow time and wait for 4 seconds to load back to main menu
+            Time.timeScale = 0.25f;
+            _service.GameplayUIManager.ShowWinningScreen(winnerId);
+            Invoke(nameof(LoadBackToMainMenu), 1f);
+        }
+
+        private void LoadBackToMainMenu()
+        {
+            Time.timeScale = 1f;
             _gameService.SceneManager.LoadScene(SceneID.MainMenu);
         }
     }

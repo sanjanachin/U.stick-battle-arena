@@ -14,8 +14,17 @@ namespace Game.Player
         private int _remainingHealth;
         private PlayerID _lastDamageDealer;
 
-
+        /**
+         * Invoked when the player's lives reaches 0
+         * 1st arg: id of the player
+         */
         public event UnityAction<PlayerID> OnDeath = delegate { }; 
+        
+        /**
+         * Invoked when health of a player change
+         * 1st arg: remaining health of the player
+         * 2nd arg: max health of the player
+         */
         public event UnityAction<int, int> OnHealthChange = delegate { }; 
 
         private void Awake()
@@ -52,6 +61,10 @@ namespace Game.Player
         }
     }
 
+    /**
+     * A struct containing information of a damage deal
+     * Should be used when ever damage is dealt to a player
+     */
     public struct DamageInfo
     {
         public readonly PlayerID Dealer;

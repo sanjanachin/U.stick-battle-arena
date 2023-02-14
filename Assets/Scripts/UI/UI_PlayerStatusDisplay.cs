@@ -24,6 +24,10 @@ namespace Game.UI
             gameObject.SetActive(false);
         }
 
+        /**
+         * Initialize the UI by hooking to corresponded events
+         * Should ONLY be called by the corresponding manager
+         */
         public void Initialize()
         {
             // deactivate player status display if the player is not in the gameplay
