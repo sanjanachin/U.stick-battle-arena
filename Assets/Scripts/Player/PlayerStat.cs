@@ -30,7 +30,7 @@ namespace Game.Player
          * Deduct the health of the player by given damage;
          * set the the player ID of the dealer for kill bonus reference.
          */
-        public void DeductHealth(float damage, PlayerID lastDealer)
+        public void DeductHealth(PlayerID lastDealer, float damage)
         {
             _remainingHealth -= damage;
             _lastDamageDealer = lastDealer;
