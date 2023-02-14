@@ -39,6 +39,7 @@ namespace Game.Player
         
             // reset the health
             _remainingHealth = _maxHealth;
+            OnHealthChange.Invoke(_remainingHealth, _maxHealth);
             // give kill bonus to the last damage dealer
             _service.PlayerManager.IncreaseScore(_lastDamageDealer, _killBonus);
             // reduce the remaining life of the player
