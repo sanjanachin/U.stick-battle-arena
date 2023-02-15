@@ -146,8 +146,8 @@ MonoBehaviour:
   _transform: {fileID: 0}
   _pickable: {fileID: 1822478864894748591}
   _id: 0
-  _maxDurability: 2
-  _durability: 2
+  _maxDurability: 5
+  _durability: 5
 --- !u!114 &1822478864894748586
 MonoBehaviour:
   m_ObjectHideFlags: 0
