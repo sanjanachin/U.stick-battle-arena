@@ -1,39 +1,7 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Game.Arrow" preserve="all" />
-    <type fullname="Game.Bow" preserve="all" />
-    <type fullname="Game.Dagger" preserve="all" />
-    <type fullname="Game.GameplayManager" preserve="all" />
-    <type fullname="Game.GameplayService" preserve="all" />
-    <type fullname="Game.GameplayUIManager" preserve="all" />
     <type fullname="Game.GameService" preserve="all" />
-    <type fullname="Game.GameSettingsSO" preserve="all" />
-    <type fullname="Game.Pickable" preserve="all" />
-    <type fullname="Game.Pistol" preserve="all" />
-    <type fullname="Game.PistolBullet" preserve="all" />
-    <type fullname="Game.Player.PlayerController" preserve="all" />
-    <type fullname="Game.Player.PlayerInventory" preserve="all" />
-    <type fullname="Game.Player.PlayerStat" preserve="all" />
-    <type fullname="Game.PlayerInputReader" preserve="all" />
-    <type fullname="Game.PlayerManager" preserve="all" />
-    <type fullname="Game.PlayerSpawnPoint" preserve="all" />
-    <type fullname="Game.Projectile" preserve="all" />
-    <type fullname="Game.ProjectileManager" preserve="all" />
-    <type fullname="Game.Shotgun" preserve="all" />
-    <type fullname="Game.ShotgunBullet" preserve="all" />
-    <type fullname="Game.SMG" preserve="all" />
-    <type fullname="Game.SMGBullet" preserve="all" />
-    <type fullname="Game.Sniper" preserve="all" />
-    <type fullname="Game.SniperBullet" preserve="all" />
-    <type fullname="Game.Spawner" preserve="all" />
-    <type fullname="Game.UI.UI_PlayerStatusDisplay" preserve="all" />
-    <type fullname="Game.UI.UI_PlayerStatusPanel" preserve="all" />
     <type fullname="Game.UI_MainMenu" preserve="all" />
-    <type fullname="Game.UsableItem" preserve="all" />
-    <type fullname="Game.UsableItemManager" preserve="all" />
-    <type fullname="Game.PlayerManager/PlayerIDPlayerPair" preserve="nothing" serialized="true" />
-    <type fullname="Game.ProjectileManager/ProjectileIdPrefabPair" preserve="nothing" serialized="true" />
-    <type fullname="Game.UsableItemManager/UsableItemIdPrefabPair" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -86,7 +54,6 @@
     <type fullname="UnityEngine.RenderSettings" preserve="all" />
     <type fullname="UnityEngine.Shader" preserve="all" />
     <type fullname="UnityEngine.Sprite" preserve="all" />
-    <type fullname="UnityEngine.SpriteRenderer" preserve="all" />
     <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
     <type fullname="UnityEngine.Events.ArgumentCache" preserve="nothing" serialized="true" />
@@ -98,11 +65,6 @@
     <type fullname="UnityEngine.ParticleSystem" preserve="all" />
     <type fullname="UnityEngine.ParticleSystemRenderer" preserve="all" />
   </assembly>
-  <assembly fullname="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.BoxCollider2D" preserve="all" />
-    <type fullname="UnityEngine.CircleCollider2D" preserve="all" />
-    <type fullname="UnityEngine.Rigidbody2D" preserve="all" />
-  </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Font" preserve="all" />
   </assembly>
@@ -111,7 +73,6 @@
     <type fullname="UnityEngine.UI.Button" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
     <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
-    <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
