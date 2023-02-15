@@ -16,6 +16,7 @@ namespace Game
     public enum SceneID
     {
         MainMenu,
+        MapSelectionMenu,
         Map1,
         Map2,
     }

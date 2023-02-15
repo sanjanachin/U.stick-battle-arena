@@ -100,7 +100,19 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
   - _id: 1
     _sceneReference:
-      m_AssetGUID: 8c9cfa26abfee488c85f1582747f6a02
+      m_AssetGUID: 8c6fd4d44423e394283f05f9c8ee6710
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - _id: 2
+    _sceneReference:
+      m_AssetGUID: 7b6304e7d01114a4d9ba6ef4225ef62e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+  - _id: 3
+    _sceneReference:
+      m_AssetGUID: c873bed56d7e3c04395b7d6b27454de3
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
