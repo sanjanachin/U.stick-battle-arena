@@ -31,6 +31,8 @@ namespace Game
         private Dictionary<PlayerID, int> _remainingLife;
         private Dictionary<PlayerID, PlayerStat> _playerList;
 
+        public event UnityAction<PlayerID> OnScoreChange = delegate { };
+
         private void Awake()
         {
             Assert.IsTrue(_playerEntries != null);
@@ -83,6 +85,8 @@ namespace Game
         {
             _scoreboard[id] += score;
             Debug.Log($"{id} got a score of {GetScore(id)}");
+
+            OnScoreChange.Invoke(id);
         }
         
         /**
@@ -92,6 +96,8 @@ namespace Game
         {
             _scoreboard[id] -= score;
             Debug.Log($"{id} got a score of {GetScore(id)}");
+
+            OnScoreChange.Invoke(id);
         }
 
         /**

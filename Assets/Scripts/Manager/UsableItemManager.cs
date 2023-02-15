@@ -10,6 +10,9 @@ namespace Game
         Pistol,
         Dagger,
         Bow,
+        Sniper,
+        SMG,
+        Shotgun,
     }
     public class UsableItemManager : MonoBehaviour
     {

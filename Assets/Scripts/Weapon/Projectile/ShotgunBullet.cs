@@ -1,10 +1,10 @@
-﻿using Game.Player;
+using Game.Player;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(Projectile))]
-    public class PistolBullet : MonoBehaviour
+    public class ShotgunBullet : MonoBehaviour
     {
         [SerializeField] private GameplayService _service;
         [SerializeField] private Projectile _projectile;
@@ -39,11 +39,21 @@ namespace Game
         
         private void ReturnToPool()
         {
-            _projectile.ReturnToPool();
+            // added this if statement to prevent multi collisions (e.g., floor and player)
+            // that causes release of the same object twice
+            if (gameObject.activeSelf)
+            {
+                _projectile.ReturnToPool();
+            }
         }
 
         private void HandleHitStage() => ReturnToPool();
-        
-        private void HandleHitProjectile(Projectile other) => ReturnToPool();
+
+        private void HandleHitProjectile(Projectile other)
+        {
+            // does not return to pool if collide with shotgun bullets
+            if (other.gameObject.GetComponent<ShotgunBullet>() == null)
+                ReturnToPool();
+        }
     }
 }

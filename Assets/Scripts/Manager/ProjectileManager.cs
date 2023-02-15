@@ -9,6 +9,9 @@ namespace Game
     {
         PistolBullet,
         Arrow,
+        SniperBullet,
+        SMGBullet,
+        ShotgunBullet,
     }
     
     /**
