@@ -536,7 +536,7 @@ MonoBehaviour:
   _gameSettings: {fileID: 11400000, guid: 20164ed21e2c1374585f0d83457de296, type: 2}
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _scoreLabel: {fileID: 1092913431}
-  _lifeLeftLabel: {fileID: 1972371203}
+  _lifeLeftLabel: {fileID: 0}
   _healthBar: {fileID: 1376338933}
   _itemDurabilityBar: {fileID: 404822062}
   _itemIcon: {fileID: 599192576}
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   _gameSettings: {fileID: 11400000, guid: 20164ed21e2c1374585f0d83457de296, type: 2}
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _scoreLabel: {fileID: 1826628315}
-  _lifeLeftLabel: {fileID: 1759349870}
+  _lifeLeftLabel: {fileID: 0}
   _healthBar: {fileID: 1319276484}
   _itemDurabilityBar: {fileID: 850115306}
   _itemIcon: {fileID: 252094842}
@@ -1959,7 +1959,6 @@ Transform:
   - {fileID: 1212317095}
   - {fileID: 645740835}
   - {fileID: 581089735}
-  - {fileID: 991090294}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2392,7 +2391,7 @@ MonoBehaviour:
   _gameSettings: {fileID: 11400000, guid: 20164ed21e2c1374585f0d83457de296, type: 2}
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _scoreLabel: {fileID: 1644077686}
-  _lifeLeftLabel: {fileID: 1771967680}
+  _lifeLeftLabel: {fileID: 0}
   _healthBar: {fileID: 2010998777}
   _itemDurabilityBar: {fileID: 270873977}
   _itemIcon: {fileID: 1261604384}
@@ -5105,7 +5104,7 @@ MonoBehaviour:
   _gameSettings: {fileID: 11400000, guid: 20164ed21e2c1374585f0d83457de296, type: 2}
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
   _scoreLabel: {fileID: 1336215389}
-  _lifeLeftLabel: {fileID: 83161222}
+  _lifeLeftLabel: {fileID: 0}
   _healthBar: {fileID: 125229748}
   _itemDurabilityBar: {fileID: 1793969118}
   _itemIcon: {fileID: 1149797244}
