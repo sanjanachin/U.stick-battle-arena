@@ -11,6 +11,7 @@
     <type fullname="Game.Pickable" preserve="all" />
     <type fullname="Game.Pistol" preserve="all" />
     <type fullname="Game.PistolBullet" preserve="all" />
+    <type fullname="Game.Player.PlayerAnimator" preserve="all" />
     <type fullname="Game.Player.PlayerController" preserve="all" />
     <type fullname="Game.Player.PlayerInventory" preserve="all" />
     <type fullname="Game.Player.PlayerStat" preserve="all" />
@@ -71,6 +72,10 @@
     <type fullname="TMPro.TMP_GlyphPairAdjustmentRecord" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_GlyphValueRecord" preserve="nothing" serialized="true" />
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Animator" preserve="all" />
+    <type fullname="UnityEngine.RuntimeAnimatorController" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.AudioListener" preserve="all" />
