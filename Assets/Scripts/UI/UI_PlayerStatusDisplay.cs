@@ -20,13 +20,9 @@ namespace Game.UI
 
         [SerializeField] private PlayerID _playerID;
 
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-        }
-
         public void Initialize()
         {
+            gameObject.SetActive(false);
             // deactivate player status display if the player is not in the gameplay
             if (!_gameSettings.PlayerIDInGameplay(_playerID)) return;
             gameObject.SetActive(true);

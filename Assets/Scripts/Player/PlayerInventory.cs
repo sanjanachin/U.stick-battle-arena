@@ -107,9 +107,9 @@ namespace Game.Player
                 {
                     // holding one item, but got an empty slot
                     // set equipped item to holding equip pick up item 
-                    _holdItem = _equippedItem;
-                    _holdItem.UnEquip();
-                    OnItemUnEquip.Invoke(_holdItem);
+                    _holdItem = item;
+                    SwitchItem();
+                    // OnItemUnEquip.Invoke(_holdItem);
                 }
                 else
                 {
