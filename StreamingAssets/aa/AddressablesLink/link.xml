@@ -1,8 +1,13 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Game.Arrow" preserve="all" />
+    <type fullname="Game.AudioClipSO" preserve="all" />
+    <type fullname="Game.AudioDataSetSO" preserve="all" />
+    <type fullname="Game.AudioManager" preserve="all" />
+    <type fullname="Game.BattleRoyalGameModeLogicSO" preserve="all" />
     <type fullname="Game.Bow" preserve="all" />
     <type fullname="Game.Dagger" preserve="all" />
+    <type fullname="Game.DataSet.GameModeLogicDataSetSO" preserve="all" />
     <type fullname="Game.GameplayManager" preserve="all" />
     <type fullname="Game.GameplayService" preserve="all" />
     <type fullname="Game.GameplayUIManager" preserve="all" />
@@ -29,12 +34,12 @@
     <type fullname="Game.UI.UI_PlayerStatusDisplay" preserve="all" />
     <type fullname="Game.UI.UI_PlayerStatusPanel" preserve="all" />
     <type fullname="Game.UI_MainMenu" preserve="all" />
-    <type fullname="Game.UI_MapSelection" preserve="all" />
     <type fullname="Game.UsableItem" preserve="all" />
     <type fullname="Game.UsableItemManager" preserve="all" />
     <type fullname="Game.PlayerManager/PlayerIDPlayerPair" preserve="nothing" serialized="true" />
     <type fullname="Game.ProjectileManager/ProjectileIdPrefabPair" preserve="nothing" serialized="true" />
     <type fullname="Game.UsableItemManager/UsableItemIdPrefabPair" preserve="nothing" serialized="true" />
+    <type fullname="Game.AudioClipPlaySetting" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -74,6 +79,7 @@
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.AudioClip" preserve="all" />
     <type fullname="UnityEngine.AudioListener" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
