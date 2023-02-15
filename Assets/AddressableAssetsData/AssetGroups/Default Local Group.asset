@@ -25,16 +25,16 @@ MonoBehaviour:
     m_Address: Assets/Scenes/SampleScene 1.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 7b6304e7d01114a4d9ba6ef4225ef62e
-    m_Address: Assets/Scenes/NoonMountainStage.unity
+  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
+    m_Address: Assets/Scenes/SampleScene.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: c873bed56d7e3c04395b7d6b27454de3
-    m_Address: Assets/Scenes/NightMountainStage.unity
+  - m_GUID: 8c3b2cdaa7f13284a9a0653af7879c86
+    m_Address: Assets/Scenes/MoreWeapon.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 8c6fd4d44423e394283f05f9c8ee6710
-    m_Address: Assets/Scenes/Map Selection Menu.unity
+  - m_GUID: 40522b8856c9045bf9cf4ecb08a2429d
+    m_Address: Assets/Scenes/StageTwo.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
