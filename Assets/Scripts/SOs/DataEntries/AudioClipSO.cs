@@ -8,7 +8,7 @@ namespace Game
     public enum AudioID
     {
         // TODO: Add ID
-        TestingAudio,
+        Death,
         Damage,
         PistolUse,
         PistolSwitch,

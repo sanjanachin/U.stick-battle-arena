@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb59846d8c0e02479e0c80cc13c8f5c, type: 3}
   m_Name: BowSwitch
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 0}
+  _audioClip: {fileID: 8300000, guid: 852f49ac03cb6184ea7eb6d8c9013833, type: 3}
   _id: 12
   _defaultSetting:
     _pitch: 1

@@ -30,8 +30,13 @@ namespace Game.Player
         {
             _health -= damageInfo.Damage;
             _lastDamageDealer = lastDealer;
-            _service.AudioManager.PlayAudio(AudioID.Damage);
             OnHealthChange.Invoke(this);
+            // Play damage sound only if player has remaining life
+            // Otherwise play death SFX
+            if (_health > 0)
+            {
+                _service.AudioManager.PlayAudio(AudioID.Damage);
+            }
             CheckDeath();
         }
 
@@ -39,6 +44,7 @@ namespace Game.Player
         {
             if (_health > 0) return;
         
+            _service.AudioManager.PlayAudio(AudioID.Death);
             // reset the health
             _health = _maxHealth;
             OnHealthChange.Invoke(this);
