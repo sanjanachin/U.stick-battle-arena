@@ -25,13 +25,21 @@ namespace Game
          * Invoked when the durability of this item reaches 0
          */
         public event UnityAction<UsableItem> OnBreak = delegate {  };
+        /**
+         * Invoked when durability of the item change
+         * 1st arg: the item
+         */
+        public event UnityAction<UsableItem> OnDurabilityChange = delegate {  };
         public event UnityAction OnReturn = delegate {  };
 
         public PlayerController Player { get => _player; }
+        public float DurabilityPercentage { get => (float) _durability / _maxDurability; }
+        public Sprite Icon { get => _icon; }
         
         private PlayerController _player;
 
         [SerializeField] private GameplayService _service;
+        [SerializeField] private Sprite _icon;
         [SerializeField] private Transform _transform;
         [SerializeField] private Pickable _pickable;
         [SerializeField] private UsableItemID _id;
@@ -153,6 +161,7 @@ namespace Game
         public void ReduceDurability(int value)
         {
             _durability -= value;
+            OnDurabilityChange.Invoke(this);
             if (_durability <= 0)
             {
                 OnBreak.Invoke(this);

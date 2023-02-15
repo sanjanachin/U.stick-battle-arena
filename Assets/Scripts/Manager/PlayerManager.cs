@@ -65,7 +65,7 @@ namespace Game
             }
         }
 
-        private void SignalPlayerDeath(PlayerID id)
+        private void SignalPlayerDeath(int _)
         {
             OnPlayerDies.Invoke();
         }
