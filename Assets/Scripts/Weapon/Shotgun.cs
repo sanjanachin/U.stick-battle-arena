@@ -15,6 +15,7 @@ namespace Game
         {
             _usableItem = GetComponent<UsableItem>();
             _usableItem.OnUseButtonDown += Shoot;
+            _usableItem.OnSwitchTo += PlaySwitchSound;
         }
         
         private void Shoot(PlayerController executor)
@@ -28,6 +29,8 @@ namespace Game
                 ShootOneBullet(executor, _yOffset * i);
                 ShootOneBullet(executor, -_yOffset * i);
             }
+            
+            _service.AudioManager.PlayAudio(AudioID.ShotgunShoot);
             
             _usableItem.ReduceDurability(1);
         }
@@ -46,6 +49,11 @@ namespace Game
                 velocity = new Vector2(-velocity.x, velocity.y);
             
             bullet.Launch(_projectileID, velocity, executor, BulletGravity, BulletLifespan);
+        }
+
+        private void PlaySwitchSound()
+        {
+            _service.AudioManager.PlayAudio(AudioID.ShotgunRack);
         }
     }
 }
