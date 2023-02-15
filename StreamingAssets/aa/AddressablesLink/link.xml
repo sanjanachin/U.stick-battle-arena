@@ -34,6 +34,7 @@
     <type fullname="Game.UI.UI_PlayerStatusDisplay" preserve="all" />
     <type fullname="Game.UI.UI_PlayerStatusPanel" preserve="all" />
     <type fullname="Game.UI_MainMenu" preserve="all" />
+    <type fullname="Game.UI_MapSelection" preserve="all" />
     <type fullname="Game.UsableItem" preserve="all" />
     <type fullname="Game.UsableItemManager" preserve="all" />
     <type fullname="Game.PlayerManager/PlayerIDPlayerPair" preserve="nothing" serialized="true" />
