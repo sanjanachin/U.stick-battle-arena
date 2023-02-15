@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Player;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -18,6 +19,9 @@ namespace Game
     
     public class PlayerManager : MonoBehaviour
     {
+        public event UnityAction OnPlayerDies = delegate {  };
+        public event UnityAction OnPlayerScoreChange = delegate {  };
+        
         [SerializeField] private GameSettingsSO _gameSettings;
         [SerializeField] private PlayerIDPlayerPair[] _playerEntries;
         [SerializeField] private PlayerSpawnPoint[] _playerSpawnPoint;
@@ -57,7 +61,13 @@ namespace Game
                 _playerList.Add(_playerEntries[i].Id, playerStat);
                 // set up spawn point
                 _playerSpawnPoint[i].Initialize(playerStat);
+                playerStat.OnDeath += SignalPlayerDeath;
             }
+        }
+
+        private void SignalPlayerDeath(int _)
+        {
+            OnPlayerDies.Invoke();
         }
 
         /**
@@ -110,11 +120,23 @@ namespace Game
 
         public float GetScore(PlayerID id)
         {
+            if (!_scoreboard.ContainsKey(id))
+                return 0;
             return _scoreboard[id];
+        }
+        
+        public PlayerID PlayerWithHighestScore()
+        {
+            return _scoreboard.Aggregate(
+                // get key with highest value
+                (x, y) => x.Value > y.Value ? x : y
+                ).Key;
         }
 
         public int GetRemainingLife(PlayerID id)
         {
+            if (!_remainingLife.ContainsKey(id))
+                return 0;
             return _remainingLife[id];
         }
 

@@ -16,6 +16,10 @@ namespace Game.UI
             Assert.IsTrue(_playerStatusDisplays.Length == GameSettingsSO.MAX_PLAYER_COUNT);
         }
 
+        /**
+         * Initialize the sub UIs
+         * Should ONLY be called by the GameplayUIManager
+         */
         public void Initialize()
         {
             foreach (UI_PlayerStatusDisplay display in _playerStatusDisplays)

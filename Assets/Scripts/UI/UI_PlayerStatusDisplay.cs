@@ -1,7 +1,5 @@
-using System;
 using Game.Player;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +17,11 @@ namespace Game.UI
         [SerializeField] private Image _itemIcon;
 
         [SerializeField] private PlayerID _playerID;
-
+        
+        /**
+         * Initialize the UI by hooking to corresponded events
+         * Should ONLY be called by the corresponding manager
+         */
         public void Initialize()
         {
             gameObject.SetActive(false);

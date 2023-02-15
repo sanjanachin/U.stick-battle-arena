@@ -21,8 +21,8 @@ MonoBehaviour:
     m_Address: Assets/Scenes/Main Menu.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
-    m_Address: Assets/Scenes/SampleScene.unity
+  - m_GUID: e2da2325dcf1b9b49bf34b211028735c
+    m_Address: Assets/Scenes/SampleScene 1.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
