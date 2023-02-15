@@ -48,7 +48,7 @@ namespace Game
             // random x position
             transform.position = _originalPosition + new Vector3(
                 Random.Range(_randomXPosLowerBound, _randomXPosUpperBound),
-                transform.position.y);
+                0);
         }
 
         private void SpawnWeapon()
