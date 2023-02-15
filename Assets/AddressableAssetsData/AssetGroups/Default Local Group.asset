@@ -25,10 +25,6 @@ MonoBehaviour:
     m_Address: Assets/Scenes/SampleScene 1.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
-    m_Address: Assets/Scenes/SampleScene.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6f06fca0e9e54f1458ecf54858902e1d, type: 2}
   m_SchemaSet:

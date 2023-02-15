@@ -17,12 +17,7 @@ namespace Game.UI
         [SerializeField] private Image _itemIcon;
 
         [SerializeField] private PlayerID _playerID;
-
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-        }
-
+        
         /**
          * Initialize the UI by hooking to corresponded events
          * Should ONLY be called by the corresponding manager
