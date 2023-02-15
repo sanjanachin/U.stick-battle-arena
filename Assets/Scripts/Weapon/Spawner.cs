@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -12,7 +14,13 @@ namespace Game
         [SerializeField] private float _spawnInterval;
         [SerializeField] private float _randomXPosLowerBound;
         [SerializeField] private float _randomXPosUpperBound;
+        private Vector3 _originalPosition;
         private float _currentTime;
+
+        private void Awake()
+        {
+            _originalPosition = transform.position;
+        }
 
         private void Update()
         {
@@ -38,7 +46,7 @@ namespace Game
         private void UpdatePosition()
         {
             // random x position
-            transform.position = new Vector3(
+            transform.position = _originalPosition + new Vector3(
                 Random.Range(_randomXPosLowerBound, _randomXPosUpperBound),
                 transform.position.y);
         }
