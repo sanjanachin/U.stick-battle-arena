@@ -37,6 +37,18 @@ MonoBehaviour:
     m_Address: Assets/Scenes/StageTwo.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 7b6304e7d01114a4d9ba6ef4225ef62e
+    m_Address: Assets/Scenes/NoonMountainStage.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c873bed56d7e3c04395b7d6b27454de3
+    m_Address: Assets/Scenes/NightMountainStage.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8c6fd4d44423e394283f05f9c8ee6710
+    m_Address: Assets/Scenes/Map Selection Menu.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6f06fca0e9e54f1458ecf54858902e1d, type: 2}
   m_SchemaSet:
