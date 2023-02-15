@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fb59846d8c0e02479e0c80cc13c8f5c, type: 3}
-  m_Name: SMGShoot
+  m_Name: BowUse
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: 5928e3b69448ac34ba0c2c5083253c83, type: 3}
-  _id: 4
+  _audioClip: {fileID: 8300000, guid: cfee423dce2ff8c4e9ea76d91e580d79, type: 3}
+  _id: 11
   _defaultSetting:
     _pitch: 1
     _volume: 1

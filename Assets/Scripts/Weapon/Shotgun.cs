@@ -30,7 +30,7 @@ namespace Game
                 ShootOneBullet(executor, -_yOffset * i);
             }
             
-            _service.AudioManager.PlayAudio(AudioID.ShotgunShoot);
+            _service.AudioManager.PlayAudio(AudioID.ShotgunUse);
             
             _usableItem.ReduceDurability(1);
         }
@@ -53,7 +53,7 @@ namespace Game
 
         private void PlaySwitchSound()
         {
-            _service.AudioManager.PlayAudio(AudioID.ShotgunRack);
+            _service.AudioManager.PlayAudio(AudioID.ShotgunSwitch);
         }
     }
 }

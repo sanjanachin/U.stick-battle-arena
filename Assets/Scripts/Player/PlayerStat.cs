@@ -30,6 +30,7 @@ namespace Game.Player
         {
             _health -= damageInfo.Damage;
             _lastDamageDealer = lastDealer;
+            _service.AudioManager.PlayAudio(AudioID.Damage);
             OnHealthChange.Invoke(this);
             CheckDeath();
         }

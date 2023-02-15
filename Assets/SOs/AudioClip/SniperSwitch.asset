@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fb59846d8c0e02479e0c80cc13c8f5c, type: 3}
-  m_Name: SMGRack
+  m_Name: SniperSwitch
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: 5928e3b69448ac34ba0c2c5083253c83, type: 3}
-  _id: 4
+  _audioClip: {fileID: 8300000, guid: 586c9427837e2194586a4e7b984181a4, type: 3}
+  _id: 9
   _defaultSetting:
     _pitch: 1
     _volume: 1

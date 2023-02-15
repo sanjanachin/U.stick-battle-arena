@@ -95,7 +95,6 @@ namespace Game
         {
             player.OnItemUseDown += HandleItemUseDown;
             player.OnItemUseUp += HandleItemUseUp;
-            OnSwitchTo.Invoke();
             DisablePhysics();
             _player = player;
             player.GetComponent<PlayerInventory>().PickUpItem(this);

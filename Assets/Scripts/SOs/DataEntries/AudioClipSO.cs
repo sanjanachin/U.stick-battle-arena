@@ -9,14 +9,20 @@ namespace Game
     {
         // TODO: Add ID
         TestingAudio,
-        PistolShoot,
-        PistolRack,
-        SMGShoot,
-        SMGRack,
-        ShotgunShoot,
-        ShotgunRack,
-        SniperShoot,
-        SniperRack,
+        Damage,
+        PistolUse,
+        PistolSwitch,
+        SMGUse,
+        SMGSwitch,
+        ShotgunUse,
+        ShotgunSwitch,
+        SniperUse,
+        SniperSwitch,
+        BowPull,
+        BowUse,
+        BowSwitch,
+        DaggerUse,
+        DaggerSwitch,
     }
     
     [CreateAssetMenu]

@@ -42,7 +42,7 @@ namespace Game
             
                 bullet.Launch(_projectileID, velocity, _executor, BulletGravity, BulletLifespan);
                 
-                _service.AudioManager.PlayAudio(AudioID.SMGShoot );
+                _service.AudioManager.PlayAudio(AudioID.SMGUse);
                 
                 _usableItem.ReduceDurability(1);
 
@@ -69,7 +69,7 @@ namespace Game
 
         private void PlaySwitchSound()
         {
-            _service.AudioManager.PlayAudio(AudioID.SMGRack);
+            _service.AudioManager.PlayAudio(AudioID.SMGSwitch);
         }
     }
 }

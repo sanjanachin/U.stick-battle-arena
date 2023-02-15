@@ -25,14 +25,14 @@ namespace Game
                 velocity = new Vector2(-velocity.x, velocity.y);
             
             bullet.Launch(_projectileID, velocity, executor, BulletGravity, BulletLifespan);
-            _service.AudioManager.PlayAudio(AudioID.PistolShoot);
+            _service.AudioManager.PlayAudio(AudioID.PistolUse);
             
             _usableItem.ReduceDurability(1);
         }
 
         private void PlaySwitchSound()
         {
-            _service.AudioManager.PlayAudio(AudioID.PistolRack);
+            _service.AudioManager.PlayAudio(AudioID.PistolSwitch);
         }
     }
 }
