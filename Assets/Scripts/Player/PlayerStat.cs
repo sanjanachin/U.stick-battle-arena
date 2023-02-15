@@ -5,20 +5,21 @@ namespace Game.Player
 {
     public class PlayerStat : MonoBehaviour
     {
+        public PlayerID ID;
+        public float HealthPercentage => (float) _health / _maxHealth;
+            
         [SerializeField] private GameplayService _service;
         [SerializeField] private int _maxHealth;
         [SerializeField] private float _killBonus;
-        private int _remainingHealth;
+        private int _health;
         private PlayerID _lastDamageDealer;
-    
-        public PlayerID ID;
-
-        public event UnityAction OnDeath = delegate { }; 
-        public event UnityAction<int, int> OnHealthChange = delegate { }; 
+        
+        public event UnityAction<int> OnDeath = delegate { }; 
+        public event UnityAction<PlayerStat> OnHealthChange = delegate { }; 
 
         private void Awake()
         {
-            _remainingHealth = _maxHealth;
+            _health = _maxHealth;
         }
 
         /**
@@ -27,24 +28,24 @@ namespace Game.Player
          */
         public void DeductHealth(PlayerID lastDealer, DamageInfo damageInfo)
         {
-            _remainingHealth -= damageInfo.Damage;
+            _health -= damageInfo.Damage;
             _lastDamageDealer = lastDealer;
-            OnHealthChange.Invoke(_remainingHealth, _maxHealth);
+            OnHealthChange.Invoke(this);
             CheckDeath();
         }
 
         private void CheckDeath()
         {
-            if (_remainingHealth > 0) return;
+            if (_health > 0) return;
         
             // reset the health
-            _remainingHealth = _maxHealth;
-            OnHealthChange.Invoke(_remainingHealth, _maxHealth);
+            _health = _maxHealth;
+            OnHealthChange.Invoke(this);
             // give kill bonus to the last damage dealer
             _service.PlayerManager.IncreaseScore(_lastDamageDealer, _killBonus);
             // reduce the remaining life of the player
             _service.PlayerManager.ReduceRemainingLife(ID);
-            OnDeath.Invoke();
+            OnDeath.Invoke(_service.PlayerManager.GetRemainingLife(ID));
         }
     }
 

@@ -17,7 +17,27 @@ namespace Game.Player
         [SerializeField] private UsableItem _holdItem;
         [SerializeField] private PlayerController _playerController;
         
-        public event UnityAction<UsableItem> OnItemSwitched = (_) => { };
+        /**
+         * Called when the item is switched
+         * 1st arg: the currently equipping item after switching
+         * 2nd arg: the hold item in inventory after switching
+         */
+        public event UnityAction<UsableItem, UsableItem> OnItemSwitched = (_, _) => { };
+        /**
+         * Called when an item is equipped to the player
+         * 1st arg: the equipped item
+         */
+        public event UnityAction<UsableItem> OnItemEquip = (_) => { };
+        /**
+         * Called when an item is unequipped from the player
+         * 1st arg: the unequipped item
+         */
+        public event UnityAction<UsableItem> OnItemUnEquip = (_) => { };
+        /**
+         * Called when picked an item
+         * 1st arg: the picked item
+         */
+        public event UnityAction<UsableItem> OnItemPick = (_) => { };
 
         private void Awake()
         {
@@ -42,10 +62,15 @@ namespace Game.Player
             
             // switch
             if (!Object.Equals(_equippedItem, null))
+            {
                 _equippedItem.UnEquip();
+                OnItemUnEquip.Invoke(_equippedItem);
+            }
+
             _holdItem.Equip();
+            OnItemEquip.Invoke(_holdItem);
             (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
-            OnItemSwitched.Invoke(_equippedItem);
+            OnItemSwitched.Invoke(_equippedItem, _holdItem);
         }
 
         // handle if the item is broken
@@ -54,6 +79,8 @@ namespace Game.Player
         {
             // disable item
             item.UnEquip();
+            OnItemUnEquip.Invoke(item);
+
             if (item == _equippedItem)
             {
                 _equippedItem = null;
@@ -82,20 +109,24 @@ namespace Game.Player
                     // set equipped item to holding equip pick up item 
                     _holdItem = _equippedItem;
                     _holdItem.UnEquip();
+                    OnItemUnEquip.Invoke(_holdItem);
                 }
                 else
                 {
                     // no empty slot, replace the item with equipped one
                     _equippedItem.UnEquip();
+                    OnItemUnEquip.Invoke(_equippedItem);
                     _equippedItem.ReturnToPool();
                 }
             }
             
             _equippedItem = item;
             item.Equip();
+            OnItemEquip.Invoke(item);
 
             // move the gameObject under the player's holder
             item.SetAndMoveToParent(_itemHolderTrans);
+            OnItemPick.Invoke(item);
         }
     }
 }

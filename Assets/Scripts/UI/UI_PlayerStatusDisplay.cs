@@ -1,6 +1,7 @@
 using System;
 using Game.Player;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ namespace Game.UI
         [SerializeField] private GameplayService _service;
 
         [SerializeField] private TMP_Text _scoreLabel;
-        [SerializeField] private TMP_Text _lifeLeftLabel;
+        [SerializeField] private TMP_Text _lifeCountLabel;
         [SerializeField] private Image _healthBar;
         [SerializeField] private Image _itemDurabilityBar;
         [SerializeField] private Image _itemIcon;
@@ -33,19 +34,50 @@ namespace Game.UI
             // set up event hooks
             PlayerStat playerStat = _service.PlayerManager.GetPlayerStat(_playerID);
             playerStat.OnHealthChange += UpdateHealthBarVisual;
+            playerStat.OnDeath += UpdateLifeCountVisual;
 
+            PlayerInventory playerInventory = playerStat.GetComponent<PlayerInventory>();
+            playerInventory.OnItemSwitched += UpdateInventoryIcon;
+            playerInventory.OnItemEquip += HookToItemDurabilityChange;
+            playerInventory.OnItemUnEquip += UnHookToItemDurabilityChange;
+            playerInventory.OnItemPick += UpdateDurabilityBar;
+            
             _service.PlayerManager.OnScoreChange += UpdateScore;
-
         }
 
-        private void UpdateHealthBarVisual(int hp, int maxHp)
+        private void UpdateHealthBarVisual(PlayerStat playerStat)
         {
-            _healthBar.fillAmount = (float)hp * 0.5f / maxHp;
+            _healthBar.fillAmount = playerStat.HealthPercentage * 0.5f;
+        }
+
+        private void HookToItemDurabilityChange(UsableItem equippedItem)
+        {
+            equippedItem.OnDurabilityChange += UpdateDurabilityBar;
+        }
+
+        private void UnHookToItemDurabilityChange(UsableItem unequippedItem)
+        {
+            unequippedItem.OnDurabilityChange -= UpdateDurabilityBar;
+        }
+
+        private void UpdateDurabilityBar(UsableItem item)
+        {
+            _itemDurabilityBar.fillAmount = item.DurabilityPercentage * 0.5f;
+        }
+        
+        private void UpdateInventoryIcon(UsableItem equippedItem, UsableItem holdItem)
+        {
+            _itemIcon.sprite = holdItem.Icon;
+        }
+        
+        private void UpdateLifeCountVisual(int lifeCount)
+        {
+            _lifeCountLabel.text = $"{lifeCount}";
         }
 
         private void UpdateScore(PlayerID id)
         {
-            _scoreLabel.text = _service.PlayerManager.GetScore(id).ToString();
+            _scoreLabel.text = $"{_service.PlayerManager.GetScore(id)}";
         }
     }
 }
