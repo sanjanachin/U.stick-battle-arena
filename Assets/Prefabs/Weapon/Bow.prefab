@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
+  _icon: {fileID: 21300000, guid: 1f21190ca9d1e8540b2a3a2e46002685, type: 3}
   _transform: {fileID: 0}
   _pickable: {fileID: 6693322614909361244}
   _id: 2
