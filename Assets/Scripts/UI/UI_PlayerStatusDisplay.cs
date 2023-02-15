@@ -53,6 +53,7 @@ namespace Game.UI
         private void HookToItemDurabilityChange(UsableItem equippedItem)
         {
             equippedItem.OnDurabilityChange += UpdateDurabilityBar;
+            UpdateDurabilityBar(equippedItem);
         }
 
         private void UnHookToItemDurabilityChange(UsableItem unequippedItem)
@@ -65,8 +66,16 @@ namespace Game.UI
             _itemDurabilityBar.fillAmount = item.DurabilityPercentage * 0.5f;
         }
         
+        // TODO : rework on inventory icon, currently coded for demo
         private void UpdateInventoryIcon(UsableItem equippedItem, UsableItem holdItem)
         {
+            if (holdItem == null)
+            {
+                _itemIcon.gameObject.SetActive(false);
+                return;
+            }
+            
+            _itemIcon.gameObject.SetActive(true);
             _itemIcon.sprite = holdItem.Icon;
         }
         
@@ -77,6 +86,7 @@ namespace Game.UI
 
         private void UpdateScore(PlayerID id)
         {
+            if (id != _playerID) return;
             _scoreLabel.text = $"{_service.PlayerManager.GetScore(id)}";
         }
     }
