@@ -30,6 +30,10 @@ namespace Game
          * 1st arg: the item
          */
         public event UnityAction<UsableItem> OnDurabilityChange = delegate {  };
+        /**
+         * Invoked when the current weapon is switched to.
+         */
+        public event UnityAction OnSwitchTo = delegate { }; 
         public event UnityAction OnReturn = delegate {  };
 
         public PlayerController Player { get => _player; }
@@ -126,6 +130,7 @@ namespace Game
         {
             _equipped = true;
             gameObject.SetActive(true);
+            OnSwitchTo.Invoke();
         }
         
         /**
