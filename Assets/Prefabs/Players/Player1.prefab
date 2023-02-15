@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxTilt: 4
   _tiltSpeed: 20
-  _squashSpeed: 10.6
+  _landAnimDuration: 0.32
 --- !u!1 &8807138702188848656
 GameObject:
   m_ObjectHideFlags: 0

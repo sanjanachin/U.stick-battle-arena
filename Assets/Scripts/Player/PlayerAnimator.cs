@@ -15,6 +15,7 @@ namespace Game.Player {
         // maxTilt and tiltSpeed control rate and maximum pitch of rotation effect while moving
         [SerializeField] private float _maxTilt = 4;
         [SerializeField] private float _tiltSpeed = 20;
+        [SerializeField] private float _landAnimDuration = .1f;
 
         private IPlayerController _player;
         private SpriteRenderer _renderer;
@@ -36,17 +37,11 @@ namespace Game.Player {
         }
 
         private void Update() {
-            // if (_player.Input.x != 0) _renderer.flipX = _player.Input.x < 0;
             if (_player.MovementInput.X != 0) transform.localScale = new Vector3(_player.MovementInput.X < 0 ? 1 : -1, 1, 1);
             // Apply rotation to model dependant of speed and time
             var targetRotVector = new Vector3(0, 0, Mathf.Lerp(-_maxTilt, _maxTilt, Mathf.InverseLerp(-1, 1, _player.MovementInput.X)));
             _anim.transform.rotation = Quaternion.RotateTowards(_anim.transform.rotation, Quaternion.Euler(targetRotVector), _tiltSpeed * Time.deltaTime);
             var state = GetState();
-            // Debug.Log(state);
-
-            // _jumpTriggered = false;
-            // _landed = false;
-            // _attacked = false;
 
             if (state == _currentState) return;
             _anim.CrossFade(state, 0, 0);
@@ -59,15 +54,11 @@ namespace Game.Player {
 
             // Animations sorted by priority
             // if (_player.JumpingThisFrame) return Jump;
-            if (_player.Grounded) {
-                if (_player.MovementInput.X == 0) {
-                    return Idle;
-                } else {
-                    return Walk;
-                }
-            } else {
-                return Jump;
-            }
+            if (_player.LandingThisFrame) return LockState(Land, _landAnimDuration);
+            if (!_player.Grounded) return Jump;
+            if (_player.MovementInput.X == 0) return Idle;
+            if (_player.MovementInput.X != 0) return Walk;
+
             // if (_player.Grounded) return _player.MovementInput.X == 0 ? Idle : Walk;
             int LockState(int s, float t) {
                 _lockedTill = Time.time + t;
@@ -91,8 +82,8 @@ namespace Game.Player {
         private static readonly int Idle = Animator.StringToHash("IdleSpeed");
         private static readonly int Walk = Animator.StringToHash("Grounded");
         private static readonly int Jump = Animator.StringToHash("Jump");
+        private static readonly int Land = Animator.StringToHash("Land");
         // private static readonly int Fall = Animator.StringToHash("Fall");
-        // private static readonly int Land = Animator.StringToHash("Land");
         // private static readonly int Attack = Animator.StringToHash("Attack");
         // private static readonly int Crouch = Animator.StringToHash("Crouch");
 
