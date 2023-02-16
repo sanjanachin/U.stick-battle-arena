@@ -11,10 +11,10 @@ namespace Game.Player {
         [SerializeField] private float _tiltSpeed = 20;
         // landAnimDuration controls the length of the landing animation
         [SerializeField] private float _landAnimDuration = .45f;
+        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private Animator _anim;
 
         private IPlayerController _player;
-        private SpriteRenderer _renderer;
-        private Animator _anim;
         private float _lockedTill;
 
 
@@ -26,8 +26,8 @@ namespace Game.Player {
             }
             _player = player;
             // Grab animations from animator
-            _anim = GetComponent<Animator>();
-            _renderer = GetComponent<SpriteRenderer>();
+            // _anim = GetComponent<Animator>();
+            // _renderer = GetComponent<SpriteRenderer>();
         }
 
         private void Update() {
