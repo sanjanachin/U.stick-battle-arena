@@ -7,13 +7,13 @@ namespace Game
 {
     public enum UsableItemID
     {
-        Pistol,
-        Dagger,
-        Bow,
-        Sniper,
-        SMG,
-        Shotgun,
-        HandGrenade,
+        Pistol = 1,
+        Dagger = 2,
+        Bow = 3,
+        Sniper = 4,
+        SMG = 5,
+        Shotgun = 6,
+        HandGrenade = 7,
     }
     public class UsableItemManager : MonoBehaviour
     {

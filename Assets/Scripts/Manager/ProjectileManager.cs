@@ -7,12 +7,12 @@ namespace Game
 {
     public enum ProjectileID
     {
-        PistolBullet,
-        Arrow,
-        SniperBullet,
-        SMGBullet,
-        ShotgunBullet,
-        Grenade,
+        PistolBullet = 1,
+        Arrow = 2,
+        SniperBullet = 3,
+        SMGBullet = 4,
+        ShotgunBullet = 5,
+        Grenade = 6,
     }
     
     /**

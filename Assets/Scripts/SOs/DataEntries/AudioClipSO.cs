@@ -9,24 +9,24 @@ namespace Game
     {
         None = -1,
         // TODO: Add ID
-        Death,
-        Damage,
-        PistolUse,
-        PistolSwitch,
-        SMGUse,
-        SMGSwitch,
-        ShotgunUse,
-        ShotgunSwitch,
-        SniperUse,
-        SniperSwitch,
-        BowPull,
-        BowUse,
-        BowSwitch,
-        DaggerUse,
-        DaggerSwitch,
+        Death = 0,
+        Damage = 1,
+        PistolUse = 2,
+        PistolSwitch = 3,
+        SMGUse = 4,
+        SMGSwitch = 5,
+        ShotgunUse = 6,
+        ShotgunSwitch = 7,
+        SniperUse = 8,
+        SniperSwitch = 9,
+        BowPull = 10,
+        BowUse = 11,
+        BowSwitch = 12,
+        DaggerUse = 13,
+        DaggerSwitch = 14,
     }
     
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Game/DataEntry/AudioClip")]
     public class AudioClipSO : ScriptableObject, IDataId<AudioID>
     {
         public AudioClip AudioClip { get => _audioClip; }

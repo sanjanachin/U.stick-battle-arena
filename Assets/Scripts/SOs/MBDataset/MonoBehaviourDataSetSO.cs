@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SOs.DataSet
+namespace Game.DataSet
 {
     /**
      * A SO based dataset that stores MonoBehaviour prefabs with corresponding enum id

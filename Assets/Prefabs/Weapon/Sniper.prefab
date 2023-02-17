@@ -159,16 +159,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 0}
-  _audioOnUse: 0
-  _audioOnEquip: 0
-  _id: 0
-  _maxDurability: 0
-  _durability: 0
+  _icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+  _audioOnUse: 8
+  _audioOnEquip: 9
+  _id: 4
+  _maxDurability: 2
+  _durability: 2
   _shootingPoint: {fileID: 2005636559043271077}
-  _velocity: {x: 0, y: 0}
+  _velocity: {x: 100, y: 0}
   _gravity: 0
-  _projectileID: 2
+  _projectileID: 3
 --- !u!1 &7783170079757629830
 GameObject:
   m_ObjectHideFlags: 0

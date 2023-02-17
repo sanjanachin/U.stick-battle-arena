@@ -214,17 +214,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 0}
-  _audioOnUse: 0
-  _audioOnEquip: 0
-  _id: 0
-  _maxDurability: 0
-  _durability: 0
+  _icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+  _audioOnUse: 11
+  _audioOnEquip: 12
+  _id: 3
+  _maxDurability: 10
+  _durability: 10
   _shootingPoint: {fileID: 6693322615751488557}
-  _velocity: {x: 0, y: 0}
-  _gravity: 0
-  _projectileID: 1
-  _maxPull: 1.5
+  _velocity: {x: 15, y: 15}
+  _gravity: 10
+  _projectileID: 2
+  _maxPull: 1
   _pulling: 0
   _pull: 0
 --- !u!1 &6693322615276670226
