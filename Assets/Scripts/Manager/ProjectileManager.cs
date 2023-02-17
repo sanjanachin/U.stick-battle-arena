@@ -12,6 +12,7 @@ namespace Game
         SniperBullet,
         SMGBullet,
         ShotgunBullet,
+        Grenade,
     }
     
     /**
