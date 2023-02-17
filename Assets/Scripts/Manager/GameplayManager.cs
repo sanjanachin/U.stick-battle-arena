@@ -29,7 +29,8 @@ namespace Game
             _service.ProvideUsableItemManager(_usableItemManager);
             _service.ProvidePlayerManager(_playerManager);
             _service.ProvideGameplayUIManager(_gameplayUIManager);
-            
+
+            return;
             // Initialize managers in order of dependency
             _playerManager.Initialize();
             _gameplayUIManager.Initialize();

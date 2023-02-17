@@ -7,6 +7,7 @@ namespace Game
 {
     public enum AudioID
     {
+        None = -1,
         // TODO: Add ID
         Death,
         Damage,
