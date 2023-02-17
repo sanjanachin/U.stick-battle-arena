@@ -1,5 +1,3 @@
-using System;
-using Game.Player;
 using UnityEngine;
 
 namespace Game
@@ -33,7 +31,7 @@ namespace Game
         {
             LaunchInfo launchInfo = new LaunchInfo(
                 _shootingPoint.position,
-                new Vector2(_velocity.x, yVelocity) * _shootingPoint.localScale.x,
+                VelocityWithFlip(new Vector2(_velocity.x, yVelocity)),
                 _gravity,
                 shooter
             );

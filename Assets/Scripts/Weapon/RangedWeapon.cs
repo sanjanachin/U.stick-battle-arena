@@ -13,13 +13,21 @@ namespace Game
         protected void Launch(PlayerID shooter)
         {
             LaunchInfo launchInfo = new LaunchInfo(
-                _shootingPoint.position,
-                _velocity * _shootingPoint.localScale.x,
+                _shootingPoint.position, 
+                VelocityWithFlip(_velocity),
                 _gravity,
                 shooter
             );
 
             Launch(shooter, launchInfo);
+        }
+
+        protected Vector2 VelocityWithFlip(Vector2 velocity)
+        {
+            return new Vector2(
+                velocity.x * _shootingPoint.parent.parent.localScale.x * -1,
+                velocity.y
+            );
         }
         
         protected void Launch(PlayerID shooter, LaunchInfo launchInfo)

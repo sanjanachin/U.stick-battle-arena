@@ -132,7 +132,7 @@ MonoBehaviour:
   _audioOnUse: 6
   _audioOnEquip: 7
   _id: 6
-  _maxDurability: 3
+  _maxDurability: 9
   _durability: 3
   _shootingPoint: {fileID: 1822478866356062737}
   _velocity: {x: 50, y: 0}

@@ -4,7 +4,6 @@ using UnityEngine.Events;
 namespace Game.Player
 {
     // TODO: item break handle
-    // TODO: projectile not colliding
     /**
      * Represent the inventory of a player
      */
@@ -33,6 +32,15 @@ namespace Game.Player
             _playerController.OnItemUseDown += ItemUseDown;
             _playerController.OnItemUseUp += ItemUseUp;
             _playerController.OnSwitchItem += SwitchItem;
+            _playerController.OnMovement += FlipItemHolder;
+        }
+
+        private void FlipItemHolder(Vector2 dir)
+        {
+            if (dir.x > 0)
+                _itemHolderTrans.localScale = Vector3.left + Vector3.up;
+            if (dir.x < 0)
+                _itemHolderTrans.localScale = Vector3.right + Vector3.up;
         }
 
         private void SwitchItem()

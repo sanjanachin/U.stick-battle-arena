@@ -38,7 +38,13 @@ namespace Game
         private void Release(PlayerID shooter)
         {
             if (!_pulling) return;
-            Launch(shooter);
+            Launch(shooter, 
+                new LaunchInfo(
+                    _shootingPoint.position, 
+                    VelocityWithFlip(_velocity * _pull),
+                    _gravity,
+                    shooter
+                ));
             
             _service.AudioManager.PlayAudio(AudioID.BowUse);
 

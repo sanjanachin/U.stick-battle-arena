@@ -47,13 +47,11 @@ namespace Game
             OnLaunch.Invoke();
         }
 
+        // reset the value to initial value
+        // potentially need to reset events depend on later implementations
         private void Reset()
         {
             _hit = false;
-            OnHitStage = () => { };
-            OnHitProjectile = (_) => { };
-            OnHitPlayer = (_) => { };
-            OnLaunch = () => { };
         }
         
         /**
@@ -61,7 +59,7 @@ namespace Game
          */
         public void ReturnToPool()
         {
-            _service.ProjectileManager.ReturnProjectile(_id, null);
+            _service.ProjectileManager.ReturnProjectile(_id, this);
             Reset();
         }
 
@@ -78,15 +76,15 @@ namespace Game
         {
             // if already hit something, ignore rest of the collision
             if (_hit) return;
-            
+            _hit = true;
+
             PlayerStat target = col.gameObject.GetComponent<PlayerStat>();
             if (target != null) OnHitPlayer.Invoke(CreateDamageInfo(target.ID));
  
             Projectile projectile = col.gameObject.GetComponent<Projectile>();
             if (projectile != null) OnHitProjectile.Invoke(projectile);
 
-            if (target != null && projectile != null) OnHitStage.Invoke();
-            _hit = true;
+            if (target == null && projectile == null) OnHitStage.Invoke();
         }
     }
 }
