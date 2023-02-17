@@ -6,7 +6,7 @@ namespace Game
     public class ShotgunBullet : Projectile
     {
         
-        private void Awake()
+        private void Start()
         {
             OnHitPlayer += HandleHitPlayer;
             OnHitStage += ReturnToPool;

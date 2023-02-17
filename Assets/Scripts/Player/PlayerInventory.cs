@@ -6,6 +6,8 @@ using Object = System.Object;
 
 namespace Game.Player
 {
+    // TODO: item break handle
+    // TODO: projectile not colliding
     /**
      * Represent the inventory of a player
      */

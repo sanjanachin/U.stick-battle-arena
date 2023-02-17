@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 5787936544196533425}
   - component: {fileID: -7537424052761003295}
   - component: {fileID: 7112100993949861734}
-  - component: {fileID: 659559778503308239}
   - component: {fileID: -5133869870670140662}
   m_Layer: 0
   m_Name: Player1
@@ -190,18 +189,6 @@ MonoBehaviour:
   _jumpBuffer: 0.1
   _jumpEndEarlyGravityModifier: 3
   _freeColliderIterations: 10
---- !u!114 &659559778503308239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2522113370557485076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5051d17841504c4caa267fe6ece2a4cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-5133869870670140662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,10 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4e67c2a52059641872ef5547986ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemHolderTrans: {fileID: 0}
-  _equippedItem: {fileID: 0}
-  _holdItem: {fileID: 0}
-  _playerController: {fileID: 0}
+  _itemHolderTrans: {fileID: 1360139175421113770}
 --- !u!1 &3158841145584515554
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace Game
     {
         [SerializeField] private Transform _visualTransform;
         
-        private void Awake()
+        private void Start()
         {
             OnHitPlayer += HandleHitPlayer;
             OnHitStage += ReturnToPool;

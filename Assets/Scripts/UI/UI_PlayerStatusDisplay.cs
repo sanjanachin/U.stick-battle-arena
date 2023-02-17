@@ -36,8 +36,8 @@ namespace Game.UI
 
             PlayerInventory playerInventory = playerStat.GetComponent<PlayerInventory>();
             playerInventory.OnItemSwitch += UpdateInventoryIcon;
-            playerInventory.OnItemEquip += HookToItemDurabilityChange;
-            playerInventory.OnItemHold += UnHookToItemDurabilityChange;
+            // playerInventory.OnItemEquip += HookToItemDurabilityChange;
+            // playerInventory.OnItemHold += UnHookToItemDurabilityChange;
             
             _service.PlayerManager.OnScoreChange += UpdateScore;
         }

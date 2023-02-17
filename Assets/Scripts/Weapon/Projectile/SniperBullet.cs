@@ -5,7 +5,7 @@ namespace Game
 {
     public class SniperBullet : Projectile
     {
-        private void Awake()
+        private void Start()
         {
             OnHitPlayer += HandleHitPlayer;
             OnHitStage += ReturnToPool;

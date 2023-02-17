@@ -5,7 +5,7 @@ namespace Game
 {
     public class SMGBullet : Projectile
     {
-        private void Awake()
+        private void Start()
         {
             OnHitPlayer += HandleHitPlayer;
             OnHitStage += ReturnToPool;

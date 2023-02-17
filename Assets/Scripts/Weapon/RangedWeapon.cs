@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -10,7 +9,7 @@ namespace Game
         [SerializeField] protected float _gravity;
         
         [SerializeField] private ProjectileID _projectileID;
-        
+
         protected void Launch(PlayerID shooter)
         {
             LaunchInfo launchInfo = new LaunchInfo(

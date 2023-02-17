@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.DataSet;
 using UnityEngine;
 using ProjectilePool = Game.GameObjectPool<Game.Projectile>;
 
@@ -14,29 +15,34 @@ namespace Game
         ShotgunBullet = 5,
         Grenade = 6,
     }
-    
+
     /**
      * Manage all the projectiles on scene
      */
     public class ProjectileManager : MonoBehaviour
     {
+        public static ProjectileID[] ProjectileIDs =
+        {
+            ProjectileID.Arrow, ProjectileID.Grenade, 
+            ProjectileID.PistolBullet, ProjectileID.ShotgunBullet, 
+            ProjectileID.SniperBullet, ProjectileID.SMGBullet
+        };
+        
         private Dictionary<ProjectileID, ProjectilePool> _poolMap;
 
-        [SerializeField]  private ProjectileIdPrefabPair[] _prefabEntries;
+        [SerializeField]  private ProjectileDataSetSO _projectileData;
 
         private void Awake()
         {
             _poolMap = new Dictionary<ProjectileID, ProjectilePool>();
 
-            for (int i = 0; i < _prefabEntries.Length; i++)
+            foreach (ProjectileID id in ProjectileIDs)
             {
                 Transform spawnParent = new GameObject(
-                    $"{_prefabEntries[i].Id} Pool").GetComponent<Transform>();
+                    $"{id} Pool").GetComponent<Transform>();
                 spawnParent.SetParent(transform);
                 
-                _poolMap.Add(
-                    _prefabEntries[i].Id,
-                    new ProjectilePool(_prefabEntries[i].Prefab, spawnParent));
+                _poolMap.Add(id, new ProjectilePool(_projectileData[id], spawnParent));
             }
         }
 

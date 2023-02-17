@@ -9,10 +9,10 @@ namespace Game
         [SerializeField] private bool _pulling;
         [SerializeField] private float _pull;
 
-        private void Awake()
+        private void Start()
         {
-            OnItemUseDown += Release;
-            OnItemUseUp += (_) => Pull();
+            OnItemUseDown += (_) => Pull();
+            OnItemUseUp += Release;
             OnReturn += CancelPull;
             OnHold += (_) => CancelPull();
         }

@@ -32,6 +32,7 @@ namespace Game.DataSet
         }
 
         public bool ContainsID(I id) => _data.ContainsKey(id);
+        public int Count => _data.Count;
 
         // Setup the dictionary from entries
         private void InitializeDataSet()

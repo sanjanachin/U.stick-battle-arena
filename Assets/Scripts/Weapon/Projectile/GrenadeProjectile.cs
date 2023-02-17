@@ -8,7 +8,7 @@ namespace Game
     {
         [SerializeField] private float _splashRadius;
         
-        private void Awake()
+        private void Start()
         {
             OnHitPlayer += HandleHitPlayer;
             OnHitStage += Explode;

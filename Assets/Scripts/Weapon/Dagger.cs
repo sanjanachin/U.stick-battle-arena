@@ -4,7 +4,7 @@ namespace Game
 {
     public class Dagger : MeleeWeapon
     {
-        private void Awake()
+        private void Start()
         {
             OnItemUseDown += Attack;
         }

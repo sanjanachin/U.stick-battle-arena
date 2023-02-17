@@ -11,11 +11,12 @@ namespace Game
         private bool _shooting;
         private PlayerID _shooter;
         
-        private void Awake()
+        private void Start()
         {
             OnItemUseDown += Shoot;
-            OnItemUseUp += Stop;
-            OnBreak += Break;
+            OnItemUseUp += (_) => Stop();
+            OnBreak += Stop;
+            OnHold += (_) => Stop();
         }
 
         private void Update()
@@ -40,12 +41,7 @@ namespace Game
             _currTime = 0; // immediate shoot
         }
 
-        private void Stop(PlayerID shooter)
-        {
-            _shooting = false;
-        }
-
-        private void Break()
+        private void Stop()
         {
             _shooting = false;
         }

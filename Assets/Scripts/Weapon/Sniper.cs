@@ -5,7 +5,7 @@ namespace Game
 {
     public class Sniper : RangedWeapon
     {
-        private void Awake()
+        private void Start()
         {
             OnItemUseDown += Launch;
         }

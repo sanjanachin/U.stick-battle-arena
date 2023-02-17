@@ -1,7 +1,5 @@
-﻿using Game.Player;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using Object = System.Object;
 
 namespace Game
 {
@@ -112,7 +110,7 @@ namespace Game
             if (_durability > 0) return;
             OnBreak.Invoke();
             OnReturn.Invoke();
-            _service.UsableItemManager.ReturnUsableItem(_id, null);
+            _service.UsableItemManager.ReturnUsableItem(_id, this);
             Reset();
         }
     }
