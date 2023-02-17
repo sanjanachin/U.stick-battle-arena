@@ -22,7 +22,7 @@ namespace Game
     {
         private Dictionary<ProjectileID, ProjectilePool> _poolMap;
 
-       [SerializeField]  private ProjectileIdPrefabPair[] _prefabEntries;
+        [SerializeField]  private ProjectileIdPrefabPair[] _prefabEntries;
 
         private void Awake()
         {
@@ -43,11 +43,13 @@ namespace Game
         /**
          * Get a projectile prefab from the pool and let the given
          */
-        public Projectile SpawnProjectile(ProjectileID id)
+        public Projectile SpawnAndLaunch(ProjectileID id, RangedWeapon.LaunchInfo launchInfo)
         {
             ProjectilePool pool = _poolMap[id];
-            Projectile projectile = pool.Get((_) => { });
-            return projectile;
+            return pool.Get((projectile) => { 
+                projectile.transform.position = launchInfo.Origin;
+                projectile.Launch(launchInfo.Velocity, launchInfo.Gravity, launchInfo.Shooter);
+            });
         }
         
         /**

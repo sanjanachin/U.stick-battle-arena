@@ -1,23 +1,50 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(UsableItem))]
-    public class RangedWeapon : MonoBehaviour
+    public abstract class RangedWeapon : UsableItem
     {
-        public float BulletGravity { get => _bulletGravity; }
-        public float BulletLifespan { get => _bulletLifespan; }
-        public Vector2 BulletVelocity { get => _bulletVelocity; }
-        
-        [SerializeField] protected GameplayService _service;
-        
-        [SerializeField] protected UsableItem _usableItem;
         [SerializeField] protected Transform _shootingPoint;
-        [SerializeField] protected ProjectileID _projectileID;
+        [SerializeField] protected Vector2 _velocity;
+        [SerializeField] protected float _gravity;
+        
+        [SerializeField] private ProjectileID _projectileID;
+        
+        protected void Launch(PlayerID shooter)
+        {
+            LaunchInfo launchInfo = new LaunchInfo(
+                _shootingPoint.position,
+                _velocity * _shootingPoint.localScale.x,
+                _gravity,
+                shooter
+            );
 
-        [Header("Shooting Settings")]
-        [SerializeField] private Vector2 _bulletVelocity;
-        [SerializeField] private float _bulletGravity;
-        [SerializeField] private float _bulletLifespan;
+            Launch(shooter, launchInfo);
+        }
+        
+        protected void Launch(PlayerID shooter, LaunchInfo launchInfo)
+        {
+            _service.ProjectileManager.SpawnAndLaunch(_projectileID, launchInfo);
+            _service.AudioManager.PlayAudio(_audioOnUse);
+            
+            ReduceDurability(1);
+        }
+        
+        public struct LaunchInfo
+        {
+            public Vector3 Origin { get; private set; }
+            public Vector2 Velocity { get; private set; }
+            public float Gravity { get; private set; }
+            public PlayerID Shooter { get; private set; }
+
+            public LaunchInfo(Vector3 origin, Vector2 velocity, float gravity, PlayerID shooter)
+            {
+                Origin = origin;
+                Velocity = velocity;
+                Gravity = gravity;
+                Shooter = shooter;
+            }
+        }
     }
 }

@@ -74,8 +74,6 @@ GameObject:
   - component: {fileID: 5538143957227390030}
   - component: {fileID: 8174921541955324987}
   - component: {fileID: 7829815550811239036}
-  - component: {fileID: 8886803646341427195}
-  - component: {fileID: 6148107051136876358}
   - component: {fileID: 3495436881692594692}
   m_Layer: 0
   m_Name: Sniper
@@ -148,37 +146,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8886803646341427195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6448820834151174437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06de7de47dc7499cb853ca69556acb49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6148107051136876358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6448820834151174437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fab3e6986754e8e9f9f4b0db74e9acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 21300000, guid: 803b0b9bfc1fd824aae8423bfbab83b4, type: 3}
-  _transform: {fileID: 0}
-  _pickable: {fileID: 8886803646341427195}
-  _id: 3
-  _maxDurability: 2
-  _durability: 2
 --- !u!114 &3495436881692594692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,12 +159,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _usableItem: {fileID: 6148107051136876358}
+  _icon: {fileID: 0}
+  _audioOnUse: 0
+  _audioOnEquip: 0
+  _id: 0
+  _maxDurability: 0
+  _durability: 0
   _shootingPoint: {fileID: 2005636559043271077}
+  _velocity: {x: 0, y: 0}
+  _gravity: 0
   _projectileID: 2
-  _bulletVelocity: {x: 70, y: 0}
-  _bulletGravity: 0
-  _bulletLifespan: 2
 --- !u!1 &7783170079757629830
 GameObject:
   m_ObjectHideFlags: 0

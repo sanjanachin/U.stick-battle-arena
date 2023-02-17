@@ -5,34 +5,9 @@ namespace Game
 {
     public class Pistol : RangedWeapon
     {
-        private void Awake()
+        private void Start()
         {
-            _usableItem = GetComponent<UsableItem>();
-            _usableItem.OnUseButtonDown += Shoot;
-            _usableItem.OnSwitchTo += PlaySwitchSound;
-        }
-        
-        private void Shoot(PlayerController executor)
-        {
-            Projectile bullet = _service.ProjectileManager.
-                SpawnProjectile(_projectileID);
-
-            bullet.transform.position = _shootingPoint.position;
-
-            // flip velocity if facing different direction
-            Vector2 velocity = BulletVelocity;
-            if (_usableItem.Player.FacingLeft)
-                velocity = new Vector2(-velocity.x, velocity.y);
-            
-            bullet.Launch(_projectileID, velocity, executor, BulletGravity, BulletLifespan);
-            _service.AudioManager.PlayAudio(AudioID.PistolUse);
-            
-            _usableItem.ReduceDurability(1);
-        }
-
-        private void PlaySwitchSound()
-        {
-            _service.AudioManager.PlayAudio(AudioID.PistolSwitch);
+            OnItemUseDown += Launch;
         }
     }
 }

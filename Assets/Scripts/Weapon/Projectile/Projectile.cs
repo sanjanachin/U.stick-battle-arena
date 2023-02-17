@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Game.Player;
@@ -10,99 +9,84 @@ namespace Game
      * certain velocity and gravity
      */
     [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour
     {
-        /**
-         * Invoked on launched
-         */
-        public event UnityAction OnLaunch = delegate { };
-        /**
-         * Invoked on hitting a player
-         */
-        // TODO: make <PlayerController, PlayerController> a struct with damage/attack detail
-        public event UnityAction<PlayerController, PlayerController> OnHitPlayer = delegate { };
-        public event UnityAction OnHitStage = delegate { };
-        public event UnityAction<Projectile> OnHitProjectile = delegate { };
+        public event UnityAction OnHitStage = () => { };
+        public event UnityAction<Projectile> OnHitProjectile = (_) => { };
+        public event UnityAction<DamageInfo> OnHitPlayer = (_) => { };
+        public event UnityAction OnLaunch = () => { };
+
+        public Rigidbody2D Rigidbody => _rigidbody;
         
-        public Vector2 Velocity => _rigidbody.velocity;
-        public float Gravity => _rigidbody.gravityScale;
-
-        [SerializeField] private GameplayService _service;
-        [SerializeField] private float _lifespan;
-        [SerializeField] private ProjectileID _id;
-
-        private PlayerController _executor;
-
-        private Collider2D _collider;
         private Rigidbody2D _rigidbody;
+        private Collider2D _collider;
+        private Transform _transform;
+        private PlayerID _shooter;
+
+        [SerializeField] protected GameplayService _service;
+        
+        [SerializeField] protected int _damage;
+        [SerializeField] protected int _score;
+        [SerializeField] protected ProjectileID _id;
+
+        [SerializeField] private bool _hit = false;
 
         private void Awake()
         {
-            _collider = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
-        }
-        
-        private void Update()
-        {
-            if (!isActiveAndEnabled) return;
-
-            // countdown and destroy bullet 
-            if (_lifespan > 0)
-            {
-                _lifespan -= Time.deltaTime;
-            } 
-            else 
-            {
-                ReturnToPool();
-            }
+            _collider = GetComponent<Collider2D>();
+            _transform = transform;
         }
 
-        /**
-         * Launch the projectile with provided values
-         */
-        public void Launch(ProjectileID id, Vector2 velocity, PlayerController executor, float gravity, float lifespan)
+        public void Launch(Vector2 velocity, float gravity, PlayerID shooter)
         {
-            _executor = executor;
+            _shooter = shooter;
             _rigidbody.velocity = velocity;
             _rigidbody.gravityScale = gravity;
-            _lifespan = lifespan;
-            _id = id;
             
             OnLaunch.Invoke();
         }
 
+        private void Reset()
+        {
+            _hit = false;
+            OnHitStage = () => { };
+            OnHitProjectile = (_) => { };
+            OnHitPlayer = (_) => { };
+            OnLaunch = () => { };
+        }
+        
         /**
          * Return this Object to the pool
          */
         public void ReturnToPool()
         {
-            _service.ProjectileManager.ReturnProjectile(_id, this);
+            _service.ProjectileManager.ReturnProjectile(_id, null);
+            Reset();
         }
 
-        // called on the projectile collides with a collider
-        private void Hit(PlayerController player)
+        public DamageInfo CreateDamageInfo(PlayerID target)
         {
-            OnHitPlayer.Invoke(player, _executor);
+            return new DamageInfo(
+                _shooter,
+                target,
+                _damage,
+                this);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            if (!enabled) return;
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
-            if (player != null)
-            {
-                Hit(player);
-                return;
-            }
-
-            if (projectile != null)
-            {
-                OnHitProjectile.Invoke(projectile);
-                return;
-            }
+            // if already hit something, ignore rest of the collision
+            if (_hit) return;
             
-            OnHitStage.Invoke();
+            PlayerStat target = col.gameObject.GetComponent<PlayerStat>();
+            if (target != null) OnHitPlayer.Invoke(CreateDamageInfo(target.ID));
+ 
+            Projectile projectile = col.gameObject.GetComponent<Projectile>();
+            if (projectile != null) OnHitProjectile.Invoke(projectile);
+
+            if (target != null && projectile != null) OnHitStage.Invoke();
+            _hit = true;
         }
     }
 }

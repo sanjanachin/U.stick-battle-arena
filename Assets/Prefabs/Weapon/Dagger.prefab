@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4961244621800134782}
   - component: {fileID: 4961244621800134769}
   - component: {fileID: 4961244621800134768}
-  - component: {fileID: 4961244621800134773}
-  - component: {fileID: 4961244621800134770}
   - component: {fileID: 4961244621800134771}
   m_Layer: 0
   m_Name: Dagger
@@ -84,37 +82,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4961244621800134773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961244621800134783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06de7de47dc7499cb853ca69556acb49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4961244621800134770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961244621800134783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fab3e6986754e8e9f9f4b0db74e9acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 21300000, guid: a14979d2b0467b14abf4467f248460fb, type: 3}
-  _transform: {fileID: 0}
-  _pickable: {fileID: 4961244621800134773}
-  _id: 1
-  _maxDurability: 3
-  _durability: 3
 --- !u!114 &4961244621800134771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,12 +95,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _usableItem: {fileID: 4961244621800134770}
-  _hitPlayer: {fileID: 0}
-  _rayCastDist: 1
-  _rayCastRadius: 0.3
+  _icon: {fileID: 0}
+  _audioOnUse: 0
+  _audioOnEquip: 0
+  _id: 0
+  _maxDurability: 0
+  _durability: 0
   _damage: 3
-  _score: 0
+  _rayCastRadius: 0.3
+  _hitBoxOrigin: {fileID: 0}
 --- !u!1 &4961244622899746949
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,129 +10,61 @@ namespace Game
      * "use" button
      * Rely on Pickable component to be pick up by a player and to be used
      */
-    [RequireComponent(typeof(Pickable))]
-    public class UsableItem : MonoBehaviour
+    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
+    public abstract class UsableItem : MonoBehaviour
     {
-        /**
-         * Invoked when the player holding this item pressed the use button
-         */
-        public event UnityAction<PlayerController> OnUseButtonDown = delegate {  }; 
-        /**
-         * Invoked when the player holding this item released the use button
-         */
-        public event UnityAction<PlayerController> OnUseButtonUp = delegate {  };
-        /**
-         * Invoked when the durability of this item reaches 0
-         */
-        public event UnityAction<UsableItem> OnBreak = delegate {  };
-        /**
-         * Invoked when durability of the item change
-         * 1st arg: the item
-         */
-        public event UnityAction<UsableItem> OnDurabilityChange = delegate {  };
-        /**
-         * Invoked when the current weapon is switched to.
-         */
-        public event UnityAction OnSwitchTo = delegate { }; 
-        public event UnityAction OnReturn = delegate {  };
-
-        public PlayerController Player { get => _player; }
-        public float DurabilityPercentage { get => (float) _durability / _maxDurability; }
-        public Sprite Icon { get => _icon; }
+        public UsableItemID ID => _id;
+        public Sprite Icon => _icon;
+        public int Durability => _durability;
+        public float DurabilityPercent => (float) _durability / _maxDurability;
         
-        private PlayerController _player;
+        public event UnityAction OnPickedUp = () => { };
+        public event UnityAction<PlayerID> OnItemUseDown = (_) => { };
+        public event UnityAction<PlayerID> OnItemUseUp = (_) => { };
+        public event UnityAction<PlayerID> OnHold = (_) => { };
+        public event UnityAction<PlayerID> OnEquip = (_) => { };
+        public event UnityAction<UsableItem> OnDurabilityChange = (_) => { };
+        public event UnityAction OnReturn = () => { };
+        public event UnityAction OnBreak = () => { };
 
-        [SerializeField] private GameplayService _service;
-        [SerializeField] private Sprite _icon;
-        [SerializeField] private Transform _transform;
-        [SerializeField] private Pickable _pickable;
+        [SerializeField] protected GameplayService _service;
+        [SerializeField] protected Sprite _icon;
+        [SerializeField] protected AudioID _audioOnUse;
+        [SerializeField] protected AudioID _audioOnEquip;
+
+        private Rigidbody2D _rigidbody;
+        private Collider2D _collider;
+        private Transform _transform;
+
         [SerializeField] private UsableItemID _id;
         [SerializeField] private int _maxDurability;
         [SerializeField] private int _durability;
-        private float _lifespan;
-        private bool _picked => _player != null;
-        private bool _equipped = false;
 
-        protected virtual void Awake()
+        private void Awake()
         {
-            _transform = GetComponent<Transform>();
-            _pickable = GetComponent<Pickable>();
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<Collider2D>();
+            _transform = transform;
+
+            OnHold += (_) => gameObject.SetActive(false);
+            OnEquip += (_) => gameObject.SetActive(true);
+        }
+
+        private void Reset()
+        {
             _durability = _maxDurability;
+            OnPickedUp = () => { };
+            OnItemUseDown = (_) => { };
+            OnItemUseUp = (_) => { };
+            OnHold = (_) => { };
+            OnEquip = (_) => { };
+            OnReturn = () => { };
+            OnDurabilityChange = (_) => { };
+            OnBreak = () => { };
 
-            _pickable.OnPicked += RegisterToPlayer;
-        }
-
-        private void Update()
-        {
-            if (!isActiveAndEnabled || _picked) return;
-            
-            if (_lifespan > 0)
-            {
-                _lifespan -= Time.deltaTime;
-            }
-            else
-            {
-                ReturnToPool();
-            }
+            EnablePhysics();
         }
 
-        private void DisablePhysics()
-        {
-
-            _pickable.Collider.enabled = false;
-            _pickable.Rigidbody.velocity = Vector2.zero;
-            _pickable.Rigidbody.isKinematic = true;
-        }
-        
-        private void EnablePhysics()
-        {
-            _pickable.Collider.enabled = true;
-            _pickable.Rigidbody.isKinematic = false;
-        }
-        
-        // hook the player's events and disable physics to be held 
-        private void RegisterToPlayer(PlayerController player)
-        {
-            player.OnItemUseDown += HandleItemUseDown;
-            player.OnItemUseUp += HandleItemUseUp;
-            DisablePhysics();
-            _player = player;
-            player.GetComponent<PlayerInventory>().PickUpItem(this);
-        }
-
-        private void HandleItemUseDown()
-        {
-            if (!_equipped) return;
-            OnUseButtonDown.Invoke(_player);
-        }
-        
-        private void HandleItemUseUp()
-        {
-            if (!_equipped) return;
-            OnUseButtonUp.Invoke(_player);
-        }
-
-        /**
-         * remove hooks to the player and deactivate the gameObject
-         * used for item switching
-         */
-        public void UnEquip()
-        {
-            _equipped = false;
-            gameObject.SetActive(false);
-        }
-        
-        /**
-         * hooks to the player and activate the gameObject
-         * used for item switching
-         */
-        public void Equip()
-        {
-            _equipped = true;
-            gameObject.SetActive(true);
-            OnSwitchTo.Invoke();
-        }
-        
         /**
          * set the parent of this gameObject and reset local position
          */
@@ -141,43 +73,47 @@ namespace Game
             _transform.SetParent(parent, false);
             _transform.localPosition = Vector3.zero;
         }
+        
+        private void DisablePhysics()
+        {
+            _collider.enabled = false;
+            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.isKinematic = true;
+        }
+        
+        private void EnablePhysics()
+        {
+            _collider.enabled = true;
+            _rigidbody.isKinematic = false;
+        }
 
-        private void DeregisterFromPlayer()
+        public void ItemUseDown(PlayerID itemUser) => OnItemUseDown.Invoke(itemUser);
+        public void Hold(PlayerID itemUser) => OnHold.Invoke(itemUser);
+
+        public void Equip(PlayerID itemUser)
         {
-            if (!_picked) return;
-            _player.OnItemUseDown -= HandleItemUseDown;
-            _player.OnItemUseUp -= HandleItemUseUp;
-            _player.GetComponent<PlayerInventory>().DumpItem(this);
-            _player = null;
+            _service.AudioManager.PlayAudio(_audioOnEquip);
+            OnEquip.Invoke(itemUser);
         }
         
-        public void ReturnToPool()
+        public void ItemUseUp(PlayerID itemUser) => OnItemUseUp.Invoke(itemUser);
+
+        public void PickUpBy(Transform itemHolder)
         {
-            EnablePhysics();
-            _equipped = false;
-            _durability = _maxDurability;
-            gameObject.SetActive(false);
-            _service.UsableItemManager.ReturnUsableItem(_id, this);
-            OnReturn.Invoke();
+            DisablePhysics();
+            SetAndMoveToParent(itemHolder);
+            OnPickedUp.Invoke();
         }
-        
-        public void IncreaseDurability(int value) => _durability += value;
 
         public void ReduceDurability(int value)
         {
             _durability -= value;
             OnDurabilityChange.Invoke(this);
-            if (_durability <= 0)
-            {
-                OnBreak.Invoke(this);
-                DeregisterFromPlayer();
-                ReturnToPool();
-            }
-        }
-
-        public void Spawn(float lifespan)
-        {
-            _lifespan = lifespan;
+            if (_durability > 0) return;
+            OnBreak.Invoke();
+            OnReturn.Invoke();
+            _service.UsableItemManager.ReturnUsableItem(_id, null);
+            Reset();
         }
     }
 }
