@@ -5,7 +5,7 @@ namespace Game
 {
     public class Pistol : RangedWeapon
     {
-        private void Start()
+        protected override void Initialize()
         {
             OnItemUseDown += Launch;
         }

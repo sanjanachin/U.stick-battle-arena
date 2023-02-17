@@ -76,6 +76,7 @@ namespace Game
         {
             // if already hit something, ignore rest of the collision
             if (_hit) return;
+            if (!isActiveAndEnabled) return;
             _hit = true;
 
             PlayerStat target = col.gameObject.GetComponent<PlayerStat>();

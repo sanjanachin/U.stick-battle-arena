@@ -9,7 +9,7 @@ namespace Game
         [SerializeField] private bool _pulling;
         [SerializeField] private float _pull;
 
-        private void Start()
+        protected override void Initialize()
         {
             OnItemUseDown += (_) => Pull();
             OnItemUseUp += Release;

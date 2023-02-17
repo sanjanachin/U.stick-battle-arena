@@ -11,11 +11,11 @@ namespace Game
         private bool _shooting;
         private PlayerID _shooter;
         
-        private void Start()
+        protected override void Initialize()
         {
             OnItemUseDown += Shoot;
             OnItemUseUp += (_) => Stop();
-            OnBreak += Stop;
+            OnBreak += (_) => Stop();
             OnHold += (_) => Stop();
         }
 

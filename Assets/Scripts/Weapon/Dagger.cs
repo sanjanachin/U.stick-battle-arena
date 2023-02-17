@@ -4,7 +4,7 @@ namespace Game
 {
     public class Dagger : MeleeWeapon
     {
-        private void Start()
+        protected override void Initialize()
         {
             OnItemUseDown += Attack;
         }

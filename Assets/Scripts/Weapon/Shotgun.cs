@@ -9,7 +9,7 @@ namespace Game
         // for creating spread of shotgun bullets
         [SerializeField] private float _yOffset;
         
-        private void Start()
+        protected override void Initialize()
         {
             OnItemUseDown += Shoot;
         }

@@ -77,6 +77,13 @@ namespace Game.Player
             EquippedItem.ItemUseUp(_playerStat.ID);
         }
 
+        private void ItemBreak(UsableItem item)
+        {
+            item.OnBreak -= ItemBreak;
+            if (item == EquippedItem) _inventory.Item1 = null;
+            if (item == HeldItem) _inventory.Item2 = null;
+        }
+
         private void PickUpItem(UsableItem item)
         {
             if (IsFull) return;
@@ -85,11 +92,13 @@ namespace Game.Player
             {
                 _inventory.Item1 = item;
                 _inventory.Item1.Equip(_playerStat.ID);
+                _inventory.Item1.OnBreak += ItemBreak;
                 OnItemEquip.Invoke(this);
                 return;
             }
 
             _inventory.Item2 = item;
+            _inventory.Item2.OnBreak += ItemBreak;
             SwitchItem();
         }
 

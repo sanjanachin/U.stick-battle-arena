@@ -23,7 +23,7 @@ namespace Game
         public event UnityAction<PlayerID> OnEquip = (_) => { };
         public event UnityAction<UsableItem> OnDurabilityChange = (_) => { };
         public event UnityAction OnReturn = () => { };
-        public event UnityAction OnBreak = () => { };
+        public event UnityAction<UsableItem> OnBreak = (_) => { };
 
         [SerializeField] protected GameplayService _service;
         [SerializeField] protected Sprite _icon;
@@ -46,7 +46,12 @@ namespace Game
 
             OnHold += (_) => gameObject.SetActive(false);
             OnEquip += (_) => gameObject.SetActive(true);
+            
+            Reset();
         }
+
+
+        protected abstract void Initialize();
 
         private void Reset()
         {
@@ -58,9 +63,10 @@ namespace Game
             OnEquip = (_) => { };
             OnReturn = () => { };
             OnDurabilityChange = (_) => { };
-            OnBreak = () => { };
+            OnBreak = (_) => { };
 
             EnablePhysics();
+            Initialize();
         }
 
         /**
@@ -108,7 +114,7 @@ namespace Game
             _durability -= value;
             OnDurabilityChange.Invoke(this);
             if (_durability > 0) return;
-            OnBreak.Invoke();
+            OnBreak.Invoke(this);
             OnReturn.Invoke();
             _service.UsableItemManager.ReturnUsableItem(_id, this);
             Reset();
