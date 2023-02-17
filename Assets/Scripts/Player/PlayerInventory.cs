@@ -1,8 +1,5 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using Object = System.Object;
 
 namespace Game.Player
 {
@@ -40,20 +37,24 @@ namespace Game.Player
 
         private void SwitchItem()
         {
+            bool equipped = false;
+            bool held = false;
             if (EquippedItem != null)
             {
                 EquippedItem.Hold(_playerStat.ID);
-                OnItemHold.Invoke(this);
+                held = true;
             }
 
             if (HeldItem != null)
             {
                 HeldItem.Equip(_playerStat.ID);
-                OnItemEquip.Invoke(this);
+                equipped = true;
             }
             
             _inventory = (_inventory.Item2, _inventory.Item1);
             OnItemSwitch.Invoke(this);
+            if (equipped) OnItemEquip.Invoke(this);
+            if (held) OnItemHold.Invoke(this);
         }
 
         private void ItemUseDown()
@@ -80,12 +81,8 @@ namespace Game.Player
                 return;
             }
 
-            _inventory.Item1.Hold(_playerStat.ID);
-            OnItemHold.Invoke(this);
-
             _inventory.Item2 = item;
-            _inventory.Item2.Equip(_playerStat.ID);
-            OnItemEquip.Invoke(this);
+            SwitchItem();
         }
 
         private void OnCollisionEnter2D(Collision2D col)
