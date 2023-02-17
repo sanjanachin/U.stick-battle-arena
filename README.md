@@ -46,6 +46,19 @@ The tests are handled by Unity TestRunner and can be launched through github act
   - Alternatively, click File > Build Settings open up a window allowing simply building the project
 ### Our goal
 Our goal is to ship a finished game with refined details and fun gameplay by the end of the quarter. Also, to gain group project and teamwork experience along the development process.
+### Use Cases
+- [x] Player eliminates another player and is rewarded
+ - We have a basic implementation so far where a player’s score is updated upon elimination
+- [x] Player uses the abilities (weapons)
+ - We have a variety of weapons currently in which each has its own unique characteristics. The player can successfully pick up weapons and deal damage to opposing players using the acquired abilities
+- [x] Player Navigates the main menu
+ - We have successfully implemented a menu system in which we can start and quit the game with plans to add and options menu in the final release
+- [x] Player starts a local match
+ - Players are successfully spawned into the game where they can actively acquire weapons spawned in and compete against each other
+- [ ] Player pauses in the middle of the game
+ - The pause menu we want to implement is still a work in progress to be added as a part of the final release
+- [x] Player moves on the map
+ - Players can successfully move with the arrow keys on the keyboard with plans to add custom keybinding for the final release.
 ### Repo layout
 - `/Asset`
   - The resources for the whole project including art assets, C# scripts, game prefabs, external packages, etc.

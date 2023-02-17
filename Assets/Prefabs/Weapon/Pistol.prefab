@@ -142,11 +142,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
+  _icon: {fileID: 21300000, guid: e6a6624ab013b8e44beddfa2668afb65, type: 3}
   _transform: {fileID: 0}
   _pickable: {fileID: 1822478864894748591}
   _id: 0
-  _maxDurability: 2
-  _durability: 2
+  _maxDurability: 5
+  _durability: 5
 --- !u!114 &1822478864894748586
 MonoBehaviour:
   m_ObjectHideFlags: 0

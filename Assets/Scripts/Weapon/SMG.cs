@@ -17,6 +17,7 @@ namespace Game
             _usableItem.OnUseButtonDown += Shoot;
             _usableItem.OnUseButtonUp += Stop;
             _usableItem.OnBreak += Break;
+            _usableItem.OnSwitchTo += PlaySwitchSound;
         }
 
         private void Update()
@@ -40,6 +41,9 @@ namespace Game
                     velocity = new Vector2(-velocity.x, velocity.y);
             
                 bullet.Launch(_projectileID, velocity, _executor, BulletGravity, BulletLifespan);
+                
+                _service.AudioManager.PlayAudio(AudioID.SMGUse);
+                
                 _usableItem.ReduceDurability(1);
 
                 _currTime = _fireInterval;
@@ -61,6 +65,11 @@ namespace Game
         private void Break(UsableItem usableItem)
         {
             _shooting = false;
+        }
+
+        private void PlaySwitchSound()
+        {
+            _service.AudioManager.PlayAudio(AudioID.SMGSwitch);
         }
     }
 }

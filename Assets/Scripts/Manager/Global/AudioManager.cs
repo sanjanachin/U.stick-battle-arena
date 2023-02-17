@@ -24,13 +24,13 @@ namespace Game
         private IEnumerator AudioTest()
         {
             yield return new WaitForSecondsRealtime(2);
-            PlayAudio(AudioID.TestingAudio);
+            // PlayAudio(AudioID.TestingAudio);
         }
 
         /**
          * Play audio clip with the default play setting
          */
-        public void PlayAudio(AudioID id) => PlayAudio(id, _audioDataSet[id].DefaultSetting);
+        public void PlayAudio(AudioID id) => PlayAudio(id, _audioDataSet[id].DefaultSetting); 
         
         /**
          * Play audio clip with the given play setting

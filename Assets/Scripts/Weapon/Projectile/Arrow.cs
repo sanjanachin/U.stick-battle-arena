@@ -52,7 +52,12 @@ namespace Game
         
         private void ReturnToPool()
         {
-            _projectile.ReturnToPool();
+            // added this if statement to prevent multi collisions (e.g., floor and player)
+            // that causes release of the same object twice
+            if (gameObject.activeSelf)
+            {
+                _projectile.ReturnToPool();
+            }
         }
         
         // wall / floor hits

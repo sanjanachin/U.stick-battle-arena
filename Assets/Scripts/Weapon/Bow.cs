@@ -15,6 +15,7 @@ namespace Game
             _usableItem.OnUseButtonUp += Release;
             _usableItem.OnUseButtonDown += Pull;
             _usableItem.OnReturn += CancelPull;
+            _usableItem.OnSwitchTo += PlaySwitchSound;
         }
 
         private void Update()
@@ -27,6 +28,7 @@ namespace Game
         private void Pull(PlayerController executor)
         {
             _pulling = true;
+            _service.AudioManager.PlayAudio(AudioID.BowPull);
         }
 
         private void CancelPull()
@@ -50,11 +52,18 @@ namespace Game
                 velocity = new Vector2(-velocity.x, velocity.y);
             
             arrow.Launch(_projectileID, _pull * velocity, executor, BulletGravity, BulletLifespan);
+            
+            _service.AudioManager.PlayAudio(AudioID.BowUse);
 
             _pulling = false;
             _pull = 0;
             
             _usableItem.ReduceDurability(1);
+        }
+
+        private void PlaySwitchSound()
+        {
+            _service.AudioManager.PlayAudio(AudioID.BowSwitch);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Game
         {
             _usableItem = GetComponent<UsableItem>();
             _usableItem.OnUseButtonDown += Slash;
+            _usableItem.OnSwitchTo += PlaySwitchSound;
         }
         
         // Preform a circle hitbox check
@@ -34,6 +35,8 @@ namespace Game
             _hitPlayer = target.GetComponent<PlayerController>();
             if (_hitPlayer != null)
                 HandleHit(target.GetComponent<PlayerController>(), executor);
+            
+            _service.AudioManager.PlayAudio(AudioID.DaggerUse);
             
             _usableItem.ReduceDurability(1);
         }
@@ -50,6 +53,11 @@ namespace Game
                     hit.Stat.ID,
                     _damage,
                     _usableItem));
+        }
+
+        private void PlaySwitchSound()
+        {
+            _service.AudioManager.PlayAudio(AudioID.DaggerSwitch);
         }
     }
 }
