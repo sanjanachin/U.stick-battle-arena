@@ -9,9 +9,11 @@ namespace Game.Player {
         // maxTilt and tiltSpeed control rate and maximum pitch of rotation effect while moving
         [SerializeField] private float _maxTilt = 4;
         [SerializeField] private float _tiltSpeed = 20;
-        // landAnimDuration controls the length of the landing animation
+        // LandAnimDuration controls the length of the landing animation
         [SerializeField] private float _landAnimDuration = .45f;
+		// Grab renderer
         [SerializeField] private SpriteRenderer _renderer;
+		// Grab animator
         [SerializeField] private Animator _anim;
 
         private IPlayerController _player;
