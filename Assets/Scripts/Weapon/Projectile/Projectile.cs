@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Game.Player;
+using UnityEngine.Assertions;
 
 namespace Game
 {
@@ -11,9 +12,21 @@ namespace Game
     [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour
     {
+        /**
+         * Invoked when the projectile hits the stage
+         */
         public event UnityAction OnHitStage = () => { };
+        /**
+         * Invoked when the projectile hits another projectile
+         */
         public event UnityAction<Projectile> OnHitProjectile = (_) => { };
+        /**
+         * Invoked when the projectile hits a player
+         */
         public event UnityAction<DamageInfo> OnHitPlayer = (_) => { };
+        /**
+         * Invoked when the projectile is launched
+         */
         public event UnityAction OnLaunch = () => { };
 
         public Rigidbody2D Rigidbody => _rigidbody;
@@ -38,8 +51,14 @@ namespace Game
             _transform = transform;
         }
 
+        /**
+         * Apply the given velocity and gravity to the projectile while
+         * keeping track of the shooter
+         */
         public void Launch(Vector2 velocity, float gravity, PlayerID shooter)
         {
+            
+            Assert.IsTrue(_hit == false);
             _shooter = shooter;
             _rigidbody.velocity = velocity;
             _rigidbody.gravityScale = gravity;
@@ -63,15 +82,6 @@ namespace Game
             Reset();
         }
 
-        public DamageInfo CreateDamageInfo(PlayerID target)
-        {
-            return new DamageInfo(
-                _shooter,
-                target,
-                _damage,
-                this);
-        }
-
         private void OnTriggerEnter2D(Collider2D col)
         {
             // if already hit something, ignore rest of the collision
@@ -86,6 +96,19 @@ namespace Game
             if (projectile != null) OnHitProjectile.Invoke(projectile);
 
             if (target == null && projectile == null) OnHitStage.Invoke();
+        }
+        
+        /**
+         * Creates a DamageInfo struct as if this projectile dealt damage to
+         * the target player.
+         */
+        public DamageInfo CreateDamageInfo(PlayerID target)
+        {
+            return new DamageInfo(
+                _shooter,
+                target,
+                _damage,
+                this);
         }
     }
 }

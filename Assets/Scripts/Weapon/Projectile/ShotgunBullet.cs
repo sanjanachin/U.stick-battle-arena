@@ -5,7 +5,6 @@ namespace Game
 {
     public class ShotgunBullet : Projectile
     {
-        
         private void Start()
         {
             OnHitPlayer += HandleHitPlayer;

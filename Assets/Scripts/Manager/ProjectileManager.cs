@@ -47,7 +47,7 @@ namespace Game
         }
 
         /**
-         * Get a projectile prefab from the pool and let the given
+         * Get a projectile prefab from the pool and launch it on the stage with the given launch info
          */
         public Projectile SpawnAndLaunch(ProjectileID id, RangedWeapon.LaunchInfo launchInfo)
         {
