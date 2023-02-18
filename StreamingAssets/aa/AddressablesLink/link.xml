@@ -8,12 +8,15 @@
     <type fullname="Game.Bow" preserve="all" />
     <type fullname="Game.Dagger" preserve="all" />
     <type fullname="Game.DataSet.GameModeLogicDataSetSO" preserve="all" />
+    <type fullname="Game.DataSet.ProjectileDataSetSO" preserve="all" />
+    <type fullname="Game.DataSet.UsableItemDataSetSO" preserve="all" />
     <type fullname="Game.GameplayManager" preserve="all" />
     <type fullname="Game.GameplayService" preserve="all" />
     <type fullname="Game.GameplayUIManager" preserve="all" />
     <type fullname="Game.GameService" preserve="all" />
     <type fullname="Game.GameSettingsSO" preserve="all" />
-    <type fullname="Game.Pickable" preserve="all" />
+    <type fullname="Game.GrenadeItem" preserve="all" />
+    <type fullname="Game.GrenadeProjectile" preserve="all" />
     <type fullname="Game.Pistol" preserve="all" />
     <type fullname="Game.PistolBullet" preserve="all" />
     <type fullname="Game.Player.PlayerController" preserve="all" />
@@ -22,7 +25,6 @@
     <type fullname="Game.PlayerInputReader" preserve="all" />
     <type fullname="Game.PlayerManager" preserve="all" />
     <type fullname="Game.PlayerSpawnPoint" preserve="all" />
-    <type fullname="Game.Projectile" preserve="all" />
     <type fullname="Game.ProjectileManager" preserve="all" />
     <type fullname="Game.Shotgun" preserve="all" />
     <type fullname="Game.ShotgunBullet" preserve="all" />
@@ -35,11 +37,10 @@
     <type fullname="Game.UI.UI_PlayerStatusPanel" preserve="all" />
     <type fullname="Game.UI_MainMenu" preserve="all" />
     <type fullname="Game.UI_MapSelection" preserve="all" />
-    <type fullname="Game.UsableItem" preserve="all" />
     <type fullname="Game.UsableItemManager" preserve="all" />
+    <type fullname="Game.DataSet.MonoBehaviourDataSetSO`2/PrefabDataSetEntry[Game.ProjectileID,Game.Projectile]" preserve="nothing" serialized="true" />
+    <type fullname="Game.DataSet.MonoBehaviourDataSetSO`2/PrefabDataSetEntry[Game.UsableItemID,Game.UsableItem]" preserve="nothing" serialized="true" />
     <type fullname="Game.PlayerManager/PlayerIDPlayerPair" preserve="nothing" serialized="true" />
-    <type fullname="Game.ProjectileManager/ProjectileIdPrefabPair" preserve="nothing" serialized="true" />
-    <type fullname="Game.UsableItemManager/UsableItemIdPrefabPair" preserve="nothing" serialized="true" />
     <type fullname="Game.AudioClipPlaySetting" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
