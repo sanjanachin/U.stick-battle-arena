@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 namespace Game.Player
 {
-    // TODO: item break handle
     /**
      * Represent the inventory of a player
      */
@@ -14,9 +13,25 @@ namespace Game.Player
         public UsableItem HeldItem => _inventory.Item2;
         public bool IsFull => _inventory.Item1 != null && _inventory.Item2 != null;
 
+        /**
+         * Invoked when an item is equipped,
+         * either when pick up or switching between weapons
+         */
         public event UnityAction<PlayerInventory> OnItemEquip = (_) => { };
+        /**
+         * Invoked when an item is held,
+         * either when replaced on pick up or switching between weapons
+         */
         public event UnityAction<PlayerInventory> OnItemHold = (_) => { };
+        /**
+         * Invoked when the items in the inventory is switched
+         * Notice that it also trigger if an item is pick up when there's a spot
+         * in the inventory and the player is holding an item
+         */
         public event UnityAction<PlayerInventory> OnItemSwitch = (_) => { };
+        /**
+         * Invoked when picking up an item
+         */
         public event UnityAction<PlayerInventory> OnItemPick = (_) => { };
         
         [SerializeField] private Transform _itemHolderTrans;
@@ -84,6 +99,15 @@ namespace Game.Player
             if (item == HeldItem) _inventory.Item2 = null;
         }
 
+        // Handle when picking up an item in three cases on the inventory
+        // 1. (null, null):
+        //      have no item at all, pick up and equip right away
+        // 2. (null, item):
+        //      currently not equipping any item, pick up and equip right away
+        // 3. (item, null):
+        //      try picking up item when equipping an item, switch the
+        //      equipped item to inventory slot. And pick up and equip right away 
+        // * Currently not auto picking up items when inventory is full
         private void PickUpItem(UsableItem item)
         {
             if (IsFull) return;

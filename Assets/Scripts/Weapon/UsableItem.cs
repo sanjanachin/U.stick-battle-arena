@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Game
@@ -7,6 +8,9 @@ namespace Game
      * Represent a item that can be used by the player using the
      * "use" button
      * Rely on Pickable component to be pick up by a player and to be used
+     * Every item and weapon on stage should inherit this class and operate on
+     * the provided events calls.
+     * The derived class should override the Initialize function to hook up events as needed
      */
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public abstract class UsableItem : MonoBehaviour
@@ -16,13 +20,38 @@ namespace Game
         public int Durability => _durability;
         public float DurabilityPercent => (float) _durability / _maxDurability;
         
+        /**
+         * Invoked when this item is picked up
+         */
         public event UnityAction OnPickedUp = () => { };
+        /**
+         * Invoked when the item use button on this item is down
+         */
         public event UnityAction<PlayerID> OnItemUseDown = (_) => { };
+        /**
+         * Invoked when the item use button on this item is up
+         */
         public event UnityAction<PlayerID> OnItemUseUp = (_) => { };
+        /**
+         * Invoked when this item is held by the player, which is switched into the inventory
+         */
         public event UnityAction<PlayerID> OnHold = (_) => { };
+        /**
+         * Invoked when this item is equipped by the player
+         * either when picked up or switched out of the inventory for use
+         */
         public event UnityAction<PlayerID> OnEquip = (_) => { };
+        /**
+         * Invoked when the durability has changed
+         */
         public event UnityAction<UsableItem> OnDurabilityChange = (_) => { };
+        /**
+         * Invoked when this item is returned to the pool
+         */
         public event UnityAction OnReturn = () => { };
+        /**
+         * Invoked when this item breaks, which is when durability <= 0
+         */
         public event UnityAction<UsableItem> OnBreak = (_) => { };
 
         [SerializeField] protected GameplayService _service;
@@ -50,12 +79,17 @@ namespace Game
             Reset();
         }
 
-
+        /**
+         * Every derived class should override this function to
+         * set up the needed event calls for its unique behavior
+         */
         protected abstract void Initialize();
 
         private void Reset()
         {
             _durability = _maxDurability;
+            // clear all event calls to prevent left over functions
+            // from the previous player, etc
             OnPickedUp = () => { };
             OnItemUseDown = (_) => { };
             OnItemUseUp = (_) => { };
@@ -91,17 +125,38 @@ namespace Game
             _rigidbody.isKinematic = false;
         }
 
+        /**
+         * called by the player inventory when the item use is down
+         * to trigger the event
+         */
         public void ItemUseDown(PlayerID itemUser) => OnItemUseDown.Invoke(itemUser);
+        
+        /**
+         * called by the player inventory when the item is held
+         * to trigger the event
+         */
         public void Hold(PlayerID itemUser) => OnHold.Invoke(itemUser);
 
+        /**
+         * called by the player inventory when the item is equipped
+         * to trigger the event
+         */
         public void Equip(PlayerID itemUser)
         {
             _service.AudioManager.PlayAudio(_audioOnEquip);
             OnEquip.Invoke(itemUser);
         }
         
+        /**
+         * called by the player inventory when the item use is up
+         * to trigger the event
+         */
         public void ItemUseUp(PlayerID itemUser) => OnItemUseUp.Invoke(itemUser);
 
+        /**
+         * called by the player inventory to set the item object
+         * state to attach to the player object
+         */
         public void PickUpBy(Transform itemHolder)
         {
             DisablePhysics();
@@ -109,6 +164,9 @@ namespace Game
             OnPickedUp.Invoke();
         }
 
+        /**
+         * Reduce the durability of the item by the given value
+         */
         public void ReduceDurability(int value)
         {
             _durability -= value;

@@ -8,6 +8,9 @@ namespace Game
     /**
      * Represent a projectile that is launch and travels with
      * certain velocity and gravity
+     * Every projectile on stage should inherit this class and operate on
+     * the provided events calls when needed.
+     * The derived class should override the Start function to hook up events as needed
      */
     [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour
@@ -57,7 +60,9 @@ namespace Game
          */
         public void Launch(Vector2 velocity, float gravity, PlayerID shooter)
         {
-            
+            #if UNITY_EDITOR_WIN
+                Assert.IsTrue(_hit == false);
+            #endif
             Assert.IsTrue(_hit == false);
             _shooter = shooter;
             _rigidbody.velocity = velocity;
