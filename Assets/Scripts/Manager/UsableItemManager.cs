@@ -15,6 +15,8 @@ namespace Game
         SMG = 5,
         Shotgun = 6,
         HandGrenade = 7,
+        BaseballBat = 8,
+        Spear = 9,
     }
     
     public class UsableItemManager : MonoBehaviour
