@@ -65,12 +65,14 @@ namespace Game.Player
             if (EquippedItem != null)
             {
                 EquippedItem.Hold(_playerStat.ID);
+                EquippedItem.MakeInvisible();
                 held = true;
             }
 
             if (HeldItem != null)
             {
                 HeldItem.Equip(_playerStat.ID);
+                HeldItem.MakeVisible();
                 equipped = true;
             }
             

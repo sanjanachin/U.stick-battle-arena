@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -56,6 +57,7 @@ namespace Game
 
         [SerializeField] protected GameplayService _service;
         [SerializeField] protected Sprite _icon;
+        [SerializeField] protected GameObject _visual;
         [SerializeField] protected AudioID _audioOnUse;
         [SerializeField] protected AudioID _audioOnEquip;
 
@@ -176,6 +178,16 @@ namespace Game
             OnReturn.Invoke();
             _service.UsableItemManager.ReturnUsableItem(_id, this);
             Reset();
+        }
+
+        public void MakeInvisible()
+        {
+            _visual.SetActive(false);
+        }
+
+        public void MakeVisible()
+        {
+            _visual.SetActive(true);
         }
     }
 }
