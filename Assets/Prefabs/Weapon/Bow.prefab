@@ -129,8 +129,6 @@ GameObject:
   - component: {fileID: 6693322614909361313}
   - component: {fileID: 6693322614909361246}
   - component: {fileID: 6693322614909361245}
-  - component: {fileID: 6693322614909361244}
-  - component: {fileID: 6693322614909361315}
   - component: {fileID: 6693322614909361247}
   m_Layer: 0
   m_Name: Bow
@@ -203,37 +201,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &6693322614909361244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6693322614909361312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06de7de47dc7499cb853ca69556acb49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6693322614909361315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6693322614909361312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fab3e6986754e8e9f9f4b0db74e9acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 21300000, guid: 1f21190ca9d1e8540b2a3a2e46002685, type: 3}
-  _transform: {fileID: 0}
-  _pickable: {fileID: 6693322614909361244}
-  _id: 2
-  _maxDurability: 10
-  _durability: 10
 --- !u!114 &6693322614909361247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,13 +214,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _usableItem: {fileID: 6693322614909361315}
+  _icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+  _visual: {fileID: 6693322615892266843}
+  _audioOnUse: 11
+  _audioOnEquip: 12
+  _id: 3
+  _maxDurability: 10
+  _durability: 10
   _shootingPoint: {fileID: 6693322615751488557}
-  _projectileID: 1
-  _bulletVelocity: {x: 10, y: 10}
-  _bulletGravity: 2
-  _bulletLifespan: 60
-  _maxPull: 1.5
+  _velocity: {x: 15, y: 15}
+  _gravity: 10
+  _projectileID: 2
+  _maxPull: 1
   _pulling: 0
   _pull: 0
 --- !u!1 &6693322615276670226

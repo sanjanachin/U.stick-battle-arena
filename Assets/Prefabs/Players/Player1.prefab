@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5787936544196533425}
   - component: {fileID: -7537424052761003295}
   - component: {fileID: 7112100993949861734}
-  - component: {fileID: 6921122243771428646}
+  - component: {fileID: -5133869870670140662}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -111,8 +111,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2522113370557485076}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1812054, y: 3.784874, z: -0.09136713}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -189,7 +189,7 @@ MonoBehaviour:
   _jumpBuffer: 0.1
   _jumpEndEarlyGravityModifier: 3
   _freeColliderIterations: 10
---- !u!114 &6921122243771428646
+--- !u!114 &-5133869870670140662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,9 +202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemHolderTrans: {fileID: 1360139175421113770}
-  _equippedItem: {fileID: 0}
-  _holdItem: {fileID: 0}
-  _playerController: {fileID: 7112100993949861734}
 --- !u!1 &3158841145584515554
 GameObject:
   m_ObjectHideFlags: 0

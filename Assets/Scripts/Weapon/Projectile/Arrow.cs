@@ -1,68 +1,38 @@
-﻿using System;
-using Game.Player;
+﻿using Game.Player;
 using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Projectile))]
-    public class Arrow : MonoBehaviour
+    public class Arrow : Projectile
     {
-        [SerializeField] private GameplayService _service;
-        [SerializeField] private Projectile _projectile;
-        [SerializeField] private Pickable _pickable;
-        [SerializeField] private int _damage;
-        [SerializeField] private float _score;
         [SerializeField] private Transform _visualTransform;
         
-        private void Awake()
+        private void Start()
         {
-            _projectile = GetComponent<Projectile>();
-            _pickable = GetComponent<Pickable>();
-            _projectile.OnHitPlayer += HandleHitPlayer;
-            _projectile.OnHitStage += HandleHitStage;
-            _projectile.OnHitProjectile += HandleHitProjectile;
+            OnHitPlayer += HandleHitPlayer;
+            OnHitStage += ReturnToPool;
+            OnHitProjectile += (_) => ReturnToPool();
         }
 
         private void Update()
         {
             // rotate arrow based on velocity
-            Vector2 v = _pickable.Rigidbody.velocity;
+            Vector2 v = Rigidbody.velocity;
             _visualTransform.rotation = Quaternion.AngleAxis(
                 Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg, 
                 Vector3.forward);
         }
 
-        private void HandleHitPlayer(PlayerController target, PlayerController dealer)
+        private void HandleHitPlayer(DamageInfo damageInfo)
         {
-            if (target != dealer)
-            {
-                // Increase score of the dealer if hit
-                _service.PlayerManager.IncreaseScore(dealer.Stat.ID, _score);
-                // Deduct health of the hit player
-                target.Stat.DeductHealth(
-                    dealer.Stat.ID, 
-                    new DamageInfo(
-                        dealer.Stat.ID,
-                        target.Stat.ID,
-                        _damage,
-                        null));
-                ReturnToPool();
-            }
-        }
-        
-        private void ReturnToPool()
-        {
-            // added this if statement to prevent multi collisions (e.g., floor and player)
-            // that causes release of the same object twice
-            if (gameObject.activeSelf)
-            {
-                _projectile.ReturnToPool();
-            }
-        }
-        
-        // wall / floor hits
-        private void HandleHitStage() => ReturnToPool();
+            if (damageInfo.Dealer == damageInfo.Target) return;
 
-        private void HandleHitProjectile(Projectile other) => ReturnToPool();
+            // Increase score of the dealer if hit
+            _service.PlayerManager.IncreaseScore(damageInfo.Dealer, _score);
+            // Deduct health of the hit player
+            _service.PlayerManager.
+                GetPlayerStat(damageInfo.Target).DeductHealth(damageInfo);
+            ReturnToPool();
+        }
     }
 }

@@ -43,8 +43,6 @@ GameObject:
   - component: {fileID: 1822478864894748588}
   - component: {fileID: 1822478864894748585}
   - component: {fileID: 1822478864894748584}
-  - component: {fileID: 1822478864894748591}
-  - component: {fileID: 1822478864894748590}
   - component: {fileID: -2050175179094586164}
   m_Layer: 0
   m_Name: Shotgun
@@ -117,37 +115,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1822478864894748591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1822478864894748595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06de7de47dc7499cb853ca69556acb49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1822478864894748590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1822478864894748595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fab3e6986754e8e9f9f4b0db74e9acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
-  _transform: {fileID: 0}
-  _pickable: {fileID: 1822478864894748591}
-  _id: 5
-  _maxDurability: 2
-  _durability: 2
 --- !u!114 &-2050175179094586164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,12 +128,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _usableItem: {fileID: 1822478864894748590}
+  _icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+  _visual: {fileID: 1822478864894748595}
+  _audioOnUse: 6
+  _audioOnEquip: 7
+  _id: 6
+  _maxDurability: 9
+  _durability: 3
   _shootingPoint: {fileID: 1822478866356062737}
-  _projectileID: 4
-  _bulletVelocity: {x: 40, y: 0}
-  _bulletGravity: 0
-  _bulletLifespan: 0.5
+  _velocity: {x: 50, y: 0}
+  _gravity: 0
+  _projectileID: 5
   _bulletNumber: 3
   _yOffset: 4
 --- !u!1 &1822478866347210712

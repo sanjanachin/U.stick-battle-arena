@@ -37,10 +37,10 @@ namespace Game.Player
          * Deduct the health of the player by given damage;
          * set the the player ID of the dealer for kill bonus reference.
          */
-        public void DeductHealth(PlayerID lastDealer, DamageInfo damageInfo)
+        public void DeductHealth(DamageInfo damageInfo)
         {
             _health -= damageInfo.Damage;
-            _lastDamageDealer = lastDealer;
+            _lastDamageDealer = damageInfo.Dealer;
             OnHealthChange.Invoke(this);
             // Play damage sound only if player has remaining life
             // Otherwise play death SFX
@@ -77,15 +77,24 @@ namespace Game.Player
         public readonly PlayerID Dealer;
         public readonly PlayerID Target;
         public readonly int Damage;
-        public readonly UsableItem ItemUsed;
+        private readonly (UsableItem, Projectile) _source;
 
         public DamageInfo(
-            PlayerID dealer, PlayerID target, int damage, UsableItem itemUsed)
+            PlayerID dealer, PlayerID target, int damage, Projectile projectile)
         {
             Dealer = dealer;
             Target = target;
             Damage = damage;
-            ItemUsed = itemUsed;
+            _source = (null, projectile);
+        }
+        
+        public DamageInfo(
+            PlayerID dealer, PlayerID target, int damage, UsableItem usableItem)
+        {
+            Dealer = dealer;
+            Target = target;
+            Damage = damage;
+            _source = (usableItem, null);
         }
     }
 }
