@@ -39,6 +39,11 @@ The tests are handled by Unity TestRunner and can be launched through github act
   - A small window will appear with a list of tests
   - To run a particular test you can double click it in the list
   - To run all tests select 'Run All' in the top left of the Test Runner window
+### Adding tests
+- Have the project set to desired branch and open on Unity editor.
+- Select Window > General > Test Runner to run and view tests.
+- Add new test scripts or tests to existing scripts in the tests folder
+- Whene adding tests, editor mode is for tests that will run within the editor and play mode tests are tests that run only during game runtime.
 ### Building the project
   - make sure you open th project in Unity version `2021.3.16f1`
   - Checkout and pull the `main` branch 
