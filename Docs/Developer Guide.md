@@ -11,7 +11,7 @@ Adding to the project is done in a standardized [pull request workflow](https://
 - Since the GameCI takes a while to run, before submitting a pull request for your branch make sure all tests pass locally (refer below for info on running tests)
 - Do not approve pull requests that have not/ do not pass all tests in the GameCI (check actions tab)
 - Do not approve pull requests that you have not fully reviewed and built locally
-- Lastly, make sure all code follows the [C# style guide for Unity ](https://github.com/JimmyC7834/U.stick-battle-arena/blob/main/C%23%20style%20guide.md)
+- Lastly, make sure all code follows the [C# style guide for Unity ](https://github.com/JimmyC7834/U.stick-battle-arena/blob/Jimmy-reset-main-for-PR/Docs/C%23%20style%20guide.md)
 ### Bug Tracking And Reporting
 Bugs are reported to `JimmyC7834/U.stick-battle-arena` repo under the issues tab.
 - It is best to let the responsible for the feature to fix the bug. Please `@` the responsibility for your issue. You can find the responsible by looking through the PR records or the branch with the responsible's name.
