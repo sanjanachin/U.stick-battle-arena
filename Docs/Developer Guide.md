@@ -88,6 +88,9 @@ Our goal is to ship a finished game with refined details and fun gameplay by the
     - Probably no need to modify
   - `/Packages`
     - Contains folders of external packages
+- `/Docs`
+  - `/Reports`: Contains the weekly reports of the project
+  - Contains style guide and developer guide for the project
 - `/Package`
   - The unity default and extra packages that are used for our game.
   - DO NOT MODIFY MANUALLY
