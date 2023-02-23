@@ -8,7 +8,6 @@ namespace Game
     {
         [SerializeField] private GameplayService _service;
         [SerializeField] private UsableItemID _usableItemID;
-        [SerializeField] private float _spawnLifespan;
         
         [Header("Spawner Settings")]
         [SerializeField] private float _spawnInterval;
@@ -56,9 +55,6 @@ namespace Game
             // Get a weapon from the pool and set to the current location
             UsableItem weapon = _service.UsableItemManager.SpawnProjectile(_usableItemID);
             weapon.transform.position = transform.position;
-            
-            // Set the lifespan of this weapon
-            weapon.Spawn(_spawnLifespan);
         }
     }
 }

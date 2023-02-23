@@ -37,6 +37,7 @@ namespace Game
          */
         public void PlayAudio(AudioID id, AudioClipPlaySetting setting)
         {
+            if (id == AudioID.None) return;
             if (!_audioDataSet.ContainsID(id)) return;
             if (!_audioSources.ContainsKey(id))
             {

@@ -3,6 +3,6 @@ using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Game/DataSet/AudioClip")]
     public class AudioDataSetSO : DataSetSO<AudioID, AudioClipSO> { }
 }

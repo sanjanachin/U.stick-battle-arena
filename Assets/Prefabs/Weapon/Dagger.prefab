@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3404898215662358123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3189781468407678171}
+  m_Layer: 0
+  m_Name: HitBoxOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3189781468407678171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404898215662358123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.081, y: -0.174, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4961244621800134782}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4961244621800134783
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,8 +42,6 @@ GameObject:
   - component: {fileID: 4961244621800134782}
   - component: {fileID: 4961244621800134769}
   - component: {fileID: 4961244621800134768}
-  - component: {fileID: 4961244621800134773}
-  - component: {fileID: 4961244621800134770}
   - component: {fileID: 4961244621800134771}
   m_Layer: 0
   m_Name: Dagger
@@ -34,6 +63,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4961244622899746948}
+  - {fileID: 3189781468407678171}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,37 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4961244621800134773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961244621800134783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06de7de47dc7499cb853ca69556acb49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4961244621800134770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961244621800134783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fab3e6986754e8e9f9f4b0db74e9acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _icon: {fileID: 21300000, guid: a14979d2b0467b14abf4467f248460fb, type: 3}
-  _transform: {fileID: 0}
-  _pickable: {fileID: 4961244621800134773}
-  _id: 1
-  _maxDurability: 3
-  _durability: 3
 --- !u!114 &4961244621800134771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,12 +127,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _service: {fileID: 11400000, guid: d11d90276d601814a9e6fa01ec4f1a4b, type: 2}
-  _usableItem: {fileID: 4961244621800134770}
-  _hitPlayer: {fileID: 0}
-  _rayCastDist: 1
-  _rayCastRadius: 0.3
+  _icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
+  _visual: {fileID: 4961244622899746949}
+  _audioOnUse: 0
+  _audioOnEquip: 0
+  _id: 2
+  _maxDurability: 10
+  _durability: 10
   _damage: 3
-  _score: 0
+  _rayCastRadius: 0.3
+  _hitBoxOrigin: {fileID: 3189781468407678171}
 --- !u!1 &4961244622899746949
 GameObject:
   m_ObjectHideFlags: 0
