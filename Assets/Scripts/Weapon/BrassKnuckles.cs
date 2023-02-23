@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BaseballBat : MeleeWeapon
+    public class BrassKnuckles : MeleeWeapon
     {
         protected override void Initialize()
         {

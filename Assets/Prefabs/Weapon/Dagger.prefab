@@ -133,7 +133,11 @@ MonoBehaviour:
   _id: 2
   _maxDurability: 10
   _durability: 10
+  IsAvailable: 1
+  CooldownDuration: 0.5
   _damage: 3
+  _knockbackDirection: {x: 1, y: 0}
+  _knockback: 10
   _rayCastRadius: 0.3
   _hitBoxOrigin: {fileID: 3189781468407678171}
 --- !u!1 &4961244622899746949
