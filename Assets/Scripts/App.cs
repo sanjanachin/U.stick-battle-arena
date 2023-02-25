@@ -1,13 +1,13 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Game
 {
     public class App
     {
         private static readonly string GLOBALMANAGERS_PATH = $"GlobalManagers";
-        
+        private static readonly SceneID GLOBALMANAGERS_SCENEID = SceneID.GlobalManagers;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Bootstrap()
         {
@@ -18,6 +18,9 @@ namespace Game
             //
             // Object.DontDestroyOnLoad(app);
 
+            UnityEngine.SceneManagement.SceneManager.LoadScene(
+                GLOBALMANAGERS_SCENEID.ToString());
+            
             // temporary setting
             Application.targetFrameRate = 60;
         }

@@ -167,14 +167,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4afc3c622b169a4b806184d5c0a7b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameService:
-    m_AssetGUID: e6f021f86780f1d4293d31b4d110feaa
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _globalManagerScene:
-    m_AssetGUID: c31b9e29fa82d04478f74c16b6be671e
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _firstSceneToLoad: 0
+  _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
+  _firstSceneToLoad: 2
