@@ -17,6 +17,10 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: bc30821651496944091749be1946289f
   m_SerializeEntries:
+  - m_GUID: c31b9e29fa82d04478f74c16b6be671e
+    m_Address: Assets/Scenes/GlobalManagers.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: fe5c92ac80bd34e4ea30116d89ceba52
     m_Address: Assets/Scenes/Main Menu.unity
     m_ReadOnly: 0
@@ -39,10 +43,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 8c6fd4d44423e394283f05f9c8ee6710
     m_Address: Assets/Scenes/Map Selection Menu.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: c31b9e29fa82d04478f74c16b6be671e
-    m_Address: Assets/Scenes/GlobalManagers.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

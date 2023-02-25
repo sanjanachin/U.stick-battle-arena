@@ -12,11 +12,11 @@ namespace Game
         private static void Bootstrap()
         {
             // load globalManagers
-            GameObject app = Object.Instantiate(Resources.Load(GLOBALMANAGERS_PATH)) as GameObject;
-            if (app == null)
-                throw new ApplicationException();
-            
-            Object.DontDestroyOnLoad(app);
+            // GameObject app = Object.Instantiate(Resources.Load(GLOBALMANAGERS_PATH)) as GameObject;
+            // if (app == null)
+            //     throw new ApplicationException();
+            //
+            // Object.DontDestroyOnLoad(app);
 
             // temporary setting
             Application.targetFrameRate = 60;
