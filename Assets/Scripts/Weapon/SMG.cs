@@ -9,15 +9,14 @@ namespace Game
         [SerializeField] private float _fireInterval;
         private float _currTime;
         private bool _shooting;
-        private PlayerController _executor;
+        private PlayerID _shooter;
         
-        private void Awake()
+        protected override void Initialize()
         {
-            _usableItem = GetComponent<UsableItem>();
-            _usableItem.OnUseButtonDown += Shoot;
-            _usableItem.OnUseButtonUp += Stop;
-            _usableItem.OnBreak += Break;
-            _usableItem.OnSwitchTo += PlaySwitchSound;
+            OnItemUseDown += Shoot;
+            OnItemUseUp += (_) => Stop();
+            OnBreak += (_) => Stop();
+            OnHold += (_) => Stop();
         }
 
         private void Update()
@@ -30,46 +29,21 @@ namespace Game
             }
             else
             {
-                Projectile bullet = _service.ProjectileManager.
-                    SpawnProjectile(_projectileID);
-
-                bullet.transform.position = _shootingPoint.position;
-
-                // flip velocity if facing different direction
-                Vector2 velocity = BulletVelocity;
-                if (_usableItem.Player.FacingLeft)
-                    velocity = new Vector2(-velocity.x, velocity.y);
-            
-                bullet.Launch(_projectileID, velocity, _executor, BulletGravity, BulletLifespan);
-                
-                _service.AudioManager.PlayAudio(AudioID.SMGUse);
-                
-                _usableItem.ReduceDurability(1);
-
+                Launch(_shooter);
                 _currTime = _fireInterval;
             }
         }
 
-        private void Shoot(PlayerController executor)
+        private void Shoot(PlayerID shooter)
         {
             _shooting = true;
-            _executor = executor;
+            _shooter = shooter;
             _currTime = 0; // immediate shoot
         }
 
-        private void Stop(PlayerController executor)
+        private void Stop()
         {
             _shooting = false;
-        }
-
-        private void Break(UsableItem usableItem)
-        {
-            _shooting = false;
-        }
-
-        private void PlaySwitchSound()
-        {
-            _service.AudioManager.PlayAudio(AudioID.SMGSwitch);
         }
     }
 }

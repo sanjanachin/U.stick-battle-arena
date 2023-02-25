@@ -1,108 +1,119 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Game.Player;
+using UnityEngine.Assertions;
 
 namespace Game
 {
     /**
      * Represent a projectile that is launch and travels with
      * certain velocity and gravity
+     * Every projectile on stage should inherit this class and operate on
+     * the provided events calls when needed.
+     * The derived class should override the Start function to hook up events as needed
      */
     [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour
     {
         /**
-         * Invoked on launched
+         * Invoked when the projectile hits the stage
          */
-        public event UnityAction OnLaunch = delegate { };
+        public event UnityAction OnHitStage = () => { };
         /**
-         * Invoked on hitting a player
+         * Invoked when the projectile hits another projectile
          */
-        // TODO: make <PlayerController, PlayerController> a struct with damage/attack detail
-        public event UnityAction<PlayerController, PlayerController> OnHitPlayer = delegate { };
-        public event UnityAction OnHitStage = delegate { };
-        public event UnityAction<Projectile> OnHitProjectile = delegate { };
+        public event UnityAction<Projectile> OnHitProjectile = (_) => { };
+        /**
+         * Invoked when the projectile hits a player
+         */
+        public event UnityAction<DamageInfo> OnHitPlayer = (_) => { };
+        /**
+         * Invoked when the projectile is launched
+         */
+        public event UnityAction OnLaunch = () => { };
+
+        public Rigidbody2D Rigidbody => _rigidbody;
         
-        public Vector2 Velocity => _rigidbody.velocity;
-        public float Gravity => _rigidbody.gravityScale;
-
-        [SerializeField] private GameplayService _service;
-        [SerializeField] private float _lifespan;
-        [SerializeField] private ProjectileID _id;
-
-        private PlayerController _executor;
-
-        private Collider2D _collider;
         private Rigidbody2D _rigidbody;
+        private Collider2D _collider;
+        private Transform _transform;
+        private PlayerID _shooter;
+
+        [SerializeField] protected GameplayService _service;
+
+        [SerializeField] protected ProjectileID _id;
+        [SerializeField] protected int _damage;
+        [SerializeField] protected int _score;
+        [SerializeField] protected bool _hit = false;
+
 
         private void Awake()
         {
-            _collider = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
-        }
-        
-        private void Update()
-        {
-            if (!isActiveAndEnabled) return;
-
-            // countdown and destroy bullet 
-            if (_lifespan > 0)
-            {
-                _lifespan -= Time.deltaTime;
-            } 
-            else 
-            {
-                ReturnToPool();
-            }
+            _collider = GetComponent<Collider2D>();
+            _transform = transform;
         }
 
         /**
-         * Launch the projectile with provided values
+         * Apply the given velocity and gravity to the projectile while
+         * keeping track of the shooter
          */
-        public void Launch(ProjectileID id, Vector2 velocity, PlayerController executor, float gravity, float lifespan)
+        public void Launch(Vector2 velocity, float gravity, PlayerID shooter)
         {
-            _executor = executor;
+            #if UNITY_EDITOR_WIN
+                Assert.IsTrue(_hit == false);
+            #endif
+            Assert.IsTrue(_hit == false);
+            _shooter = shooter;
             _rigidbody.velocity = velocity;
             _rigidbody.gravityScale = gravity;
-            _lifespan = lifespan;
-            _id = id;
             
             OnLaunch.Invoke();
         }
 
+        // reset the value to initial value
+        // potentially need to reset events depend on later implementations
+        private void Reset()
+        {
+            _hit = false;
+        }
+        
         /**
          * Return this Object to the pool
          */
         public void ReturnToPool()
         {
             _service.ProjectileManager.ReturnProjectile(_id, this);
+            Reset();
         }
 
-        // called on the projectile collides with a collider
-        private void Hit(PlayerController player)
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            OnHitPlayer.Invoke(player, _executor);
+            // if already hit something, ignore rest of the collision
+            if (_hit) return;
+            if (!isActiveAndEnabled) return;
+            _hit = true;
+
+            PlayerStat target = col.gameObject.GetComponent<PlayerStat>();
+            if (target != null) OnHitPlayer.Invoke(CreateDamageInfo(target.ID));
+ 
+            Projectile projectile = col.gameObject.GetComponent<Projectile>();
+            if (projectile != null) OnHitProjectile.Invoke(projectile);
+
+            if (target == null && projectile == null) OnHitStage.Invoke();
         }
-
-        private void OnCollisionEnter2D(Collision2D collision)
+        
+        /**
+         * Creates a DamageInfo struct as if this projectile dealt damage to
+         * the target player.
+         */
+        public DamageInfo CreateDamageInfo(PlayerID target)
         {
-            if (!enabled) return;
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
-            if (player != null)
-            {
-                Hit(player);
-                return;
-            }
-
-            if (projectile != null)
-            {
-                OnHitProjectile.Invoke(projectile);
-                return;
-            }
-            
-            OnHitStage.Invoke();
+            return new DamageInfo(
+                _shooter,
+                target,
+                _damage,
+                this);
         }
     }
 }

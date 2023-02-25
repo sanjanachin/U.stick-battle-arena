@@ -1,132 +1,139 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using Object = System.Object;
 
 namespace Game.Player
 {
     /**
      * Represent the inventory of a player
      */
-    [RequireComponent(typeof(PlayerController))]
+    [RequireComponent(typeof(PlayerController), typeof(PlayerStat))]
     public class PlayerInventory : MonoBehaviour
     {
-        [SerializeField] private Transform _itemHolderTrans;
-        [SerializeField] private UsableItem _equippedItem;
-        [SerializeField] private UsableItem _holdItem;
-        [SerializeField] private PlayerController _playerController;
+        public UsableItem EquippedItem => _inventory.Item1;
+        public UsableItem HeldItem => _inventory.Item2;
+        public bool IsFull => _inventory.Item1 != null && _inventory.Item2 != null;
+
+        /**
+         * Invoked when an item is equipped,
+         * either when pick up or switching between weapons
+         */
+        public event UnityAction<PlayerInventory> OnItemEquip = (_) => { };
+        /**
+         * Invoked when an item is held,
+         * either when replaced on pick up or switching between weapons
+         */
+        public event UnityAction<PlayerInventory> OnItemHold = (_) => { };
+        /**
+         * Invoked when the items in the inventory is switched
+         * Notice that it also trigger if an item is pick up when there's a spot
+         * in the inventory and the player is holding an item
+         */
+        public event UnityAction<PlayerInventory> OnItemSwitch = (_) => { };
+        /**
+         * Invoked when picking up an item
+         */
+        public event UnityAction<PlayerInventory> OnItemPick = (_) => { };
         
-        /**
-         * Called when the item is switched
-         * 1st arg: the currently equipping item after switching
-         * 2nd arg: the hold item in inventory after switching
-         */
-        public event UnityAction<UsableItem, UsableItem> OnItemSwitched = (_, _) => { };
-        /**
-         * Called when an item is equipped to the player
-         * 1st arg: the equipped item
-         */
-        public event UnityAction<UsableItem> OnItemEquip = (_) => { };
-        /**
-         * Called when an item is unequipped from the player
-         * 1st arg: the unequipped item
-         */
-        public event UnityAction<UsableItem> OnItemUnEquip = (_) => { };
-        /**
-         * Called when picked an item
-         * 1st arg: the picked item
-         */
-        public event UnityAction<UsableItem> OnItemPick = (_) => { };
+        [SerializeField] private Transform _itemHolderTrans;
+        private PlayerController _playerController;
+        private PlayerStat _playerStat;
+        private (UsableItem, UsableItem) _inventory;
 
         private void Awake()
         {
             _playerController = GetComponent<PlayerController>();
-
-            _playerController.OnMovement += CheckAndFlip;
+            _playerStat = GetComponent<PlayerStat>();
+            
+            _playerController.OnItemUseDown += ItemUseDown;
+            _playerController.OnItemUseUp += ItemUseUp;
             _playerController.OnSwitchItem += SwitchItem;
-        }
-        
-        // flip the item holder when the player is facing different directions
-        private void CheckAndFlip()
-        {
-            _itemHolderTrans.localScale = new Vector3(
-                _playerController.FacingLeft ? 1 : -1, 1, 1);
+            _playerController.OnMovement += FlipItemHolder;
         }
 
-        // handle player's switch action, switch items in inventory
+        private void FlipItemHolder(Vector2 dir)
+        {
+            if (dir.x > 0)
+                _itemHolderTrans.localScale = Vector3.left + Vector3.up;
+            if (dir.x < 0)
+                _itemHolderTrans.localScale = Vector3.right + Vector3.up;
+        }
+
         private void SwitchItem()
         {
-            // do nothing if don't have another item
-            if (Object.Equals(_holdItem, null)) return;
-            
-            // switch
-            if (!Object.Equals(_equippedItem, null))
+            bool equipped = false;
+            bool held = false;
+            if (EquippedItem != null)
             {
-                _equippedItem.UnEquip();
-                OnItemUnEquip.Invoke(_equippedItem);
+                EquippedItem.Hold(_playerStat.ID);
+                EquippedItem.MakeInvisible();
+                held = true;
             }
 
-            _holdItem.Equip();
-            OnItemEquip.Invoke(_holdItem);
-            (_equippedItem, _holdItem) = (_holdItem, _equippedItem);
-            OnItemSwitched.Invoke(_equippedItem, _holdItem);
+            if (HeldItem != null)
+            {
+                HeldItem.Equip(_playerStat.ID);
+                HeldItem.MakeVisible();
+                equipped = true;
+            }
+            
+            _inventory = (_inventory.Item2, _inventory.Item1);
+            OnItemSwitch.Invoke(this);
+            if (equipped) OnItemEquip.Invoke(this);
+            if (held) OnItemHold.Invoke(this);
         }
 
-        // handle if the item is broken
-        // automatically equip the remaining item
-        public void DumpItem(UsableItem item)
+        private void ItemUseDown()
         {
-            // disable item
-            item.UnEquip();
-            OnItemUnEquip.Invoke(item);
-
-            if (item == _equippedItem)
-            {
-                _equippedItem = null;
-            }
-            else
-            {
-                _holdItem = null;
-            }
-
-            // switch the inventory weapon out if the player has one
-            SwitchItem();
+            if (EquippedItem == null) return;
+            EquippedItem.ItemUseDown(_playerStat.ID);
         }
         
-        /**
-         * Set the item to the player's item holder
-         * and updates player's inventory
-         */
-        public void PickUpItem(UsableItem item)
+        private void ItemUseUp()
         {
-            // check if currently holding an Item
-            if (_equippedItem != null)
-            {
-                if (_holdItem == null)
-                {
-                    // holding one item, but got an empty slot
-                    // set equipped item to holding equip pick up item 
-                    _holdItem = item;
-                    SwitchItem();
-                    // OnItemUnEquip.Invoke(_holdItem);
-                }
-                else
-                {
-                    // no empty slot, replace the item with equipped one
-                    _equippedItem.UnEquip();
-                    OnItemUnEquip.Invoke(_equippedItem);
-                    _equippedItem.ReturnToPool();
-                }
-            }
-            
-            _equippedItem = item;
-            item.Equip();
-            OnItemEquip.Invoke(item);
+            if (EquippedItem == null) return;
+            EquippedItem.ItemUseUp(_playerStat.ID);
+        }
 
-            // move the gameObject under the player's holder
-            item.SetAndMoveToParent(_itemHolderTrans);
-            OnItemPick.Invoke(item);
+        private void ItemBreak(UsableItem item)
+        {
+            item.OnBreak -= ItemBreak;
+            if (item == EquippedItem) _inventory.Item1 = null;
+            if (item == HeldItem) _inventory.Item2 = null;
+        }
+
+        // Handle when picking up an item in three cases on the inventory
+        // 1. (null, null):
+        //      have no item at all, pick up and equip right away
+        // 2. (null, item):
+        //      currently not equipping any item, pick up and equip right away
+        // 3. (item, null):
+        //      try picking up item when equipping an item, switch the
+        //      equipped item to inventory slot. And pick up and equip right away 
+        // * Currently not auto picking up items when inventory is full
+        private void PickUpItem(UsableItem item)
+        {
+            if (IsFull) return;
+            item.PickUpBy(_itemHolderTrans);
+            if (EquippedItem == null)
+            {
+                _inventory.Item1 = item;
+                _inventory.Item1.Equip(_playerStat.ID);
+                _inventory.Item1.OnBreak += ItemBreak;
+                OnItemEquip.Invoke(this);
+                return;
+            }
+
+            _inventory.Item2 = item;
+            _inventory.Item2.OnBreak += ItemBreak;
+            SwitchItem();
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            UsableItem item = col.gameObject.GetComponent<UsableItem>();
+            if (item == null) return;
+            PickUpItem(item);
+            OnItemPick.Invoke(this);
         }
     }
 }

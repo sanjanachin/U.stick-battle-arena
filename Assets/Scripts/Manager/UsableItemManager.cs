@@ -1,23 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.DataSet;
 using UnityEngine;
 
 namespace Game
 {
     public enum UsableItemID
     {
-        Pistol,
-        Dagger,
-        Bow,
-        Sniper,
-        SMG,
-        Shotgun,
-        HandGrenade,
+        Pistol = 1,
+        Dagger = 2,
+        Bow = 3,
+        Sniper = 4,
+        SMG = 5,
+        Shotgun = 6,
+        HandGrenade = 7,
     }
+    
     public class UsableItemManager : MonoBehaviour
     {
-        [SerializeField] private UsableItemIdPrefabPair[] _prefabEntries;
+        public static readonly UsableItemID[] UsableItemIDs =
+        {
+            UsableItemID.Bow, UsableItemID.Dagger, UsableItemID.Pistol, 
+            UsableItemID.Shotgun, UsableItemID.Sniper, UsableItemID.HandGrenade, UsableItemID.SMG
+        };
+        
+        [SerializeField] private UsableItemDataSetSO _usableItemData;
 
         private Dictionary<UsableItemID, GameObjectPool<UsableItem>> _poolmap;
 
@@ -25,13 +33,12 @@ namespace Game
         {
             _poolmap = new Dictionary<UsableItemID, GameObjectPool<UsableItem>>();
 
-            for (int i = 0; i < _prefabEntries.Length; i++)
+            foreach (UsableItemID id in UsableItemIDs)
             {
-                Transform spawnParent = new GameObject($"{_prefabEntries[i].Id} Pool").GetComponent<Transform>();
+                Transform spawnParent = new GameObject($"{id} Pool").GetComponent<Transform>();
                 spawnParent.SetParent(transform);
 
-                _poolmap.Add(_prefabEntries[i].Id,
-                    new GameObjectPool<UsableItem>(_prefabEntries[i].UsableItem, spawnParent));
+                _poolmap.Add(id, new GameObjectPool<UsableItem>(_usableItemData[id], spawnParent));
             }
         }
         

@@ -9,7 +9,7 @@ namespace Game.DataSet
         HighestKills,
     }
     
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Game/DataSet/GameModeLogic")]
     public class GameModeLogicDataSetSO : DataSetSO<GameModeID, GameModeLogicSO> { }
     
 }
