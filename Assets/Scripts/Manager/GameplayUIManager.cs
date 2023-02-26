@@ -1,6 +1,10 @@
+#region
+
 using Game.UI;
 using TMPro;
 using UnityEngine;
+
+#endregion
 
 namespace Game
 {

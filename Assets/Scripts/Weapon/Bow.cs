@@ -1,5 +1,8 @@
-﻿using Game.Player;
+﻿#region
+
 using UnityEngine;
+
+#endregion
 
 namespace Game
 {

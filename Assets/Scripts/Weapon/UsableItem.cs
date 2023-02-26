@@ -1,7 +1,9 @@
-﻿using System;
-using Unity.VisualScripting;
+﻿#region
+
 using UnityEngine;
 using UnityEngine.Events;
+
+#endregion
 
 namespace Game
 {

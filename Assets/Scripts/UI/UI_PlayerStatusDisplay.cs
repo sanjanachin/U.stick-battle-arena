@@ -1,7 +1,11 @@
+#region
+
 using Game.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+#endregion
 
 namespace Game.UI
 {

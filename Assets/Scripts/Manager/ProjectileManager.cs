@@ -1,8 +1,12 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using Game.DataSet;
 using UnityEngine;
 using ProjectilePool = Game.GameObjectPool<Game.Projectile>;
+
+#endregion
 
 namespace Game
 {

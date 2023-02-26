@@ -1,8 +1,11 @@
+#region
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Game.DataSet;
 using UnityEngine;
+
+#endregion
 
 namespace Game
 {

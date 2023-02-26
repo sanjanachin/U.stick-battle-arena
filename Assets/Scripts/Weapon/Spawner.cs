@@ -1,6 +1,8 @@
-using System;
+#region
+
 using UnityEngine;
-using Random = UnityEngine.Random;
+
+#endregion
 
 namespace Game
 {

@@ -1,6 +1,10 @@
+#region
+
 using Game.DataSet;
 using UnityEngine;
 using UnityEngine.Events;
+
+#endregion
 
 namespace Game
 {

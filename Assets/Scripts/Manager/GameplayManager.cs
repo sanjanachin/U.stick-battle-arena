@@ -1,5 +1,9 @@
-﻿using Game.DataSet;
+﻿#region
+
+using Game.DataSet;
 using UnityEngine;
+
+#endregion
 
 namespace Game
 {

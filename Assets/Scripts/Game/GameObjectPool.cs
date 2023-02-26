@@ -1,7 +1,11 @@
+#region
+
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
+
+#endregion
 
 namespace Game
 {
