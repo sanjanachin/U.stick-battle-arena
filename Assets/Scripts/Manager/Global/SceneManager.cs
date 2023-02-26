@@ -44,23 +44,7 @@ namespace Game
             UnityEngine.SceneManagement.SceneManager
                 .LoadScene(id.ToString(), LoadSceneMode.Additive);
         }
-        
-        // private IEnumerator LoadingProcess(SceneID id)
-        // {
-        //     // load scene in async
-        //     AsyncOperationHandle<SceneInstance> loadingHandle = 
-        //         _sceneData[id].LoadSceneAsync(LoadSceneMode.Additive, true, 0);
-        //     
-        //     // wait for loading
-        //     while (!loadingHandle.IsDone)
-        //         yield return null;
-        //     
-        //     // activate scene
-        //     UnityEngine.SceneManagement.SceneManager
-        //         .SetActiveScene(loadingHandle.Result.Scene);
-        //     _currentScene = id;
-        // }
-        
+
         public void ExitGame()
         {
             App.ExitApplication();
