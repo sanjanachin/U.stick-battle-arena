@@ -41,6 +41,18 @@ TagManager:
   - name: Stage background
     uniqueID: 1538506189
     locked: 0
+  - name: StageBack
+    uniqueID: 3648685547
+    locked: 0
+  - name: StageMap
+    uniqueID: 118716747
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: StageFront
+    uniqueID: 2716515897
+    locked: 0
+  - name: TileMapBlock
+    uniqueID: 1279688161
     locked: 0
