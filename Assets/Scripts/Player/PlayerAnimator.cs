@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using Random = UnityEngine.Random;
 
 namespace Game.Player {
     public class PlayerAnimator : MonoBehaviour {
@@ -27,9 +24,6 @@ namespace Game.Player {
                 return;
             }
             _player = player;
-            // Grab animations from animator
-            // _anim = GetComponent<Animator>();
-            // _renderer = GetComponent<SpriteRenderer>();
         }
 
         private void Update() {
