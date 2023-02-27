@@ -1,7 +1,7 @@
+#if (UNITY_EDITOR) 
+
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
 
 public class example
@@ -24,3 +24,5 @@ public class example
         yield return null;
     }
 }
+
+#endif
