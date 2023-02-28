@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Arts/TileMaps/Farm/Tiles/tilemap_packed_farm_1.asset.meta
+guid: 021e23744c0b91d42a684c6459315ada
+========
+guid: 9c7c2d3f13ba60446b6abd790ef35077
+>>>>>>>> main:Assets/Arts/Animations/Player1/IdleSpeed.anim.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
