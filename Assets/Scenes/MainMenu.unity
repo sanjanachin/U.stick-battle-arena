@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameService: {fileID: 11400000, guid: e6f021f86780f1d4293d31b4d110feaa, type: 2}
-  _playGameButtonScene: 1
+  _playGameButtonScene: 3
 --- !u!1 &2003311360
 GameObject:
   m_ObjectHideFlags: 0
