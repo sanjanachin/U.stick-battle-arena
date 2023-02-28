@@ -47,7 +47,6 @@ namespace Game.Player
             _playerController.OnItemUseDown += ItemUseDown;
             _playerController.OnItemUseUp += ItemUseUp;
             _playerController.OnSwitchItem += SwitchItem;
-            _playerController.OnMovement += FlipItemHolder;
         }
 
         private void FlipItemHolder(Vector2 dir)
