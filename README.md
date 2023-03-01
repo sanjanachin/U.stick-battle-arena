@@ -14,7 +14,7 @@ Our goal is to ship a finished game with refined details and fun gameplay by the
   - Player1: `WASD` for movement, `F` for shooting/use item, `G` for switching between inventory items
   - Player2: `Arrow Keys` for movement, `,` for shooting/use item, `.` for switching between inventory items
 ### Contributor Guide
-Please read the [developer guide] (https://github.com/JimmyC7834/U.stick-battle-arena/blob/Jimmy-reset-main-for-PR/Docs/Developer%20Guide.md) for details and complete guide.
+Please read the [developer guide] (https://github.com/JimmyC7834/U.stick-battle-arena/blob/main/Docs/Developer%20Guide.md) for details and complete guide.
 ### Bug Reporting
 Bugs are reported to `JimmyC7834/U.stick-battle-arena` repo under the issues tab. Please include the following details in your issue submission:
 - The action performed/trigger of the bug
